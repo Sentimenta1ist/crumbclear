@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CrumbClear</title>
+  <link rel="stylesheet" href="ui.css">
+  <style>
+    body { width: 320px; }
+    header { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+    header label { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+    .site { padding: 14px; }
+    .site-host { font-size: 15px; font-weight: 700; word-break: break-all; }
+    .site-meta { margin-top: 4px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 12px; background: var(--line); padding: 3px; border-radius: 9px; }
+    .seg button { border: 0; background: transparent; padding: 6px 4px; font-size: 12px; border-radius: 7px; }
+    .seg button[aria-pressed="true"] { background: var(--panel); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+    .hint { margin-top: 8px; font-size: 12px; min-height: 34px; }
+    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 0 14px 14px; }
+    .no-site { padding: 18px 14px; }
+    footer { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-top: 1px solid var(--line); font-size: 12px; }
+    footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .toast { padding: 0 14px 10px; font-size: 12px; color: var(--keep); min-height: 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand"><img src="../icons/icon32.png" alt="">CrumbClear</div>
+    <label><span id="enabledLabel" class="muted">Auto-clean</span>
+      <span class="switch"><input type="checkbox" id="enabled"><span></span></span>
+    </label>
+  </header>
+
+  <section class="site" id="siteBox" hidden>
+    <div class="site-host" id="host"></div>
+    <div class="site-meta">
+      <span class="pill" id="statusPill"></span>
+      <span class="muted" id="count"></span>
+    </div>
+    <div class="seg" role="group" aria-label="What happens to this site's cookies">
+      <button data-list="" aria-pressed="false">Clean</button>
+      <button data-list="session" aria-pressed="false">Until restart</button>
+      <button data-list="keep" aria-pressed="false">Keep</button>
+    </div>
+    <div class="hint muted" id="hint"></div>
+  </section>
+
+  <section class="no-site muted" id="noSite" hidden>
+    This page has no site cookies to manage.
+  </section>
+
+  <div class="actions">
+    <button id="cleanSite">Clean this site</button>
+    <button id="cleanNow" class="primary">Clean closed tabs</button>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+
+  <footer>
+    <span class="muted" id="stats"></span>
+    <a href="#" id="openOptions">Settings</a>
+  </footer>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

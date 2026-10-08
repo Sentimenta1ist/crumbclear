@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.zip
+.DS_Store
+AUDIT_*.md
+FINAL_REVIEW_PROMPT.md
+CLAUDE.md
+LOCAL-INFO.md
+SECURITY_AUDIT.md
+PRIVACY.md

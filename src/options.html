@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CrumbClear settings</title>
+  <link rel="stylesheet" href="ui.css">
+  <style>
+    body { padding: 32px 16px 64px; }
+    main { max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 22px; margin: 0; }
+    .lead { margin: 6px 0 28px; }
+    h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); margin: 32px 0 10px; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); }
+    .row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 16px; border-top: 1px solid var(--line); }
+    .row:first-child { border-top: 0; }
+    .row .t { font-weight: 600; }
+    .row .d { color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+    select { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 6px 8px; }
+    .add { display: flex; gap: 8px; padding: 14px 16px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+    .add input { flex: 1 1 220px; border: 1px solid var(--line); background: var(--bg); border-radius: 8px; padding: 7px 10px; }
+    table { width: 100%; border-collapse: collapse; }
+    td { padding: 9px 16px; border-top: 1px solid var(--line); }
+    tr:first-child td { border-top: 0; }
+    td.x { width: 1%; white-space: nowrap; text-align: right; }
+    td.x button { padding: 4px 8px; font-size: 12px; }
+    .expr { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; word-break: break-all; }
+    .empty { padding: 18px 16px; color: var(--muted); }
+    .tools { display: flex; gap: 8px; flex-wrap: wrap; padding: 14px 16px; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .stat { padding: 14px 16px; border-left: 1px solid var(--line); }
+    .stat:first-child { border-left: 0; }
+    .stat b { display: block; font-size: 20px; }
+    .log td { font-size: 12.5px; vertical-align: top; }
+    .log .when { white-space: nowrap; color: var(--muted); width: 1%; }
+    .msg { padding: 0 16px 12px; font-size: 12.5px; color: var(--keep); }
+    .msg.err { color: var(--accent); }
+    .setup { border-color: var(--accent); margin-bottom: 8px; }
+    .setup-head { padding: 16px 16px 10px; }
+    .setup-head .t { font-weight: 700; font-size: 15px; }
+    .setup-head .d { color: var(--muted); margin-top: 4px; max-width: 60ch; }
+    .setup-tools { display: flex; gap: 8px; flex-wrap: wrap; padding: 0 16px 10px; }
+    .setup-tools input { flex: 1 1 200px; border: 1px solid var(--line); background: var(--bg); border-radius: 8px; padding: 7px 10px; }
+    .setup-sites { list-style: none; margin: 0; padding: 0; max-height: 320px; overflow-y: auto; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .setup-sites li + li { border-top: 1px solid var(--line); }
+    .setup-sites label { display: flex; align-items: center; gap: 10px; padding: 8px 16px; cursor: pointer; }
+    .setup-sites .expr { flex: 1; min-width: 0; }
+    .setup-sites .n { color: var(--muted); font-size: 12px; white-space: nowrap; }
+    .setup .msg { padding-top: 0; }
+    @media (max-width: 520px) { .stats { grid-template-columns: 1fr; } .stat { border-left: 0; border-top: 1px solid var(--line); } }
+  </style>
+</head>
+<body>
+<main>
+  <div class="brand"><img src="../icons/icon48.png" alt="" style="width:32px;height:32px"><h1>CrumbClear</h1></div>
+  <p class="lead muted">Cookies and site data are deleted when you close the last tab of a site. Sites on your lists are left alone.</p>
+
+  <section class="card setup" id="setup" hidden aria-labelledby="setupTitle">
+    <div class="setup-head">
+      <div class="t" id="setupTitle">First, pick the sites you want to stay signed in to</div>
+      <div class="d">Auto-clean is off until you finish. After that, cookies of every other site are deleted once you close its tabs. Google, Microsoft, Apple, GitHub and Okta sign-in are already on your Keep list. Moving from Cookie AutoDelete? Import your list below first.</div>
+    </div>
+    <div class="setup-tools">
+      <input type="search" id="setupFilter" placeholder="Filter sites" aria-label="Filter sites" autocomplete="off">
+      <button id="setupAll" type="button">Select all</button>
+    </div>
+    <ul class="setup-sites" id="setupSites"></ul>
+    <div class="empty" id="setupEmpty" hidden>No other sites have cookies right now.</div>
+    <div class="tools"><button class="primary" id="setupDone" type="button">Keep selected and turn on auto-clean</button></div>
+    <div class="msg" id="setupMsg" role="status"></div>
+  </section>
+
+  <h2>Cleaning</h2>
+  <div class="card">
+    <div class="row"><div><div class="t">Auto-clean</div><div class="d">Pause to keep everything until you turn it back on.</div></div>
+      <span class="switch"><input type="checkbox" data-setting="enabled" aria-label="Auto-clean"><span></span></span></div>
+    <div class="row"><div><div class="t">Delay after closing a tab</div><div class="d">Time to reopen a tab before its cookies are gone. Several closed tabs are cleaned together.</div></div>
+      <select data-setting="delaySec" data-type="number" aria-label="Delay after closing a tab">
+        <option value="0">Immediately</option>
+        <option value="30">30 seconds</option>
+        <option value="60">1 minute</option>
+        <option value="300">5 minutes</option>
+        <option value="900">15 minutes</option>
+      </select></div>
+    <div class="row"><div><div class="t">Clean when a tab moves to another site</div><div class="d">Navigating away counts as closing the old site.</div></div>
+      <span class="switch"><input type="checkbox" data-setting="cleanOnDomainChange" aria-label="Clean when a tab moves to another site"><span></span></span></div>
+    <div class="row"><div><div class="t">Also delete site data</div><div class="d">localStorage, IndexedDB, cache storage and service workers, not just cookies.</div></div>
+      <span class="switch"><input type="checkbox" data-setting="cleanSiteData" aria-label="Also delete site data"><span></span></span></div>
+    <div class="row"><div><div class="t">Clean on browser start</div><div class="d">Removes leftovers from the last session, including "until restart" sites. When off, "until restart" sites are kept like Keep.</div></div>
+      <span class="switch"><input type="checkbox" data-setting="cleanOnStartup" aria-label="Clean on browser start"><span></span></span></div>
+    <div class="row"><div><div class="t">Cookie count on the icon</div><div class="d">Green: kept. Amber: kept until restart. Orange: will be cleaned. Grey: auto-clean is paused.</div></div>
+      <span class="switch"><input type="checkbox" data-setting="showBadge" aria-label="Cookie count on the icon"><span></span></span></div>
+  </div>
+
+  <h2>Sites you keep</h2>
+  <div class="card">
+    <form class="add" id="addForm">
+      <input id="expr" placeholder="example.com or *.example.com" aria-label="Site or pattern" autocomplete="off">
+      <select id="listType" aria-label="List">
+        <option value="keep">Keep</option>
+        <option value="session">Until restart</option>
+      </select>
+      <button class="primary" type="submit">Add</button>
+    </form>
+    <div class="msg" id="addMsg" role="status"></div>
+    <table id="lists"></table>
+    <div class="empty" id="listsEmpty">No sites yet. Add the ones you want to stay logged in to.</div>
+  </div>
+
+  <h2>Import and export</h2>
+  <div class="card">
+    <div class="tools">
+      <button id="importBtn">Import lists…</button>
+      <button id="exportBtn">Export lists</button>
+      <input type="file" id="importFile" accept=".json,.txt,application/json,text/plain" hidden>
+    </div>
+    <div class="msg" id="importMsg" role="status"></div>
+    <div class="row" style="border-top:1px solid var(--line)"><div class="d">Moving from Cookie AutoDelete? In its settings choose Export, then import that file here. Whitelist becomes Keep, greylist becomes Until restart. A plain text file with one domain per line also works.</div></div>
+  </div>
+
+  <h2>Activity</h2>
+  <div class="card">
+    <div class="stats">
+      <div class="stat"><b id="sCookies">0</b><span class="muted">cookies removed</span></div>
+      <div class="stat"><b id="sSites">0</b><span class="muted">sites cleaned</span></div>
+      <div class="stat"><b id="sRuns">0</b><span class="muted">cleanups</span></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:10px">
+    <table class="log" id="log"></table>
+    <div class="empty" id="logEmpty">Nothing cleaned yet. Close a tab and wait for the delay.</div>
+    <div class="tools" style="border-top:1px solid var(--line)"><button id="clearLog">Clear history</button></div>
+  </div>
+</main>
+<script type="module" src="options.js"></script>
+</body>
+</html>

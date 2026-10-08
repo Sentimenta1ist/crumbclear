@@ -1,0 +1,70 @@
+:root {
+  --bg: #fbf8f3;
+  --panel: #ffffff;
+  --ink: #2a2118;
+  --muted: #7a6c5d;
+  --line: #ece4d8;
+  --accent: #c2410c;
+  --accent-ink: #ffffff;
+  --keep: #23784a;
+  --keep-bg: #e7f4ec;
+  --session: #8f560b;
+  --session-bg: #fbf0dc;
+  --off: #8a8a8a;
+  --radius: 10px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1b1713;
+    --panel: #241f1a;
+    --ink: #f3ece3;
+    --muted: #a99a89;
+    --line: #3a322a;
+    --accent: #ea6a2f;
+    --accent-ink: #1b1713;
+    --keep: #5cc28c;
+    --keep-bg: #1f3428;
+    --session: #e3a447;
+    --session-bg: #3a2c16;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font: 13px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+button, select, input { font: inherit; color: inherit; }
+button {
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 8px;
+  padding: 7px 10px;
+}
+button:hover { border-color: var(--muted); }
+button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+button.primary:hover { filter: brightness(1.06); }
+button:disabled { opacity: .5; cursor: default; }
+.brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: .1px; }
+.brand img { width: 20px; height: 20px; }
+.muted { color: var(--muted); }
+.pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 600; }
+.pill.keep { background: var(--keep-bg); color: var(--keep); }
+.pill.session { background: var(--session-bg); color: var(--session); }
+.pill.clean { background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--accent); }
+.switch { position: relative; width: 34px; height: 20px; flex: none; }
+.switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+.switch span {
+  position: absolute; inset: 0; border-radius: 999px; background: var(--line); transition: background .15s;
+}
+.switch span::after {
+  content: ""; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%;
+  background: #fff; transition: transform .15s; box-shadow: 0 1px 2px rgba(0,0,0,.25);
+}
+.switch input:checked + span { background: var(--accent); }
+.switch input:checked + span::after { transform: translateX(14px); }
+.switch input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }

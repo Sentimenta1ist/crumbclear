@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "CrumbClear — Auto Delete Cookies",
+  "short_name": "CrumbClear",
+  "version": "1.0.1",
+  "description": "Deletes cookies and site data after you close the last tab of a site. Keep lists, partitioned cookies, list import. No tracking.",
+  "minimum_chrome_version": "120",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "src/popup.html",
+    "default_title": "CrumbClear",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "options_page": "src/options.html",
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "content_security_policy": {
+    "extension_pages": "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+  },
+  "permissions": ["cookies", "storage", "alarms", "browsingData"],
+  "host_permissions": ["<all_urls>"],
+  "incognito": "spanning"
+}
