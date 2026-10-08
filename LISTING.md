@@ -1,18 +1,18 @@
 # CrumbClear — Chrome Web Store listing
 
 ## Name
-CrumbClear — Auto Delete Cookies
+CrumbClear: Auto Delete Cookies
 
 ## Summary (132 chars max; same as the manifest description)
-Deletes cookies and site data after you close the last tab of a site. Keep lists, partitioned cookies, list import. No tracking.
+Auto delete cookies when you close a tab. Cookie cleaner with keep lists, partitioned cookie support and list import. No tracking.
 
 ## Category
 Privacy & Security
 
 ## Description
-Close a tab, and the cookies it left behind are gone. Sites you trust stay logged in.
+Auto delete cookies when you close a tab. CrumbClear is a lightweight cookie cleaner for Chrome: close the last tab of a site and its cookies and site data are cleared automatically, while the sites on your whitelist (Keep list) stay logged in.
 
-CrumbClear is a Manifest V3 cookie cleaner. If you used Cookie AutoDelete before Chrome turned off Manifest V2 extensions, you can bring your lists along (see below). CrumbClear is an independent project, not affiliated with Cookie AutoDelete.
+Built for Manifest V3. If you used Cookie AutoDelete before Chrome turned off Manifest V2 extensions, you can bring your lists along (see below). CrumbClear is an independent project, not affiliated with Cookie AutoDelete.
 
 HOW IT WORKS
 • When you close the last tab of a site, CrumbClear deletes its cookies after a short delay (you choose: instantly, 30 s, 1, 5 or 15 minutes).

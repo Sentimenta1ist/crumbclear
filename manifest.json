@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "CrumbClear — Auto Delete Cookies",
+  "name": "CrumbClear: Auto Delete Cookies",
   "short_name": "CrumbClear",
   "version": "1.0.1",
-  "description": "Deletes cookies and site data after you close the last tab of a site. Keep lists, partitioned cookies, list import. No tracking.",
+  "description": "Auto delete cookies when you close a tab. Cookie cleaner with keep lists, partitioned cookie support and list import. No tracking.",
   "minimum_chrome_version": "120",
   "icons": {
     "16": "icons/icon16.png",
