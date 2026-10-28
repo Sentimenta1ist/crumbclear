@@ -70,5 +70,5 @@ test('status messages are announced and copy matches the listing', () => {
   const listing = readFileSync(new URL('../LISTING.md', import.meta.url), 'utf8');
   for (const text of [html, listing]) assert.match(text, /Google, Microsoft, Apple, GitHub and Okta sign-in/);
   // One legend entry per badge colour (kept, until restart, cleaned, paused).
-  assert.match(html, /Green: kept\. Amber: kept until restart\. Orange: will be cleaned\. Grey: auto-clean is paused\./);
+  assert.match(html, /Blue: kept\. Amber: kept until restart\. Teal: will be cleaned\. Grey: auto-clean is paused\./);
 });

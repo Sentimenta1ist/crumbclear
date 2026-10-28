@@ -273,7 +273,7 @@ async function updateBadge() {
     const cookies = await siteCookies(siteOf(host));
     const status = listStatus(host, lists);
     // White badge text needs 4.5:1 contrast against each of these.
-    const color = !settings.enabled ? '#6e6e6e' : status === LIST_KEEP ? '#23784a' : status === LIST_SESSION ? '#946010' : '#c2410c';
+    const color = !settings.enabled ? '#6b7280' : status === LIST_KEEP ? '#1d4ed8' : status === LIST_SESSION ? '#8a5a00' : '#0f766e';
     await chrome.action.setBadgeBackgroundColor({ tabId: tab.id, color });
     await chrome.action.setBadgeText({ tabId: tab.id, text: cookies.length ? String(Math.min(cookies.length, 999)) : '' });
   } catch { /* tab may be gone */ }
