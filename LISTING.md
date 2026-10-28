@@ -205,9 +205,10 @@ Bez serwerów, analityki i reklam. Ustawienia i listy zostają w przeglądarce. 
 • Remote code: No. All code is in the package; src/vendor/tldts.js is the readable build of the MIT-licensed tldts 7.4.18 library (Public Suffix List data).
 
 ## Data usage (Privacy practices tab)
-Unchanged from 1.0.1:
+Changed in 1.1 (Undo holds cookie values in memory for 10 minutes, and cookies can carry sign-in tokens):
 • Web history: YES. Host names of visited sites are stored locally until cleaned.
 • Website content: YES. Cookies (data in a website's browser storage) are read and deleted.
+• Authentication information: YES (new). Cookie values, which may include session tokens, are kept in memory for 10 minutes so the last cleanup can be undone. Never written to disk or sent anywhere.
 • All other categories: NO.
 • Certifications: tick all three.
 • Privacy policy URL: https://sentimenta1ist.github.io/crumbclear/privacy.html
