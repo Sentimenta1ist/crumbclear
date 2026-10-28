@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.1.0 — 2026-10-28
+
+### Added
+- Undo: the cookies removed by the last cleanup can be put back for 10 minutes (held in memory only, never for incognito windows). Restored sites are not cleaned again until you open and close them.
+- Six languages: English, German, Japanese, Simplified Chinese, Traditional Chinese, Polish.
+- The popup says when a site is open in several tabs.
+- A one-time request to rate CrumbClear in the Chrome Web Store, after 20 cleanups. "No thanks" hides it for good.
+
+### Changed
+- New look: teal colours and a new icon.
+- "Clean" in the popup is now "Clean on close", and "Clean closed tabs" is no longer the highlighted button.
+- Host access is limited to http and https sites (was all URLs).
+- The cookie count on the icon reads only the current site's cookies instead of every cookie in the browser.
+
+### Fixed
+- "Clean this site" in an incognito window no longer touches the normal profile, and the reverse.
+- Site data on non-default ports (for example `localhost:8080`) is now cleaned.
+- Closing tabs one after another can no longer postpone the cleanup forever: at most 30 seconds past the delay.
+
 ## 1.0.1 — 2026-10-08
 First public release.
 

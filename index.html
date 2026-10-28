@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CrumbClear: auto delete cookies when you close a tab (Chrome, Manifest V3)</title>
+  <meta name="description" content="Free, open-source Chrome extension that deletes a site's cookies and site data when you close its last tab. Keep lists, undo, Cookie AutoDelete import, no tracking.">
+  <link rel="canonical" href="https://sentimenta1ist.github.io/crumbclear/">
+  <link rel="icon" href="icons/icon48.png">
+  <meta property="og:title" content="CrumbClear: auto delete cookies when you close a tab">
+  <meta property="og:description" content="Close the tab. The cookies go with it. Free and open source, for Chrome.">
+  <meta property="og:image" content="https://sentimenta1ist.github.io/crumbclear/store/marquee-1400x560.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "CrumbClear: Auto Delete Cookies",
+        "applicationCategory": "BrowserApplication",
+        "operatingSystem": "Chrome, Edge, ChromeOS, Windows, macOS, Linux",
+        "softwareVersion": "1.1.0",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://chromewebstore.google.com/detail/aggadloggaflppnahldcfmhhedonhjia",
+        "downloadUrl": "https://chromewebstore.google.com/detail/aggadloggaflppnahldcfmhhedonhjia",
+        "license": "https://opensource.org/licenses/MIT",
+        "codeRepository": "https://github.com/Sentimenta1ist/crumbclear",
+        "description": "Deletes a site's cookies and site data after you close its last tab. Keep lists, undo, partitioned cookie support, Cookie AutoDelete import, no tracking."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is CrumbClear a Cookie AutoDelete alternative for Manifest V3?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. CrumbClear is built for Manifest V3 and imports Cookie AutoDelete exports: the whitelist becomes Keep and the greylist becomes Until restart. It is an independent project, not affiliated with Cookie AutoDelete." } },
+          { "@type": "Question", "name": "Will it log me out of everything?", "acceptedAnswer": { "@type": "Answer", "text": "No. Nothing is deleted after install until you pick the sites to stay signed in to. Google, Microsoft, Apple, GitHub and Okta sign-in are kept from the start, and sites open in any tab are never cleaned." } },
+          { "@type": "Question", "name": "Does it delete partitioned (CHIPS) cookies and site data?", "acceptedAnswer": { "@type": "Answer", "text": "It deletes partitioned cookies of the closed site and, optionally, its localStorage, IndexedDB, cache storage and service workers." } },
+          { "@type": "Question", "name": "Can I undo a cleanup?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The cookies removed by the last cleanup can be put back from the popup for 10 minutes. They are held in memory only." } },
+          { "@type": "Question", "name": "Does CrumbClear collect data?", "acceptedAnswer": { "@type": "Answer", "text": "No. It has no servers, no analytics and makes no network requests. Settings and lists stay in your browser." } }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root { --bg: #f3f7f6; --panel: #ffffff; --ink: #0e1f1c; --muted: #566b67; --line: #dce6e3; --accent: #0f766e; --accent-ink: #ffffff; color-scheme: light; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #0f1716; --panel: #16211f; --ink: #e6f0ee; --muted: #93a8a4; --line: #263533; --accent: #2dd4bf; --accent-ink: #0f1716; color-scheme: dark; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    main { max-width: 980px; margin: 0 auto; padding: 0 16px 80px; }
+    header { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 19px; color: var(--ink); text-decoration: none; }
+    .brand img { width: 32px; height: 32px; }
+    nav a { color: var(--muted); text-decoration: none; margin-left: 18px; font-size: 15px; }
+    .hero { padding: 48px 0 24px; text-align: center; }
+    h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.08; letter-spacing: -1px; margin: 0 0 18px; }
+    .lead { color: var(--muted); font-size: 19px; max-width: 640px; margin: 0 auto 28px; }
+    .cta { display: inline-block; background: var(--accent); color: var(--accent-ink); font-weight: 700; padding: 14px 26px; border-radius: 12px; text-decoration: none; }
+    .sub { color: var(--muted); font-size: 14px; margin-top: 12px; }
+    .shot { margin: 40px 0; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); }
+    .shot img { display: block; width: 100%; height: auto; }
+    h2 { font-size: 28px; margin: 56px 0 16px; letter-spacing: -.3px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+    .card b { display: block; margin-bottom: 4px; }
+    .card span { color: var(--muted); font-size: 15px; }
+    details { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin: 10px 0; }
+    summary { font-weight: 700; cursor: pointer; }
+    details p { color: var(--muted); margin: 10px 0 0; }
+    ol li { margin: 6px 0; }
+    footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); padding-top: 20px; margin-top: 60px; }
+    footer a, p a { color: var(--accent); }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <a class="brand" href="./"><img src="icons/icon48.png" alt="">CrumbClear</a>
+    <nav><a href="#faq">FAQ</a><a href="https://github.com/Sentimenta1ist/crumbclear">GitHub</a></nav>
+  </header>
+
+  <section class="hero">
+    <h1>Close the tab.<br>The cookies go with it.</h1>
+    <p class="lead">CrumbClear deletes a site's cookies and site data when you close its last tab. Sites you trust stay logged in. Free, open source, no tracking.</p>
+    <a class="cta" href="https://chromewebstore.google.com/detail/aggadloggaflppnahldcfmhhedonhjia?utm_source=landing">Add to Chrome, it's free</a>
+    <div class="sub">Works in Chrome and Edge · Manifest V3 · English, Deutsch, 日本語, 简体中文, 繁體中文, Polski</div>
+  </section>
+
+  <div class="shot"><img src="store/screenshots/en/1.jpg" width="1280" height="800" alt="CrumbClear popup: the current site, its cookie count, and the Clean on close, Until restart and Keep switch"></div>
+
+  <h2>What it does</h2>
+  <div class="grid">
+    <div class="card"><b>Cleans on tab close</b><span>Cookies, and optionally localStorage, IndexedDB, cache storage and service workers, after a delay you choose.</span></div>
+    <div class="card"><b>Keeps what you need</b><span>Keep forever or until restart. One click in the popup, or patterns like *.example.com.</span></div>
+    <div class="card"><b>Safe first run</b><span>Nothing is deleted until you pick the sites to stay signed in to. Common sign-in services are kept from the start.</span></div>
+    <div class="card"><b>Undo</b><span>Cleaned too much? Put the last cleanup's cookies back for 10 minutes.</span></div>
+    <div class="card"><b>Partitioned cookies</b><span>CHIPS cookies of the closed site are cleaned too, so embedded trackers go with it.</span></div>
+    <div class="card"><b>No tracking</b><span>No servers, no analytics, no network requests. The code is on GitHub.</span></div>
+  </div>
+
+  <h2>Moving from Cookie AutoDelete</h2>
+  <ol>
+    <li>In Cookie AutoDelete, open Settings and choose Export.</li>
+    <li>Install CrumbClear. Its settings page opens on its own.</li>
+    <li>Under Import and export, choose Import lists… and pick the file. The whitelist becomes Keep, the greylist becomes Until restart.</li>
+  </ol>
+  <p>CrumbClear is an independent project, not affiliated with Cookie AutoDelete.</p>
+
+  <div class="shot"><img src="store/screenshots/en/2.jpg" width="1280" height="800" alt="First run: pick the sites to stay signed in to before anything is deleted" loading="lazy"></div>
+
+  <h2 id="faq">FAQ</h2>
+  <details open><summary>Is CrumbClear a Cookie AutoDelete alternative for Manifest V3?</summary><p>Yes. It is built for Manifest V3 and imports Cookie AutoDelete exports in one step.</p></details>
+  <details><summary>Will it log me out of everything?</summary><p>No. Nothing is deleted after install until you pick the sites to keep. Google, Microsoft, Apple, GitHub and Okta sign-in are kept from the start, and sites open in any tab are never cleaned.</p></details>
+  <details><summary>Does it delete partitioned (CHIPS) cookies and site data?</summary><p>It deletes partitioned cookies of the closed site and, if you leave the option on, its localStorage, IndexedDB, cache storage and service workers.</p></details>
+  <details><summary>Can I undo a cleanup?</summary><p>Yes, from the popup, for 10 minutes after the last cleanup. The removed cookies are held in memory only.</p></details>
+  <details><summary>Does it collect any data?</summary><p>No. See the <a href="privacy.html">privacy policy</a>.</p></details>
+  <details><summary>Does it work in Edge or Firefox?</summary><p>It works in Chrome and other Chromium browsers such as Edge and Brave. There is no Firefox version yet.</p></details>
+
+  <footer>
+    MIT licensed · <a href="https://github.com/Sentimenta1ist/crumbclear">Source code</a> · <a href="privacy.html">Privacy policy</a> · <a href="https://github.com/Sentimenta1ist/crumbclear/issues">Report an issue</a>
+  </footer>
+</main>
+</body>
+</html>
