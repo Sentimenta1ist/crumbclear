@@ -55,7 +55,7 @@ button:disabled { opacity: .5; cursor: default; }
 .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 600; }
 .pill.keep { background: var(--keep-bg); color: var(--keep); }
 .pill.session { background: var(--session-bg); color: var(--session); }
-.pill.clean { background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--accent); }
+.pill.clean { background: var(--line); color: var(--ink); }
 .switch { position: relative; width: 34px; height: 20px; flex: none; }
 .switch input { opacity: 0; width: 0; height: 0; position: absolute; }
 .switch span {

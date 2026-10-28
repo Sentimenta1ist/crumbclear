@@ -38,7 +38,7 @@ test('every permission is used and every used API is permitted', () => {
   const apis = { cookies: /chrome\.cookies\./, storage: /chrome\.storage\./, alarms: /chrome\.alarms\./, browsingData: /chrome\.browsingData\./ };
   assert.deepEqual([...m.permissions].sort(), Object.keys(apis).sort());
   for (const [perm, re] of Object.entries(apis)) assert.match(code, re, perm);
-  assert.deepEqual(m.host_permissions, ['<all_urls>']);
+  assert.deepEqual(m.host_permissions, ['*://*/*'], 'http and https only');
 });
 
 test('declared icons are PNGs of the declared size', () => {

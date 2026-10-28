@@ -1,6 +1,6 @@
 import {
   DEFAULT_SETTINGS, LIST_KEEP, LIST_SESSION, LOGIN_PROVIDERS,
-  hostFromUrl, siteOf, normHost, decideCookie, cookieUrl, originsFor, listStatus,
+  hostFromUrl, visitKeyFromUrl, splitHostPort, siteOf, normHost, decideCookie, cookieUrl, originsFor, listStatus,
 } from './lib.js';
 
 const ALARM = 'crumbclear-clean';
@@ -11,6 +11,8 @@ const SCHEMA_VERSION = 1;
 const SETTLE_MIN_MS = 3000;
 const SETTLE_MAX_MS = 30000;
 const SETTLE_POLL_MS = 1000;
+// Closing more tabs postpones the clean, but by at most this much after the first close.
+const MAX_POSTPONE_MS = 30000;
 
 // ---------- storage ----------
 async function getState() {
@@ -36,9 +38,11 @@ function updateVisited(fn) {
   return run;
 }
 
-function rememberHost(host) {
-  if (!host) return;
-  return updateVisited((visited) => (visited.includes(host) ? null : [...visited, host]));
+// key: a host name, or "host:port" for a non-default port, whose site data
+// lives under that exact origin.
+function rememberHost(key) {
+  if (!key) return;
+  return updateVisited((visited) => (visited.includes(key) ? null : [...visited, key]));
 }
 
 // ---------- helpers ----------
@@ -92,15 +96,17 @@ async function incognitoStoreIds() {
   }
 }
 
-async function allCookies() {
-  let stores = [{ id: undefined }];
+async function cookieStores() {
   try {
     const s = await chrome.cookies.getAllCookieStores();
-    if (s && s.length) stores = s;
+    if (s && s.length) return s;
   } catch { /* fall back to default store */ }
+  return [{ id: undefined }];
+}
 
+async function allCookies() {
   const out = [];
-  for (const store of stores) {
+  for (const store of await cookieStores()) {
     const base = store.id ? { storeId: store.id } : {};
     let list;
     try {
@@ -110,6 +116,27 @@ async function allCookies() {
       list = await chrome.cookies.getAll(base);
     }
     out.push(...list);
+  }
+  return out;
+}
+
+// Cookies of one site, partitioned ones included, without reading every cookie
+// in the browser: the badge refreshes on every cookie change.
+async function siteCookies(site) {
+  const out = [];
+  const isSite = (top) => top && siteOf(hostFromUrl(top)) === site;
+  for (const store of await cookieStores()) {
+    const base = store.id ? { storeId: store.id } : {};
+    try {
+      out.push(...await chrome.cookies.getAll({ ...base, domain: site, partitionKey: {} }));
+      for (const scheme of ['https', 'http']) {
+        const list = await chrome.cookies.getAll({ ...base, partitionKey: { topLevelSite: `${scheme}://${site}` } });
+        // Third-party cookies under this site; the site's own were read above.
+        out.push(...list.filter((c) => c.partitionKey && isSite(c.partitionKey.topLevelSite) && siteOf(c.domain) !== site));
+      }
+    } catch {
+      out.push(...await chrome.cookies.getAll({ ...base, domain: site }));
+    }
   }
   return out;
 }
@@ -136,19 +163,21 @@ async function log(entry) {
 let queue = Promise.resolve();
 let queuedAuto = null;
 
-function clean({ reason = 'auto', startup = false, onlySite = null } = {}) {
+// scope (with onlySite): 'private' cleans only incognito cookie stores,
+// 'regular' only the normal profile, so "Clean this site" stays in its window.
+function clean({ reason = 'auto', startup = false, onlySite = null, scope = null } = {}) {
   const auto = !onlySite && !startup && reason !== 'manual';
   if (auto && queuedAuto) return queuedAuto;
   const run = queue.then(() => {
     if (queuedAuto === run) queuedAuto = null;
-    return doClean({ reason, startup, onlySite });
+    return doClean({ reason, startup, onlySite, scope });
   });
   if (auto) queuedAuto = run;
   queue = run.catch(() => {});
   return run;
 }
 
-async function doClean({ reason, startup, onlySite }) {
+async function doClean({ reason, startup, onlySite, scope }) {
   const { settings, lists, stats } = await getState();
   if (!settings.enabled && !onlySite && reason !== 'manual') return { cookies: 0, sites: [] };
   if (!onlySite && reason !== 'manual') await waitForTabsToSettle();
@@ -162,6 +191,7 @@ async function doClean({ reason, startup, onlySite }) {
   let removed = 0;
 
   for (const c of cookies) {
+    if (scope && privateStores.has(c.storeId) !== (scope === 'private')) continue;
     const { remove } = decideCookie(c, ctx);
     if (!remove) continue;
     if (await removeCookie(c)) {
@@ -171,14 +201,16 @@ async function doClean({ reason, startup, onlySite }) {
   }
 
   // Site data for visited hosts that are now closed and not on a list.
-  await updateVisited((visited) => visited.filter((host) => {
+  // Incognito sites are never in this list, and their data goes with the window.
+  if (scope !== 'private') await updateVisited((visited) => visited.filter((key) => {
+    const { host } = splitHostPort(key);
     const site = siteOf(host);
     const status = listStatus(host, lists);
     const keep =
       status === LIST_KEEP ||
       (!startup && status === LIST_SESSION) ||
       (onlySite ? site !== onlySite : ctx.openSites.has(site));
-    if (!keep) cleanedHosts.add(host);
+    if (!keep) cleanedHosts.add(key);
     return keep;
   }));
 
@@ -195,7 +227,7 @@ async function doClean({ reason, startup, onlySite }) {
     }
   }
 
-  const sites = [...new Set([...cleanedHosts].map(siteOf))].sort();
+  const sites = [...new Set([...cleanedHosts].map((key) => siteOf(splitHostPort(key).host)))].sort();
   if (removed || sites.length) {
     stats.cookies += removed;
     stats.sites += sites.length;
@@ -207,23 +239,30 @@ async function doClean({ reason, startup, onlySite }) {
   return { cookies: removed, sites };
 }
 
-function schedule({ domainChange = false } = {}) {
-  chrome.storage.local.get('settings').then(({ settings }) => {
+async function schedule({ domainChange = false } = {}) {
+  try {
+    const { settings } = await chrome.storage.local.get('settings');
     const s = { ...DEFAULT_SETTINGS, ...(settings || {}) };
     if (!s.enabled || (domainChange && !s.cleanOnDomainChange)) return;
     if (!s.delaySec) {
       clean({ reason: 'tab closed' }).catch(() => {});
-    } else {
-      // Re-creating the alarm debounces bursts of closed tabs into one clean.
-      chrome.alarms.create(ALARM, { when: Date.now() + s.delaySec * 1000 });
+      return;
     }
-  }).catch(() => {});
+    // Re-creating the alarm debounces bursts of closed tabs into one clean,
+    // but a steady stream of closes must not postpone it forever.
+    const now = Date.now();
+    const delay = s.delaySec * 1000;
+    const { pendingSince } = await chrome.storage.session.get('pendingSince').catch(() => ({}));
+    if (!pendingSince) await chrome.storage.session.set({ pendingSince: now }).catch(() => {});
+    const first = pendingSince || now;
+    chrome.alarms.create(ALARM, { when: Math.min(now + delay, first + delay + MAX_POSTPONE_MS) });
+  } catch { /* storage unavailable; the next close tries again */ }
 }
 
 // ---------- badge: cookie count for the active site ----------
 async function updateBadge() {
   try {
-    const { settings } = await getState();
+    const { settings, lists } = await getState();
     const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
     if (!tab) return;
     const host = hostFromUrl(tab.url || '');
@@ -231,12 +270,7 @@ async function updateBadge() {
       await chrome.action.setBadgeText({ tabId: tab.id, text: '' });
       return;
     }
-    const site = siteOf(host);
-    const cookies = (await allCookies()).filter((c) => {
-      const top = c.partitionKey && c.partitionKey.topLevelSite;
-      return siteOf(c.domain) === site || (top && siteOf(hostFromUrl(top)) === site);
-    });
-    const { lists } = await getState();
+    const cookies = await siteCookies(siteOf(host));
     const status = listStatus(host, lists);
     // White badge text needs 4.5:1 contrast against each of these.
     const color = !settings.enabled ? '#6e6e6e' : status === LIST_KEEP ? '#23784a' : status === LIST_SESSION ? '#946010' : '#c2410c';
@@ -259,7 +293,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
   if (info.url || info.status === 'complete') {
     const host = hostFromUrl(tab.url || '');
     // A failed write must not skip the tab tracking below.
-    if (host && !tab.incognito) await rememberHost(host).catch(() => {});
+    if (host && !tab.incognito) await rememberHost(visitKeyFromUrl(tab.url)).catch(() => {});
     const key = tabKey(tabId);
     const { [key]: prev } = await chrome.storage.session.get(key).catch(() => ({}));
     if (host && host !== prev) await chrome.storage.session.set({ [key]: host }).catch(() => {});
@@ -276,7 +310,9 @@ chrome.cookies.onChanged.addListener(() => {
 });
 
 chrome.alarms.onAlarm.addListener((alarm) => {
-  if (alarm.name === ALARM) clean({ reason: 'tab closed' }).catch(() => {});
+  if (alarm.name !== ALARM) return;
+  chrome.storage.session.remove('pendingSince').catch(() => {});
+  clean({ reason: 'tab closed' }).catch(() => {});
 });
 
 chrome.runtime.onStartup.addListener(async () => {
@@ -323,23 +359,25 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     sendResponse(null);
     return false;
   }
-  if (msg.type !== 'clean-now' && !validHost(msg.host)) {
+  if ((msg.type !== 'clean-now' && !validHost(msg.host)) || ('incognito' in msg && typeof msg.incognito !== 'boolean')) {
     sendResponse(null);
     return false;
   }
   (async () => {
     if (msg.type === 'clean-now') return clean({ reason: 'manual' });
-    if (msg.type === 'clean-site') return clean({ reason: 'manual', onlySite: siteOf(msg.host) });
+    if (msg.type === 'clean-site') {
+      return clean({ reason: 'manual', onlySite: siteOf(msg.host), scope: msg.incognito ? 'private' : 'regular' });
+    }
     if (msg.type === 'site-info') {
       const site = siteOf(msg.host);
-      const cookies = (await allCookies()).filter((c) => {
-        const top = c.partitionKey && c.partitionKey.topLevelSite;
-        return siteOf(c.domain) === site || (top && siteOf(hostFromUrl(top)) === site);
-      });
+      const cookies = await siteCookies(site);
+      const openTabs = (await chrome.tabs.query({}))
+        .filter((t) => [t.url, t.pendingUrl].some((u) => siteOf(hostFromUrl(u || '')) === site)).length;
       return {
         site,
         cookies: cookies.length,
         partitioned: cookies.filter((c) => c.partitionKey).length,
+        openTabs,
       };
     }
     return null;

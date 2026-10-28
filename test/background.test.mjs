@@ -146,10 +146,76 @@ test('popup messages: site info and clean this site', async () => {
   tabs = [{ id: 1, url: 'https://google.com/' }];
   cookies = [ck('.google.com', 'SID'), ck('.ads.net', 'p', { partitionKey: { topLevelSite: 'https://google.com' } }), ck('.bing.com', 'b')];
   const info = await send({ type: 'site-info', host: 'www.google.com' });
-  assert.deepEqual(info, { site: 'google.com', cookies: 2, partitioned: 1 });
+  assert.deepEqual(info, { site: 'google.com', cookies: 2, partitioned: 1, openTabs: 1 });
   const r = await send({ type: 'clean-site', host: 'google.com' });
   assert.equal(r.cookies, 2);
   assert.deepEqual(cookies.map((c) => c.domain), ['.bing.com']);
+});
+
+test('site info counts the tabs a site is open in', async () => {
+  tabs = [{ id: 1, url: 'https://a.shop.com/' }, { id: 2, url: 'https://shop.com/cart' }, { id: 3, url: 'https://other.com/' }];
+  cookies = [];
+  assert.equal((await send({ type: 'site-info', host: 'shop.com' })).openTabs, 2);
+});
+
+test('"Clean this site" from an incognito window leaves the normal profile alone', async () => {
+  store.settings = { ...store.settings, enabled: true, cleanSiteData: true };
+  store.lists = [];
+  store.visited = ['shop.com'];
+  tabs = [{ id: 1, url: 'https://shop.com/', incognito: true }, { id: 2, url: 'https://shop.com/' }];
+  cookies = [ck('.shop.com', 'private', { storeId: '1' }), ck('.shop.com', 'regular')];
+  const logBefore = store.log.length;
+  const before = removedOrigins.length;
+  const r = await send({ type: 'clean-site', host: 'shop.com', incognito: true });
+  assert.equal(r.cookies, 1);
+  assert.deepEqual(cookies.map((c) => c.name), ['regular']);
+  assert.deepEqual(store.visited, ['shop.com'], 'regular site data is still pending, not wiped');
+  assert.equal(removedOrigins.length, before);
+  assert.ok(store.log.length === logBefore + 1 || store.log.length === 100);
+  assert.deepEqual(store.log[0].sites, [], 'incognito site is not named in the log');
+
+  // And from a normal window, incognito cookies stay.
+  cookies = [ck('.shop.com', 'private', { storeId: '1' }), ck('.shop.com', 'regular')];
+  await send({ type: 'clean-site', host: 'shop.com', incognito: false });
+  assert.deepEqual(cookies.map((c) => c.name), ['private']);
+  assert.ok(removedOrigins.slice(before).includes('https://shop.com'));
+  assert.equal(await send({ type: 'clean-site', host: 'shop.com', incognito: 'yes' }), null);
+});
+
+test('site data on a non-default port is cleaned with its site', async () => {
+  store.settings = { ...store.settings, enabled: true, delaySec: 0, cleanSiteData: true };
+  store.lists = [];
+  store.visited = [];
+  const tab = { id: 90, url: 'http://localhost:8080/app' };
+  tabs = [tab];
+  cookies = [];
+  await fire('tabs.onUpdated', 90, { url: tab.url }, tab); await tick();
+  assert.ok(store.visited.includes('localhost:8080'));
+  tabs = [];
+  const before = removedOrigins.length;
+  await fire('tabs.onRemoved', 90); await tick();
+  assert.ok(removedOrigins.slice(before).includes('http://localhost:8080'));
+  assert.deepEqual(store.log[0].sites, ['localhost']);
+  assert.ok(!store.visited.includes('localhost:8080'));
+});
+
+test('a steady stream of closed tabs cannot postpone the clean past delay + 30 s', async () => {
+  store.settings = { ...store.settings, enabled: true, delaySec: 60 };
+  tabs = [];
+  delete session.pendingSince;
+  const realNow = Date.now;
+  let now = realNow();
+  Date.now = () => now;
+  try {
+    await fire('tabs.onRemoved', 700);
+    const first = now;
+    for (let i = 1; i <= 10; i++) { now += 10000; await fire('tabs.onRemoved', 700 + i); }
+    assert.equal(alarms['crumbclear-clean'].when, first + 60000 + 30000);
+  } finally {
+    Date.now = realNow;
+  }
+  await fire('alarms.onAlarm', { name: 'crumbclear-clean' }); await tick();
+  assert.ok(!('pendingSince' in session), 'next burst starts a new window');
 });
 
 test('paused auto-clean does nothing on tab close', async () => {
@@ -403,6 +469,7 @@ test('stored keys are exactly the ones privacy.html describes', () => {
   };
   assert.deepEqual(Object.keys(store).sort(), Object.keys(described).sort());
   for (const phrase of Object.values(described)) assert.ok(policy.includes(phrase), phrase);
-  for (const key of Object.keys(session)) assert.match(key, /^(ready|tabHost\.\d+)$/);
+  for (const key of Object.keys(session)) assert.match(key, /^(ready|pendingSince|tabHost\.\d+)$/);
   assert.ok(policy.includes('the host name currently shown in each tab') && policy.includes('finished restoring tabs'));
+  assert.ok(policy.includes('when the first tab waiting for cleanup was closed'));
 });

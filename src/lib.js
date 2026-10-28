@@ -43,6 +43,21 @@ export function hostFromUrl(url) {
   }
 }
 
+// Key for the visited list: the host, plus the port when it is not the
+// scheme's default, because site data is stored per origin.
+export function visitKeyFromUrl(url) {
+  const host = hostFromUrl(url);
+  if (!host) return null;
+  const { port } = new URL(url);
+  return port ? `${host}:${port}` : host;
+}
+
+// "localhost:8080" -> { host: 'localhost', port: '8080' }; "[::1]:3000" works too.
+export function splitHostPort(key) {
+  const m = /^(.*?)(?::(\d{1,5}))?$/.exec(String(key || ''));
+  return { host: m[1], port: m[2] || null };
+}
+
 // Registrable site ("mail.google.com" -> "google.com"). Private suffixes
 // like github.io are respected so separate GitHub Pages sites stay separate.
 export function siteOf(host) {
@@ -246,10 +261,12 @@ export function cookieUrl(cookie) {
 // Origins to wipe site data for, given the cleaned hosts.
 export function originsFor(hosts) {
   const out = new Set();
-  for (const h of hosts) {
+  for (const key of hosts) {
+    const { host: h, port } = splitHostPort(key);
     const host = normHost(h);
     if (!host) continue;
-    for (const origin of [`https://${host}`, `http://${host}`]) {
+    const at = port ? `${host}:${port}` : host;
+    for (const origin of [`https://${at}`, `http://${at}`]) {
       try {
         if (new URL(origin).origin === origin) out.add(origin);
       } catch { /* not a hostname */ }

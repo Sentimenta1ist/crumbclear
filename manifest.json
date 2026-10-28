@@ -28,6 +28,6 @@
     "extension_pages": "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
   },
   "permissions": ["cookies", "storage", "alarms", "browsingData"],
-  "host_permissions": ["<all_urls>"],
+  "host_permissions": ["*://*/*"],
   "incognito": "spanning"
 }

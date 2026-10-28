@@ -3,6 +3,7 @@ import { DEFAULT_SETTINGS, LIST_KEEP, LIST_SESSION, hostFromUrl, siteOf, listSta
 const $ = (id) => document.getElementById(id);
 let host = null;
 let site = null;
+let incognito = false;
 
 const HINTS = {
   '': 'Cookies and site data are deleted after you close the last tab of this site.',
@@ -23,6 +24,7 @@ async function load() {
 
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   host = tab ? hostFromUrl(tab.url || '') : null;
+  incognito = !!(tab && tab.incognito);
   site = host ? siteOf(host) : null;
   $('siteBox').hidden = !host;
   $('noSite').hidden = !!host;
@@ -43,7 +45,8 @@ async function load() {
 
   const info = await ask({ type: 'site-info', host });
   $('count').textContent = info
-    ? plural(info.cookies, 'cookie') + (info.partitioned ? ` · ${info.partitioned} partitioned` : '')
+    ? plural(info.cookies, 'cookie') + (info.partitioned ? ` · ${info.partitioned} partitioned` : '') +
+      (info.openTabs > 1 ? ` · open in ${info.openTabs} tabs` : '')
     : '';
 }
 
@@ -97,7 +100,7 @@ $('cleanNow').addEventListener('click', async () => {
 $('cleanSite').addEventListener('click', async () => {
   if (!host) return;
   $('cleanSite').disabled = true;
-  const r = await ask({ type: 'clean-site', host });
+  const r = await ask({ type: 'clean-site', host, incognito });
   $('cleanSite').disabled = false;
   toast(!r ? 'Could not clean. Try again, or reload CrumbClear in chrome://extensions.'
     : r.cookies ? `Removed ${plural(r.cookies, 'cookie')} for ${site}. Reload the page to see it logged out.`

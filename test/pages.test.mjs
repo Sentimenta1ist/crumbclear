@@ -150,3 +150,17 @@ test('popup: Until restart hint names the setting it depends on', async () => {
   const { $ } = await open('popup', { store: { settings: { ...DEFAULT_SETTINGS }, lists: [{ expression: 'shop.com', list: 'session' }] }, tab: { id: 1, url: 'https://www.shop.com/' } });
   assert.match($('hint').textContent, /Clean on browser start/);
 });
+
+test('popup: says when a site is open in several tabs, and cleans in the window\'s own profile', async () => {
+  const sent = [];
+  const { $ } = await open('popup', {
+    store: { settings: { ...DEFAULT_SETTINGS }, lists: [] },
+    tab: { id: 1, url: 'https://www.shop.com/', incognito: true },
+    replies: { 'site-info': { site: 'shop.com', cookies: 3, partitioned: 1, openTabs: 2 } },
+  });
+  assert.equal($('count').textContent, '3 cookies · 1 partitioned · open in 2 tabs');
+  const send = chrome.runtime.sendMessage;
+  chrome.runtime.sendMessage = async (msg) => { sent.push(msg); return send(msg); };
+  await $('cleanSite').click(); await settle();
+  assert.deepEqual(sent.find((m) => m.type === 'clean-site'), { type: 'clean-site', host: 'www.shop.com', incognito: true });
+});

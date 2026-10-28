@@ -19,7 +19,7 @@
 <body>
 <main>
   <h1>CrumbClear Privacy Policy</h1>
-  <p class="updated">Last updated: October 8, 2026 (version 1.0.1)</p>
+  <p class="updated">Last updated: October 28, 2026 (version 1.1.0)</p>
 
   <p>CrumbClear is a browser extension that deletes cookies and site data after you close a website's tabs. It does not collect, sell or share any personal data. Everything it reads or stores stays in your browser.</p>
 
@@ -34,20 +34,23 @@
   <ul>
     <li>Your settings.</li>
     <li>Your lists of sites to keep or to keep until restart.</li>
-    <li>Host names of sites you visited since they were last cleaned (at most 2,000), so their site data can be deleted later. A host is removed from this list once it is cleaned. Sites opened in incognito windows are never added.</li>
+    <li>Host names of sites you visited since they were last cleaned (at most 2,000; with the port number for addresses like <code>localhost:8080</code>), so their site data can be deleted later. A host is removed from this list once it is cleaned. Sites opened in incognito windows are never added.</li>
     <li>A history of the last 100 cleanups: time, reason, number of cookies and sites, and up to 50 cleaned site names each. Sites cleaned from incognito windows are not named. You can clear it in Settings.</li>
     <li>Totals of cookies removed, sites cleaned and cleanups run.</li>
     <li>The version number of this storage format, for future updates.</li>
   </ul>
-  <p>In memory only, until you close the browser (<code>chrome.storage.session</code>): the host name currently shown in each tab, to notice when a tab moves to another site, and whether the browser has finished restoring tabs after it started.</p>
+  <p>In memory only, until you close the browser (<code>chrome.storage.session</code>): the host name currently shown in each tab, to notice when a tab moves to another site; whether the browser has finished restoring tabs after it started; and the time when the first tab waiting for cleanup was closed, so more closed tabs cannot postpone the cleanup for long.</p>
   <p>Uninstalling the extension deletes all of it.</p>
 
   <h2>What is sent anywhere</h2>
   <p>Nothing. CrumbClear makes no network requests. It has no servers, no analytics, no advertising and no third-party code that contacts the network.</p>
 
+  <h2>Limited Use</h2>
+  <p>The use of information received from Chrome APIs adheres to the <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use">Chrome Web Store User Data Policy</a>, including the Limited Use requirements. CrumbClear uses this information only to provide its single purpose, deleting cookies and site data of closed sites. It is not transferred to anyone, not used for advertising, not used to determine creditworthiness, and no human reads it.</p>
+
   <h2>Permissions</h2>
   <ul>
-    <li><b>Access to all sites</b>: read and delete cookies of any site you close, and see which sites your tabs show.</li>
+    <li><b>Access to all http and https sites</b>: read and delete cookies of any site you close, and see which sites your tabs show.</li>
     <li><b>cookies</b>: read and delete cookies.</li>
     <li><b>browsingData</b>: delete localStorage, IndexedDB, cache storage, file systems and service workers of closed sites.</li>
     <li><b>storage</b>: save the settings, lists and history described above on your device.</li>
