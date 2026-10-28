@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CrumbClear settings</title>
+  <title data-i18n="optionsTitle">CrumbClear settings</title>
   <link rel="stylesheet" href="ui.css">
   <style>
     body { padding: 32px 16px 64px; }
@@ -53,83 +53,83 @@
 <body>
 <main>
   <div class="brand"><img src="../icons/icon48.png" alt="" style="width:32px;height:32px"><h1>CrumbClear</h1></div>
-  <p class="lead muted">Cookies and site data are deleted when you close the last tab of a site. Sites on your lists are left alone.</p>
+  <p class="lead muted" data-i18n="optionsLead">Cookies and site data are deleted when you close the last tab of a site. Sites on your lists are left alone.</p>
 
   <section class="card setup" id="setup" hidden aria-labelledby="setupTitle">
     <div class="setup-head">
-      <div class="t" id="setupTitle">First, pick the sites you want to stay signed in to</div>
-      <div class="d">Auto-clean is off until you finish. After that, cookies of every other site are deleted once you close its tabs. Google, Microsoft, Apple, GitHub and Okta sign-in are already on your Keep list. Moving from Cookie AutoDelete? Import your list below first.</div>
+      <div class="t" id="setupTitle" data-i18n="setupTitle">First, pick the sites you want to stay signed in to</div>
+      <div class="d" data-i18n="setupDesc">Auto-clean is off until you finish. After that, cookies of every other site are deleted once you close its tabs. Google, Microsoft, Apple, GitHub and Okta sign-in are already on your Keep list. Moving from Cookie AutoDelete? Import your list below first.</div>
     </div>
     <div class="setup-tools">
-      <input type="search" id="setupFilter" placeholder="Filter sites" aria-label="Filter sites" autocomplete="off">
-      <button id="setupAll" type="button">Select all</button>
+      <input type="search" id="setupFilter" placeholder="Filter sites" aria-label="Filter sites" data-i18n-placeholder="filterSites" data-i18n-aria-label="filterSites" autocomplete="off">
+      <button id="setupAll" type="button" data-i18n="selectAll">Select all</button>
     </div>
     <ul class="setup-sites" id="setupSites"></ul>
-    <div class="empty" id="setupEmpty" hidden>No other sites have cookies right now.</div>
-    <div class="tools"><button class="primary" id="setupDone" type="button">Keep selected and turn on auto-clean</button></div>
+    <div class="empty" id="setupEmpty" hidden data-i18n="setupEmpty">No other sites have cookies right now.</div>
+    <div class="tools"><button class="primary" id="setupDone" type="button" data-i18n="setupDone">Keep selected and turn on auto-clean</button></div>
     <div class="msg" id="setupMsg" role="status"></div>
   </section>
 
-  <h2>Cleaning</h2>
+  <h2 data-i18n="hCleaning">Cleaning</h2>
   <div class="card">
-    <div class="row"><div><div class="t">Auto-clean</div><div class="d">Pause to keep everything until you turn it back on.</div></div>
-      <span class="switch"><input type="checkbox" data-setting="enabled" aria-label="Auto-clean"><span></span></span></div>
-    <div class="row"><div><div class="t">Delay after closing a tab</div><div class="d">Time to reopen a tab before its cookies are gone. Several closed tabs are cleaned together.</div></div>
-      <select data-setting="delaySec" data-type="number" aria-label="Delay after closing a tab">
-        <option value="0">Immediately</option>
-        <option value="30">30 seconds</option>
-        <option value="60">1 minute</option>
-        <option value="300">5 minutes</option>
-        <option value="900">15 minutes</option>
+    <div class="row"><div><div class="t" data-i18n="optAutoClean">Auto-clean</div><div class="d" data-i18n="optAutoCleanDesc">Pause to keep everything until you turn it back on.</div></div>
+      <span class="switch"><input type="checkbox" data-setting="enabled" aria-label="Auto-clean" data-i18n-aria-label="optAutoClean"><span></span></span></div>
+    <div class="row"><div><div class="t" data-i18n="optDelay">Delay after closing a tab</div><div class="d" data-i18n="optDelayDesc">Time to reopen a tab before its cookies are gone. Several closed tabs are cleaned together.</div></div>
+      <select data-setting="delaySec" data-type="number" aria-label="Delay after closing a tab" data-i18n-aria-label="optDelay">
+        <option value="0" data-i18n="delay0">Immediately</option>
+        <option value="30" data-i18n="delay30">30 seconds</option>
+        <option value="60" data-i18n="delay60">1 minute</option>
+        <option value="300" data-i18n="delay300">5 minutes</option>
+        <option value="900" data-i18n="delay900">15 minutes</option>
       </select></div>
-    <div class="row"><div><div class="t">Clean when a tab moves to another site</div><div class="d">Navigating away counts as closing the old site.</div></div>
-      <span class="switch"><input type="checkbox" data-setting="cleanOnDomainChange" aria-label="Clean when a tab moves to another site"><span></span></span></div>
-    <div class="row"><div><div class="t">Also delete site data</div><div class="d">localStorage, IndexedDB, cache storage and service workers, not just cookies.</div></div>
-      <span class="switch"><input type="checkbox" data-setting="cleanSiteData" aria-label="Also delete site data"><span></span></span></div>
-    <div class="row"><div><div class="t">Clean on browser start</div><div class="d">Removes leftovers from the last session, including "until restart" sites. When off, "until restart" sites are kept like Keep.</div></div>
-      <span class="switch"><input type="checkbox" data-setting="cleanOnStartup" aria-label="Clean on browser start"><span></span></span></div>
-    <div class="row"><div><div class="t">Cookie count on the icon</div><div class="d">Blue: kept. Amber: kept until restart. Teal: will be cleaned. Grey: auto-clean is paused.</div></div>
-      <span class="switch"><input type="checkbox" data-setting="showBadge" aria-label="Cookie count on the icon"><span></span></span></div>
+    <div class="row"><div><div class="t" data-i18n="optDomain">Clean when a tab moves to another site</div><div class="d" data-i18n="optDomainDesc">Navigating away counts as closing the old site.</div></div>
+      <span class="switch"><input type="checkbox" data-setting="cleanOnDomainChange" aria-label="Clean when a tab moves to another site" data-i18n-aria-label="optDomain"><span></span></span></div>
+    <div class="row"><div><div class="t" data-i18n="optSiteData">Also delete site data</div><div class="d" data-i18n="optSiteDataDesc">localStorage, IndexedDB, cache storage and service workers, not just cookies.</div></div>
+      <span class="switch"><input type="checkbox" data-setting="cleanSiteData" aria-label="Also delete site data" data-i18n-aria-label="optSiteData"><span></span></span></div>
+    <div class="row"><div><div class="t" data-i18n="optStartup">Clean on browser start</div><div class="d" data-i18n="optStartupDesc">Removes leftovers from the last session, including "until restart" sites. When off, "until restart" sites are kept like Keep.</div></div>
+      <span class="switch"><input type="checkbox" data-setting="cleanOnStartup" aria-label="Clean on browser start" data-i18n-aria-label="optStartup"><span></span></span></div>
+    <div class="row"><div><div class="t" data-i18n="optBadge">Cookie count on the icon</div><div class="d" data-i18n="optBadgeDesc">Blue: kept. Amber: kept until restart. Teal: will be cleaned. Grey: auto-clean is paused.</div></div>
+      <span class="switch"><input type="checkbox" data-setting="showBadge" aria-label="Cookie count on the icon" data-i18n-aria-label="optBadge"><span></span></span></div>
   </div>
 
-  <h2>Sites you keep</h2>
+  <h2 data-i18n="hLists">Sites you keep</h2>
   <div class="card">
     <form class="add" id="addForm">
-      <input id="expr" placeholder="example.com or *.example.com" aria-label="Site or pattern" autocomplete="off">
-      <select id="listType" aria-label="List">
-        <option value="keep">Keep</option>
-        <option value="session">Until restart</option>
+      <input id="expr" placeholder="example.com or *.example.com" aria-label="Site or pattern" data-i18n-placeholder="exprPlaceholder" data-i18n-aria-label="exprAria" autocomplete="off">
+      <select id="listType" aria-label="List" data-i18n-aria-label="listAria">
+        <option value="keep" data-i18n="segKeep">Keep</option>
+        <option value="session" data-i18n="segSession">Until restart</option>
       </select>
-      <button class="primary" type="submit">Add</button>
+      <button class="primary" type="submit" data-i18n="add">Add</button>
     </form>
     <div class="msg" id="addMsg" role="status"></div>
     <table id="lists"></table>
-    <div class="empty" id="listsEmpty">No sites yet. Add the ones you want to stay logged in to.</div>
+    <div class="empty" id="listsEmpty" data-i18n="listsEmpty">No sites yet. Add the ones you want to stay logged in to.</div>
   </div>
 
-  <h2>Import and export</h2>
+  <h2 data-i18n="hImport">Import and export</h2>
   <div class="card">
     <div class="tools">
-      <button id="importBtn">Import lists…</button>
-      <button id="exportBtn">Export lists</button>
+      <button id="importBtn" data-i18n="importBtn">Import lists…</button>
+      <button id="exportBtn" data-i18n="exportBtn">Export lists</button>
       <input type="file" id="importFile" accept=".json,.txt,application/json,text/plain" hidden>
     </div>
     <div class="msg" id="importMsg" role="status"></div>
-    <div class="row" style="border-top:1px solid var(--line)"><div class="d">Moving from Cookie AutoDelete? In its settings choose Export, then import that file here. Whitelist becomes Keep, greylist becomes Until restart. A plain text file with one domain per line also works.</div></div>
+    <div class="row" style="border-top:1px solid var(--line)"><div class="d" data-i18n="importHelp">Moving from Cookie AutoDelete? In its settings choose Export, then import that file here. Whitelist becomes Keep, greylist becomes Until restart. A plain text file with one domain per line also works.</div></div>
   </div>
 
-  <h2>Activity</h2>
+  <h2 data-i18n="hActivity">Activity</h2>
   <div class="card">
     <div class="stats">
-      <div class="stat"><b id="sCookies">0</b><span class="muted">cookies removed</span></div>
-      <div class="stat"><b id="sSites">0</b><span class="muted">sites cleaned</span></div>
-      <div class="stat"><b id="sRuns">0</b><span class="muted">cleanups</span></div>
+      <div class="stat"><b id="sCookies">0</b><span class="muted" data-i18n="statCookies">cookies removed</span></div>
+      <div class="stat"><b id="sSites">0</b><span class="muted" data-i18n="statSites">sites cleaned</span></div>
+      <div class="stat"><b id="sRuns">0</b><span class="muted" data-i18n="statRuns">cleanups</span></div>
     </div>
   </div>
   <div class="card" style="margin-top:10px">
     <table class="log" id="log"></table>
-    <div class="empty" id="logEmpty">Nothing cleaned yet. Close a tab and wait for the delay.</div>
-    <div class="tools" style="border-top:1px solid var(--line)"><button id="clearLog">Clear history</button></div>
+    <div class="empty" id="logEmpty" data-i18n="logEmpty">Nothing cleaned yet. Close a tab and wait for the delay.</div>
+    <div class="tools" style="border-top:1px solid var(--line)"><button id="clearLog" data-i18n="clearLog">Clear history</button></div>
   </div>
 </main>
 <script type="module" src="options.js"></script>

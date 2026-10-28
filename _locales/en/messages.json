@@ -1,0 +1,500 @@
+{
+  "extName": {
+    "message": "CrumbClear: Auto Delete Cookies",
+    "description": "Extension name in the Chrome Web Store and chrome://extensions (max 75 chars)"
+  },
+  "extDescription": {
+    "message": "Auto delete cookies when you close a tab. Cookie cleaner with keep lists, partitioned cookie support and list import. No tracking.",
+    "description": "Store summary (max 132 chars)"
+  },
+  "actionTitle": {
+    "message": "CrumbClear"
+  },
+  "autoClean": {
+    "message": "Auto-clean"
+  },
+  "autoCleanOn": {
+    "message": "Auto-clean on"
+  },
+  "autoCleanOff": {
+    "message": "Auto-clean off"
+  },
+  "finishSetupFirst": {
+    "message": "Finish setup in Settings first"
+  },
+  "finishSetupToStart": {
+    "message": "Finish setup in Settings to start"
+  },
+  "cookiesCleaned_one": {
+    "message": "$P1$ cookie cleaned",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookiesCleaned_other": {
+    "message": "$P1$ cookies cleaned",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "hintClean": {
+    "message": "Cookies and site data are deleted after you close the last tab of this site."
+  },
+  "hintSession": {
+    "message": "Kept while the browser is open, deleted the next time the browser starts (if \"Clean on browser start\" is on)."
+  },
+  "hintKeep": {
+    "message": "Never cleaned automatically. Use for sites you want to stay logged in to."
+  },
+  "pillKept": {
+    "message": "Kept"
+  },
+  "pillSession": {
+    "message": "Kept until restart"
+  },
+  "pillClean": {
+    "message": "Cleaned on close"
+  },
+  "pillPaused": {
+    "message": "Auto-clean paused"
+  },
+  "setByRule": {
+    "message": "Set by the rule \"$P1$\" in Settings.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieCount_one": {
+    "message": "$P1$ cookie",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieCount_other": {
+    "message": "$P1$ cookies",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "partitionedCount_other": {
+    "message": "$P1$ partitioned",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "openInTabs_one": {
+    "message": "open in $P1$ tab",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "openInTabs_other": {
+    "message": "open in $P1$ tabs",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "ruleStillApplies": {
+    "message": "The rule \"$P1$\" in Settings still applies to $P2$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "cleanFailed": {
+    "message": "Could not clean. Try again, or reload CrumbClear in chrome://extensions."
+  },
+  "removedFromClosed": {
+    "message": "Removed $P1$ from $P2$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "closedSiteCount_one": {
+    "message": "$P1$ closed site",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "closedSiteCount_other": {
+    "message": "$P1$ closed sites",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "nothingToClean": {
+    "message": "Nothing to clean: no closed sites left behind."
+  },
+  "removedForSite": {
+    "message": "Removed $P1$ for $P2$. Reload the page to see it logged out.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "noCookiesLeft": {
+    "message": "No cookies left for $P1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "segAria": {
+    "message": "What happens to this site's cookies"
+  },
+  "segClean": {
+    "message": "Clean on close"
+  },
+  "segSession": {
+    "message": "Until restart"
+  },
+  "segKeep": {
+    "message": "Keep"
+  },
+  "noSite": {
+    "message": "This page has no site cookies to manage."
+  },
+  "cleanSite": {
+    "message": "Clean this site"
+  },
+  "cleanNow": {
+    "message": "Clean closed tabs"
+  },
+  "settings": {
+    "message": "Settings"
+  },
+  "undo": {
+    "message": "Undo"
+  },
+  "undoText": {
+    "message": "Last cleanup: $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "undone": {
+    "message": "Restored $P1$. These sites are kept until you open and close them again.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "undoFailed": {
+    "message": "Nothing to undo anymore."
+  },
+  "rateText": {
+    "message": "Is CrumbClear useful? A rating in the Chrome Web Store helps others find it."
+  },
+  "rateYes": {
+    "message": "Rate it"
+  },
+  "rateNo": {
+    "message": "No thanks"
+  },
+  "optionsTitle": {
+    "message": "CrumbClear settings"
+  },
+  "optionsLead": {
+    "message": "Cookies and site data are deleted when you close the last tab of a site. Sites on your lists are left alone."
+  },
+  "setupTitle": {
+    "message": "First, pick the sites you want to stay signed in to"
+  },
+  "setupDesc": {
+    "message": "Auto-clean is off until you finish. After that, cookies of every other site are deleted once you close its tabs. Google, Microsoft, Apple, GitHub and Okta sign-in are already on your Keep list. Moving from Cookie AutoDelete? Import your list below first."
+  },
+  "filterSites": {
+    "message": "Filter sites"
+  },
+  "selectAll": {
+    "message": "Select all"
+  },
+  "setupEmpty": {
+    "message": "No other sites have cookies right now."
+  },
+  "setupDone": {
+    "message": "Keep selected and turn on auto-clean"
+  },
+  "hCleaning": {
+    "message": "Cleaning"
+  },
+  "optAutoClean": {
+    "message": "Auto-clean"
+  },
+  "optAutoCleanDesc": {
+    "message": "Pause to keep everything until you turn it back on."
+  },
+  "optDelay": {
+    "message": "Delay after closing a tab"
+  },
+  "optDelayDesc": {
+    "message": "Time to reopen a tab before its cookies are gone. Several closed tabs are cleaned together."
+  },
+  "delay0": {
+    "message": "Immediately"
+  },
+  "delay30": {
+    "message": "30 seconds"
+  },
+  "delay60": {
+    "message": "1 minute"
+  },
+  "delay300": {
+    "message": "5 minutes"
+  },
+  "delay900": {
+    "message": "15 minutes"
+  },
+  "optDomain": {
+    "message": "Clean when a tab moves to another site"
+  },
+  "optDomainDesc": {
+    "message": "Navigating away counts as closing the old site."
+  },
+  "optSiteData": {
+    "message": "Also delete site data"
+  },
+  "optSiteDataDesc": {
+    "message": "localStorage, IndexedDB, cache storage and service workers, not just cookies."
+  },
+  "optStartup": {
+    "message": "Clean on browser start"
+  },
+  "optStartupDesc": {
+    "message": "Removes leftovers from the last session, including \"until restart\" sites. When off, \"until restart\" sites are kept like Keep."
+  },
+  "optBadge": {
+    "message": "Cookie count on the icon"
+  },
+  "optBadgeDesc": {
+    "message": "Blue: kept. Amber: kept until restart. Teal: will be cleaned. Grey: auto-clean is paused."
+  },
+  "hLists": {
+    "message": "Sites you keep"
+  },
+  "exprPlaceholder": {
+    "message": "example.com or *.example.com"
+  },
+  "exprAria": {
+    "message": "Site or pattern"
+  },
+  "listAria": {
+    "message": "List"
+  },
+  "add": {
+    "message": "Add"
+  },
+  "listsEmpty": {
+    "message": "No sites yet. Add the ones you want to stay logged in to."
+  },
+  "hImport": {
+    "message": "Import and export"
+  },
+  "importBtn": {
+    "message": "Import lists…"
+  },
+  "exportBtn": {
+    "message": "Export lists"
+  },
+  "importHelp": {
+    "message": "Moving from Cookie AutoDelete? In its settings choose Export, then import that file here. Whitelist becomes Keep, greylist becomes Until restart. A plain text file with one domain per line also works."
+  },
+  "hActivity": {
+    "message": "Activity"
+  },
+  "statCookies": {
+    "message": "cookies removed"
+  },
+  "statSites": {
+    "message": "sites cleaned"
+  },
+  "statRuns": {
+    "message": "cleanups"
+  },
+  "logEmpty": {
+    "message": "Nothing cleaned yet. Close a tab and wait for the delay."
+  },
+  "clearLog": {
+    "message": "Clear history"
+  },
+  "listFor": {
+    "message": "List for $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "remove": {
+    "message": "Remove"
+  },
+  "removeAria": {
+    "message": "Remove $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "notDomain": {
+    "message": "That does not look like a domain. Try example.com or *.example.com."
+  },
+  "listsFull": {
+    "message": "Your lists are full ($P1$ sites). Remove some first.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "addedSuffix": {
+    "message": "Added $P1$. Note: this covers every site ending in .$P2$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "added": {
+    "message": "Added $P1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fileTooLarge": {
+    "message": "That file is too large to be a list of sites (limit 1 MB)."
+  },
+  "noSitesFound": {
+    "message": "No sites found in that file."
+  },
+  "tooManyImport": {
+    "message": "Too many sites: your lists can hold $P1$. Nothing was imported.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "imported": {
+    "message": "Imported $P1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "importedSkipped": {
+    "message": "Imported $P1$, $P2$ already on your lists.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "siteCount_one": {
+    "message": "$P1$ site",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "siteCount_other": {
+    "message": "$P1$ sites",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "moreSites": {
+    "message": "+$P1$ more",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "logPrivate": {
+    "message": "private windows"
+  },
+  "logSiteDataOnly": {
+    "message": "site data only"
+  },
+  "reasonTabClosed": {
+    "message": "tab closed"
+  },
+  "reasonManual": {
+    "message": "manual"
+  },
+  "reasonStartup": {
+    "message": "browser start"
+  },
+  "reasonAuto": {
+    "message": "automatic"
+  },
+  "tooManySetup": {
+    "message": "Too many sites: your lists can hold $P1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoCleanOnKept": {
+    "message": "Auto-clean is on. Kept $P1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoCleanIsOn": {
+    "message": "Auto-clean is on."
+  }
+}

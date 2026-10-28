@@ -1,0 +1,460 @@
+{
+  "extName": {
+    "message": "CrumbClear：自动删除 Cookie",
+    "description": "Extension name in the Chrome Web Store and chrome://extensions (max 75 chars)"
+  },
+  "extDescription": {
+    "message": "关闭标签页时自动删除 Cookie。支持保留列表、分区 Cookie 和列表导入。无跟踪。",
+    "description": "Store summary (max 132 chars)"
+  },
+  "actionTitle": {
+    "message": "CrumbClear"
+  },
+  "autoClean": {
+    "message": "自动清理"
+  },
+  "autoCleanOn": {
+    "message": "自动清理已开启"
+  },
+  "autoCleanOff": {
+    "message": "自动清理已关闭"
+  },
+  "finishSetupFirst": {
+    "message": "请先在设置中完成初始设置"
+  },
+  "finishSetupToStart": {
+    "message": "请在设置中完成初始设置"
+  },
+  "cookiesCleaned_other": {
+    "message": "已清理 $P1$ 个 Cookie",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "hintClean": {
+    "message": "关闭此网站的最后一个标签页后，其 Cookie 和网站数据会被删除。"
+  },
+  "hintSession": {
+    "message": "浏览器打开期间保留，下次启动浏览器时删除（需开启“浏览器启动时清理”）。"
+  },
+  "hintKeep": {
+    "message": "永不自动清理。适用于想保持登录的网站。"
+  },
+  "pillKept": {
+    "message": "保留"
+  },
+  "pillSession": {
+    "message": "保留到重启"
+  },
+  "pillClean": {
+    "message": "关闭时清理"
+  },
+  "pillPaused": {
+    "message": "自动清理已暂停"
+  },
+  "setByRule": {
+    "message": "由设置中的规则“$P1$”决定。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieCount_other": {
+    "message": "$P1$ 个 Cookie",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "partitionedCount_other": {
+    "message": "$P1$ 个分区",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "openInTabs_other": {
+    "message": "在 $P1$ 个标签页中打开",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "ruleStillApplies": {
+    "message": "设置中的规则“$P1$”仍适用于 $P2$。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "cleanFailed": {
+    "message": "清理失败。请重试，或在 chrome://extensions 中重新加载 CrumbClear。"
+  },
+  "removedFromClosed": {
+    "message": "已从 $P2$中删除 $P1$。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "closedSiteCount_other": {
+    "message": "$P1$ 个已关闭的网站",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "nothingToClean": {
+    "message": "无需清理：没有已关闭网站的残留。"
+  },
+  "removedForSite": {
+    "message": "已删除 $P2$ 的 $P1$。重新加载页面即可看到已退出登录。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "noCookiesLeft": {
+    "message": "$P1$ 已没有 Cookie。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "segAria": {
+    "message": "此网站 Cookie 的处理方式"
+  },
+  "segClean": {
+    "message": "关闭时清理"
+  },
+  "segSession": {
+    "message": "保留到重启"
+  },
+  "segKeep": {
+    "message": "保留"
+  },
+  "noSite": {
+    "message": "此页面没有可管理的网站 Cookie。"
+  },
+  "cleanSite": {
+    "message": "清理此网站"
+  },
+  "cleanNow": {
+    "message": "清理已关闭的标签页"
+  },
+  "settings": {
+    "message": "设置"
+  },
+  "undo": {
+    "message": "撤销"
+  },
+  "undoText": {
+    "message": "上次清理：$P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "undone": {
+    "message": "已恢复 $P1$。这些网站会被保留，直到你再次打开并关闭它们。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "undoFailed": {
+    "message": "已没有可撤销的操作。"
+  },
+  "rateText": {
+    "message": "CrumbClear 对你有用吗？在 Chrome 应用商店评分可以帮助更多人找到它。"
+  },
+  "rateYes": {
+    "message": "去评分"
+  },
+  "rateNo": {
+    "message": "不用了"
+  },
+  "optionsTitle": {
+    "message": "CrumbClear 设置"
+  },
+  "optionsLead": {
+    "message": "关闭网站的最后一个标签页时，其 Cookie 和网站数据会被删除。列表中的网站不受影响。"
+  },
+  "setupTitle": {
+    "message": "首先，选择你想保持登录的网站"
+  },
+  "setupDesc": {
+    "message": "完成之前自动清理保持关闭。之后，其他网站的 Cookie 会在关闭其标签页后被删除。Google、Microsoft、Apple、GitHub 和 Okta 登录已在保留列表中。从 Cookie AutoDelete 迁移？请先在下方导入你的列表。"
+  },
+  "filterSites": {
+    "message": "筛选网站"
+  },
+  "selectAll": {
+    "message": "全选"
+  },
+  "setupEmpty": {
+    "message": "目前没有其他网站有 Cookie。"
+  },
+  "setupDone": {
+    "message": "保留所选网站并开启自动清理"
+  },
+  "hCleaning": {
+    "message": "清理"
+  },
+  "optAutoClean": {
+    "message": "自动清理"
+  },
+  "optAutoCleanDesc": {
+    "message": "暂停后会保留所有内容，直到你重新开启。"
+  },
+  "optDelay": {
+    "message": "关闭标签页后的延迟"
+  },
+  "optDelayDesc": {
+    "message": "在 Cookie 被删除前重新打开标签页的时间。多个已关闭的标签页会一起清理。"
+  },
+  "delay0": {
+    "message": "立即"
+  },
+  "delay30": {
+    "message": "30 秒"
+  },
+  "delay60": {
+    "message": "1 分钟"
+  },
+  "delay300": {
+    "message": "5 分钟"
+  },
+  "delay900": {
+    "message": "15 分钟"
+  },
+  "optDomain": {
+    "message": "标签页切换到其他网站时清理"
+  },
+  "optDomainDesc": {
+    "message": "离开一个网站视为关闭了该网站。"
+  },
+  "optSiteData": {
+    "message": "同时删除网站数据"
+  },
+  "optSiteDataDesc": {
+    "message": "不仅是 Cookie，还包括 localStorage、IndexedDB、缓存存储和 Service Worker。"
+  },
+  "optStartup": {
+    "message": "浏览器启动时清理"
+  },
+  "optStartupDesc": {
+    "message": "删除上次会话的残留，包括“保留到重启”的网站。关闭后，“保留到重启”的网站会像“保留”一样保留。"
+  },
+  "optBadge": {
+    "message": "在图标上显示 Cookie 数量"
+  },
+  "optBadgeDesc": {
+    "message": "蓝色：保留。琥珀色：保留到重启。青色：将被清理。灰色：自动清理已暂停。"
+  },
+  "hLists": {
+    "message": "保留的网站"
+  },
+  "exprPlaceholder": {
+    "message": "example.com 或 *.example.com"
+  },
+  "exprAria": {
+    "message": "网站或规则"
+  },
+  "listAria": {
+    "message": "列表"
+  },
+  "add": {
+    "message": "添加"
+  },
+  "listsEmpty": {
+    "message": "还没有网站。添加你想保持登录的网站。"
+  },
+  "hImport": {
+    "message": "导入和导出"
+  },
+  "importBtn": {
+    "message": "导入列表…"
+  },
+  "exportBtn": {
+    "message": "导出列表"
+  },
+  "importHelp": {
+    "message": "从 Cookie AutoDelete 迁移？在其设置中选择 Export，然后在这里导入该文件。白名单变为“保留”，灰名单变为“保留到重启”。每行一个域名的文本文件也可以。"
+  },
+  "hActivity": {
+    "message": "活动"
+  },
+  "statCookies": {
+    "message": "已删除的 Cookie"
+  },
+  "statSites": {
+    "message": "已清理的网站"
+  },
+  "statRuns": {
+    "message": "清理次数"
+  },
+  "logEmpty": {
+    "message": "还没有清理任何内容。关闭一个标签页并等待延迟结束。"
+  },
+  "clearLog": {
+    "message": "清除历史记录"
+  },
+  "listFor": {
+    "message": "$P1$ 的列表",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "remove": {
+    "message": "移除"
+  },
+  "removeAria": {
+    "message": "移除 $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "notDomain": {
+    "message": "这看起来不像域名。请尝试 example.com 或 *.example.com。"
+  },
+  "listsFull": {
+    "message": "列表已满（$P1$ 个网站）。请先移除一些。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "addedSuffix": {
+    "message": "已添加 $P1$。注意：这会覆盖所有以 .$P2$ 结尾的网站。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "added": {
+    "message": "已添加 $P1$。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fileTooLarge": {
+    "message": "文件太大，不像网站列表（上限 1 MB）。"
+  },
+  "noSitesFound": {
+    "message": "在该文件中未找到网站。"
+  },
+  "tooManyImport": {
+    "message": "网站太多：列表最多容纳 $P1$ 个。未导入任何内容。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "imported": {
+    "message": "已导入 $P1$。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "importedSkipped": {
+    "message": "已导入 $P1$，$P2$ 个已在列表中。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "siteCount_other": {
+    "message": "$P1$ 个网站",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "moreSites": {
+    "message": "另有 $P1$ 个",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "logPrivate": {
+    "message": "无痕窗口"
+  },
+  "logSiteDataOnly": {
+    "message": "仅网站数据"
+  },
+  "reasonTabClosed": {
+    "message": "关闭标签页"
+  },
+  "reasonManual": {
+    "message": "手动"
+  },
+  "reasonStartup": {
+    "message": "浏览器启动"
+  },
+  "reasonAuto": {
+    "message": "自动"
+  },
+  "tooManySetup": {
+    "message": "网站太多：列表最多容纳 $P1$ 个。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoCleanOnKept": {
+    "message": "自动清理已开启。已保留 $P1$。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoCleanIsOn": {
+    "message": "自动清理已开启。"
+  }
+}

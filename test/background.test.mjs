@@ -60,6 +60,13 @@ globalThis.chrome = {
       (!d.partitionKey ? !c.partitionKey
         : d.partitionKey.topLevelSite ? !!c.partitionKey && c.partitionKey.topLevelSite === d.partitionKey.topLevelSite
           : true)),
+    set: async (d) => {
+      if (d.storeId === 'gone') throw new Error('No cookie store');
+      const c = { domain: d.domain ?? new URL(d.url).hostname, hostOnly: !d.domain, name: d.name, value: d.value, path: d.path, secure: d.secure,
+        httpOnly: d.httpOnly, sameSite: d.sameSite, storeId: d.storeId, session: !d.expirationDate, expirationDate: d.expirationDate };
+      if (d.partitionKey) c.partitionKey = d.partitionKey;
+      cookies.push(c); return c;
+    },
     remove: async (d) => {
       const i = cookies.findIndex((c) => c.name === d.name && c.storeId === d.storeId && `${c.secure ? 'https' : 'http'}://${c.domain.replace(/^\./, '')}${c.path}` === d.url && JSON.stringify(c.partitionKey) === JSON.stringify(d.partitionKey));
       if (i < 0) return null;
@@ -460,6 +467,63 @@ test('domain change does not clean while the setting is off (the default)', asyn
   assert.equal(cookies.length, 1);
 });
 
+test('Undo puts back the last cleanup\'s cookies and keeps those sites until they are opened again', async () => {
+  store.settings = { ...store.settings, enabled: true, delaySec: 0 };
+  store.lists = [];
+  tabs = [];
+  const future = Date.now() / 1000 + 3600;
+  cookies = [
+    ck('.undo-a.com', 'sid', { value: 'v1', httpOnly: true, sameSite: 'lax', expirationDate: future }),
+    ck('undo-b.com', 'host', { value: 'v2', hostOnly: true, session: true }),
+    ck('.ads.net', 'p', { value: 'v3', partitionKey: { topLevelSite: 'https://undo-a.com' }, expirationDate: future }),
+    ck('.undo-private.com', 's', { value: 'v4', storeId: '1' }),
+  ];
+  await fire('tabs.onRemoved', 800); await tick();
+  assert.equal(cookies.length, 0);
+  const info = await send({ type: 'undo-info' });
+  assert.equal(info.cookies, 3, 'incognito cookie is not kept for undo');
+  assert.ok(!JSON.stringify(store).includes('v1'), 'cookie values never reach storage.local');
+
+  const r = await send({ type: 'undo' });
+  assert.equal(r.restored, 3);
+  const a = cookies.find((c) => c.name === 'sid');
+  assert.equal(a.value, 'v1'); assert.equal(a.domain, '.undo-a.com'); assert.equal(a.httpOnly, true); assert.equal(a.expirationDate, future);
+  const b = cookies.find((c) => c.name === 'host');
+  assert.equal(b.hostOnly, true); assert.equal(b.session, true);
+  assert.deepEqual(cookies.find((c) => c.name === 'p').partitionKey, { topLevelSite: 'https://undo-a.com' });
+  assert.equal(await send({ type: 'undo-info' }), null, 'undo is used up');
+  assert.equal(await send({ type: 'undo' }), null);
+
+  // Another tab closes: restored sites are not cleaned straight away.
+  await fire('tabs.onRemoved', 801); await tick();
+  assert.equal(cookies.length, 3);
+  // Opened and closed again: now they are.
+  tabs = [{ id: 802, url: 'https://undo-a.com/' }, { id: 803, url: 'https://undo-b.com/' }];
+  await fire('tabs.onRemoved', 804); await tick();
+  tabs = [];
+  await fire('tabs.onRemoved', 802); await tick();
+  assert.equal(cookies.length, 0);
+});
+
+test('Undo expires after 10 minutes and skips cookies that have expired', async () => {
+  store.settings = { ...store.settings, enabled: true, delaySec: 0 };
+  tabs = [];
+  cookies = [ck('.old.com', 'gone', { expirationDate: Date.now() / 1000 + 1 }), ck('.old.com', 'stays', { expirationDate: Date.now() / 1000 + 3600 })];
+  await fire('tabs.onRemoved', 810); await tick();
+  const realNow = Date.now;
+  try {
+    Date.now = () => realNow() + 5000;
+    assert.equal((await send({ type: 'undo' })).restored, 1);
+    cookies = [ck('.old.com', 'x')];
+    Date.now = realNow;
+    await fire('tabs.onRemoved', 811); await tick();
+    Date.now = () => realNow() + 11 * 60 * 1000;
+    assert.equal(await send({ type: 'undo-info' }), null);
+  } finally {
+    Date.now = realNow;
+  }
+});
+
 // Runs last: by now every code path above has written its keys.
 test('stored keys are exactly the ones privacy.html describes', () => {
   const policy = readFileSync(new URL('../privacy.html', import.meta.url), 'utf8');
@@ -469,7 +533,9 @@ test('stored keys are exactly the ones privacy.html describes', () => {
   };
   assert.deepEqual(Object.keys(store).sort(), Object.keys(described).sort());
   for (const phrase of Object.values(described)) assert.ok(policy.includes(phrase), phrase);
-  for (const key of Object.keys(session)) assert.match(key, /^(ready|pendingSince|tabHost\.\d+)$/);
+  for (const key of Object.keys(session)) assert.match(key, /^(ready|pendingSince|undo|restored|tabHost\.\d+)$/);
   assert.ok(policy.includes('the host name currently shown in each tab') && policy.includes('finished restoring tabs'));
   assert.ok(policy.includes('when the first tab waiting for cleanup was closed'));
+  assert.ok(policy.includes('the cookies removed by the last cleanup, for 10 minutes') && policy.includes('the sites you restored with Undo'));
+  assert.ok(policy.includes('never written to disk'));
 });

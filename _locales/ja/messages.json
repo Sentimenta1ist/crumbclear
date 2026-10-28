@@ -1,0 +1,460 @@
+{
+  "extName": {
+    "message": "CrumbClear: Cookie 自動削除",
+    "description": "Extension name in the Chrome Web Store and chrome://extensions (max 75 chars)"
+  },
+  "extDescription": {
+    "message": "タブを閉じると Cookie を自動で削除。残すサイトのリスト、パーティション Cookie 対応、リストのインポート。トラッキングなし。",
+    "description": "Store summary (max 132 chars)"
+  },
+  "actionTitle": {
+    "message": "CrumbClear"
+  },
+  "autoClean": {
+    "message": "自動削除"
+  },
+  "autoCleanOn": {
+    "message": "自動削除 オン"
+  },
+  "autoCleanOff": {
+    "message": "自動削除 オフ"
+  },
+  "finishSetupFirst": {
+    "message": "先に設定画面で初期設定を完了してください"
+  },
+  "finishSetupToStart": {
+    "message": "設定画面で初期設定を完了してください"
+  },
+  "cookiesCleaned_other": {
+    "message": "$P1$ 件の Cookie を削除済み",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "hintClean": {
+    "message": "このサイトの最後のタブを閉じると、Cookie とサイトデータが削除されます。"
+  },
+  "hintSession": {
+    "message": "ブラウザを開いている間は保持され、次回のブラウザ起動時に削除されます（「ブラウザ起動時に削除」がオンの場合）。"
+  },
+  "hintKeep": {
+    "message": "自動では削除されません。ログインしたままにしたいサイト向けです。"
+  },
+  "pillKept": {
+    "message": "保持"
+  },
+  "pillSession": {
+    "message": "再起動まで保持"
+  },
+  "pillClean": {
+    "message": "閉じると削除"
+  },
+  "pillPaused": {
+    "message": "自動削除は一時停止中"
+  },
+  "setByRule": {
+    "message": "設定のルール「$P1$」によるものです。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieCount_other": {
+    "message": "Cookie $P1$ 件",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "partitionedCount_other": {
+    "message": "パーティション $P1$ 件",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "openInTabs_other": {
+    "message": "$P1$ 個のタブで開いています",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "ruleStillApplies": {
+    "message": "設定のルール「$P1$」が引き続き $P2$ に適用されます。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "cleanFailed": {
+    "message": "削除できませんでした。もう一度試すか、chrome://extensions で CrumbClear を再読み込みしてください。"
+  },
+  "removedFromClosed": {
+    "message": "$P2$から $P1$を削除しました。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "closedSiteCount_other": {
+    "message": "閉じた $P1$ 件のサイト",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "nothingToClean": {
+    "message": "削除するものはありません。閉じたサイトの残りはありません。"
+  },
+  "removedForSite": {
+    "message": "$P2$ の $P1$を削除しました。ページを再読み込みするとログアウトされます。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "noCookiesLeft": {
+    "message": "$P1$ の Cookie は残っていません。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "segAria": {
+    "message": "このサイトの Cookie の扱い"
+  },
+  "segClean": {
+    "message": "閉じると削除"
+  },
+  "segSession": {
+    "message": "再起動まで"
+  },
+  "segKeep": {
+    "message": "保持"
+  },
+  "noSite": {
+    "message": "このページには管理できるサイトの Cookie がありません。"
+  },
+  "cleanSite": {
+    "message": "このサイトを削除"
+  },
+  "cleanNow": {
+    "message": "閉じたタブを削除"
+  },
+  "settings": {
+    "message": "設定"
+  },
+  "undo": {
+    "message": "元に戻す"
+  },
+  "undoText": {
+    "message": "前回の削除: $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "undone": {
+    "message": "$P1$を復元しました。これらのサイトは、もう一度開いて閉じるまで保持されます。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "undoFailed": {
+    "message": "元に戻せる操作はもうありません。"
+  },
+  "rateText": {
+    "message": "CrumbClear は役に立っていますか？ Chrome ウェブストアでの評価が、ほかの人が見つける助けになります。"
+  },
+  "rateYes": {
+    "message": "評価する"
+  },
+  "rateNo": {
+    "message": "今はしない"
+  },
+  "optionsTitle": {
+    "message": "CrumbClear の設定"
+  },
+  "optionsLead": {
+    "message": "サイトの最後のタブを閉じると、Cookie とサイトデータが削除されます。リストにあるサイトはそのままです。"
+  },
+  "setupTitle": {
+    "message": "まず、ログインしたままにしたいサイトを選んでください"
+  },
+  "setupDesc": {
+    "message": "完了するまで自動削除はオフのままです。その後は、ほかのサイトの Cookie はタブを閉じると削除されます。Google、Microsoft、Apple、GitHub、Okta のログインは最初から保持リストに入っています。Cookie AutoDelete から移行する場合は、先に下でリストをインポートしてください。"
+  },
+  "filterSites": {
+    "message": "サイトを絞り込む"
+  },
+  "selectAll": {
+    "message": "すべて選択"
+  },
+  "setupEmpty": {
+    "message": "今は Cookie を持つサイトはほかにありません。"
+  },
+  "setupDone": {
+    "message": "選択したサイトを保持して自動削除をオンにする"
+  },
+  "hCleaning": {
+    "message": "削除"
+  },
+  "optAutoClean": {
+    "message": "自動削除"
+  },
+  "optAutoCleanDesc": {
+    "message": "一時停止すると、再びオンにするまですべて保持されます。"
+  },
+  "optDelay": {
+    "message": "タブを閉じてからの待ち時間"
+  },
+  "optDelayDesc": {
+    "message": "Cookie が消える前にタブを開き直せる時間です。閉じた複数のタブはまとめて削除されます。"
+  },
+  "delay0": {
+    "message": "すぐに"
+  },
+  "delay30": {
+    "message": "30 秒"
+  },
+  "delay60": {
+    "message": "1 分"
+  },
+  "delay300": {
+    "message": "5 分"
+  },
+  "delay900": {
+    "message": "15 分"
+  },
+  "optDomain": {
+    "message": "タブが別のサイトに移動したら削除"
+  },
+  "optDomainDesc": {
+    "message": "別のサイトに移動すると、元のサイトを閉じたものとみなします。"
+  },
+  "optSiteData": {
+    "message": "サイトデータも削除"
+  },
+  "optSiteDataDesc": {
+    "message": "Cookie だけでなく localStorage、IndexedDB、キャッシュストレージ、Service Worker も削除します。"
+  },
+  "optStartup": {
+    "message": "ブラウザ起動時に削除"
+  },
+  "optStartupDesc": {
+    "message": "前回のセッションの残りを削除します（「再起動まで」のサイトを含む）。オフのとき「再起動まで」のサイトは「保持」と同じ扱いです。"
+  },
+  "optBadge": {
+    "message": "アイコンに Cookie の数を表示"
+  },
+  "optBadgeDesc": {
+    "message": "青: 保持。黄: 再起動まで保持。ティール: 削除予定。グレー: 自動削除は一時停止中。"
+  },
+  "hLists": {
+    "message": "保持するサイト"
+  },
+  "exprPlaceholder": {
+    "message": "example.com または *.example.com"
+  },
+  "exprAria": {
+    "message": "サイトまたはパターン"
+  },
+  "listAria": {
+    "message": "リスト"
+  },
+  "add": {
+    "message": "追加"
+  },
+  "listsEmpty": {
+    "message": "まだサイトはありません。ログインしたままにしたいサイトを追加してください。"
+  },
+  "hImport": {
+    "message": "インポートとエクスポート"
+  },
+  "importBtn": {
+    "message": "リストをインポート…"
+  },
+  "exportBtn": {
+    "message": "リストをエクスポート"
+  },
+  "importHelp": {
+    "message": "Cookie AutoDelete から移行しますか？ その設定で「Export」を選び、そのファイルをここでインポートしてください。ホワイトリストは「保持」、グレーリストは「再起動まで」になります。1 行に 1 つのドメインを書いたテキストファイルも使えます。"
+  },
+  "hActivity": {
+    "message": "アクティビティ"
+  },
+  "statCookies": {
+    "message": "削除した Cookie"
+  },
+  "statSites": {
+    "message": "削除したサイト"
+  },
+  "statRuns": {
+    "message": "削除の回数"
+  },
+  "logEmpty": {
+    "message": "まだ何も削除していません。タブを閉じて待ち時間が過ぎるのを待ってください。"
+  },
+  "clearLog": {
+    "message": "履歴を消去"
+  },
+  "listFor": {
+    "message": "$P1$ のリスト",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "remove": {
+    "message": "削除"
+  },
+  "removeAria": {
+    "message": "$P1$ を削除",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "notDomain": {
+    "message": "ドメインではないようです。example.com や *.example.com を試してください。"
+  },
+  "listsFull": {
+    "message": "リストがいっぱいです（$P1$ サイト）。先にいくつか削除してください。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "addedSuffix": {
+    "message": "$P1$ を追加しました。注意: .$P2$ で終わるすべてのサイトが対象になります。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "added": {
+    "message": "$P1$ を追加しました。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fileTooLarge": {
+    "message": "サイトのリストとしては大きすぎるファイルです（上限 1 MB）。"
+  },
+  "noSitesFound": {
+    "message": "このファイルにサイトが見つかりませんでした。"
+  },
+  "tooManyImport": {
+    "message": "サイトが多すぎます。リストに入るのは $P1$ 件までです。何もインポートしませんでした。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "imported": {
+    "message": "$P1$をインポートしました。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "importedSkipped": {
+    "message": "$P1$をインポートしました。$P2$ 件はすでにリストにあります。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "siteCount_other": {
+    "message": "$P1$ 件のサイト",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "moreSites": {
+    "message": "ほか $P1$ 件",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "logPrivate": {
+    "message": "シークレット ウィンドウ"
+  },
+  "logSiteDataOnly": {
+    "message": "サイトデータのみ"
+  },
+  "reasonTabClosed": {
+    "message": "タブを閉じた"
+  },
+  "reasonManual": {
+    "message": "手動"
+  },
+  "reasonStartup": {
+    "message": "ブラウザ起動"
+  },
+  "reasonAuto": {
+    "message": "自動"
+  },
+  "tooManySetup": {
+    "message": "サイトが多すぎます。リストに入るのは $P1$ 件までです。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoCleanOnKept": {
+    "message": "自動削除がオンになりました。$P1$を保持します。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoCleanIsOn": {
+    "message": "自動削除がオンになりました。"
+  }
+}

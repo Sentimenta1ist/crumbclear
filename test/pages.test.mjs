@@ -164,3 +164,52 @@ test('popup: says when a site is open in several tabs, and cleans in the window\
   await $('cleanSite').click(); await settle();
   assert.deepEqual(sent.find((m) => m.type === 'clean-site'), { type: 'clean-site', host: 'www.shop.com', incognito: true });
 });
+
+test('popup asks for a rating once after 20 cleanups, and remembers the answer', async () => {
+  const base = { settings: { ...DEFAULT_SETTINGS }, lists: [] };
+  let { $ } = await open('popup', { store: { ...base, stats: { cookies: 5, sites: 2, runs: 3 } }, tab: { id: 1, url: 'https://a.com/' } });
+  assert.equal($('rateBox').hidden, true, 'not before 20 cleanups');
+
+  let store;
+  ({ $, store } = await open('popup', { store: { ...base, stats: { cookies: 500, sites: 90, runs: 25 } }, tab: { id: 1, url: 'https://a.com/' } }));
+  assert.equal($('rateBox').hidden, false);
+  await $('rateYes').click(); await settle();
+  assert.equal(store.settings.ratePrompt, 'done');
+  assert.deepEqual(chrome.created, [{ url: 'https://chromewebstore.google.com/detail/crumbclear-test-id/reviews' }]);
+  assert.equal($('rateBox').hidden, true);
+
+  ({ $, store } = await open('popup', { store: { ...base, stats: { runs: 25 } }, tab: null }));
+  await $('rateNo').click(); await settle();
+  assert.equal(store.settings.ratePrompt, 'dismissed');
+  assert.equal($('rateBox').hidden, true);
+  assert.equal(chrome.created.length, 0);
+});
+
+test('popup offers Undo while the last cleanup can be undone', async () => {
+  const replies = { 'undo-info': { cookies: 12, time: Date.now() }, undo: { restored: 12 } };
+  const { $ } = await open('popup', { store: { settings: { ...DEFAULT_SETTINGS }, lists: [] }, tab: null, replies });
+  assert.equal($('undoBox').hidden, false);
+  assert.equal($('undoText').textContent, 'Last cleanup: 12 cookies');
+  await $('undo').click(); await settle();
+  assert.match($('toast').textContent, /^Restored 12 cookies\./);
+
+  const none = await open('popup', { store: { settings: { ...DEFAULT_SETTINGS }, lists: [] }, tab: null });
+  assert.equal(none.$('undoBox').hidden, true);
+});
+
+test('popup and options speak the browser language, with plural forms', async () => {
+  let { $ } = await open('popup', {
+    lang: 'pl',
+    store: { settings: { ...DEFAULT_SETTINGS }, lists: [], stats: { cookies: 3 } },
+    tab: { id: 1, url: 'https://shop.com/' },
+    replies: { 'site-info': { site: 'shop.com', cookies: 5, partitioned: 0, openTabs: 1 } },
+  });
+  assert.equal($('count').textContent, '5 plików cookie');
+  assert.equal($('stats').textContent, 'Usunięto 3 pliki cookie');
+  assert.equal($('cleanNow').textContent, 'Wyczyść zamknięte karty');
+  assert.equal(document.documentElement.lang, 'pl');
+
+  ({ $ } = await open('options', { lang: 'ja', store: freshStore() }));
+  assert.equal($('setupAll').textContent, 'すべて選択');
+  assert.equal($('expr').getAttribute('placeholder'), 'example.com または *.example.com');
+});

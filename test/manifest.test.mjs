@@ -8,12 +8,26 @@ const m = JSON.parse(readFileSync(new URL('manifest.json', root), 'utf8'));
 const code = readdirSync(new URL('src/', root)).filter((f) => f.endsWith('.js'))
   .map((f) => readFileSync(new URL(`src/${f}`, root), 'utf8')).join('\n');
 
-test('manifest fields fit store limits', () => {
+const locales = readdirSync(new URL('_locales/', root));
+const messages = (lang) => JSON.parse(readFileSync(new URL(`_locales/${lang}/messages.json`, root), 'utf8'));
+
+test('manifest fields fit store limits in every language', () => {
   assert.equal(m.manifest_version, 3);
   assert.match(m.version, /^\d+(\.\d+){0,3}$/);
-  assert.ok(m.name.length <= 75);
-  assert.ok(m.description.length <= 132, `description is ${m.description.length} chars`);
-  assert.ok(!/cookie autodelete/i.test(m.name + m.description), 'no third-party product names in name/summary');
+  assert.equal(m.default_locale, 'en');
+  assert.equal(m.name, '__MSG_extName__');
+  assert.equal(m.description, '__MSG_extDescription__');
+  assert.ok(m.short_name.length <= 12);
+  assert.deepEqual([...locales].sort(), ['de', 'en', 'ja', 'pl', 'zh_CN', 'zh_TW']);
+  for (const lang of locales) {
+    const msg = messages(lang);
+    const name = msg.extName.message;
+    const description = msg.extDescription.message;
+    assert.ok(name.length <= 75, `${lang} name`);
+    assert.ok(description.length <= 132, `${lang} description is ${description.length} chars`);
+    assert.ok(/^CrumbClear/.test(name), `${lang} name starts with the brand`);
+    assert.ok(!/cookie autodelete/i.test(name + description), `${lang}: no third-party product names in name/summary`);
+  }
   assert.equal(m.incognito, 'spanning');
   assert.equal(m.minimum_chrome_version, '120', 'cookies.getAll with partitionKey needs 119+, 30 s alarms 120+');
   for (const key of ['content_scripts', 'web_accessible_resources', 'externally_connectable']) assert.ok(!(key in m), key);
@@ -48,5 +62,28 @@ test('declared icons are PNGs of the declared size', () => {
     assert.equal(png.readUInt32BE(16), Number(size), `${path} width`);
     assert.equal(png.readUInt32BE(20), Number(size), `${path} height`);
     assert.equal(png[25], 6, `${path} is RGBA`);
+  }
+});
+
+test('every language has every message, with matching placeholders', () => {
+  const en = messages('en');
+  const base = (k) => k.replace(/_(zero|one|two|few|many|other)$/, '');
+  const enBases = new Set(Object.keys(en).map(base));
+  const used = [...code.matchAll(/\bt\('([A-Za-z0-9]+)'|\btn\('([A-Za-z0-9]+)'|data-i18n(?:-[a-z-]+)?="([A-Za-z0-9]+)"/g)].map((x) => x[1] || x[2] || x[3]);
+  const html = ['popup.html', 'options.html'].map((f) => readFileSync(new URL(`src/${f}`, root), 'utf8')).join('\n');
+  for (const [, key] of html.matchAll(/data-i18n(?:-[a-z-]+)?="([A-Za-z0-9]+)"/g)) used.push(key);
+  for (const key of used) assert.ok(enBases.has(key), `missing English message ${key}`);
+  for (const key of ['extName', 'extDescription', 'actionTitle']) assert.ok(key in en, key);
+  for (const lang of locales) {
+    const msg = messages(lang);
+    assert.deepEqual(new Set(Object.keys(msg).map(base)), enBases, lang);
+    for (const [key, entry] of Object.entries(msg)) {
+      assert.ok(entry.message && !/\{\d\}/.test(entry.message), `${lang}.${key}`);
+      for (const p of entry.message.match(/\$[A-Za-z0-9_]+\$/g) || []) {
+        assert.ok(entry.placeholders && entry.placeholders[p.slice(1, -1).toLowerCase()], `${lang}.${key} placeholder ${p}`);
+      }
+      const enEntry = en[key] || en[`${base(key)}_other`];
+      assert.equal(Object.keys(entry.placeholders || {}).length, Object.keys(enEntry.placeholders || {}).length, `${lang}.${key} placeholder count`);
+    }
   }
 });

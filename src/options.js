@@ -1,4 +1,5 @@
-import { DEFAULT_SETTINGS, LIST_KEEP, LIST_SESSION, MAX_IMPORT_BYTES, MAX_LIST_ENTRIES, compileExpression, cleanExpression, parseImport, mergeLists, plural, isPublicSuffixExpression, siteOf, normHost, decideCookie } from './lib.js';
+import { DEFAULT_SETTINGS, LIST_KEEP, LIST_SESSION, MAX_IMPORT_BYTES, MAX_LIST_ENTRIES, compileExpression, cleanExpression, parseImport, mergeLists, isPublicSuffixExpression, siteOf, normHost, decideCookie } from './lib.js';
+import { t, tn, num, localize } from './i18n.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -47,8 +48,8 @@ async function renderLists() {
     const tdL = document.createElement('td');
     tdL.className = 'x';
     const sel = document.createElement('select');
-    sel.setAttribute('aria-label', `List for ${item.expression}`);
-    for (const [v, label] of [[LIST_KEEP, 'Keep'], [LIST_SESSION, 'Until restart']]) {
+    sel.setAttribute('aria-label', t('listFor', item.expression));
+    for (const [v, label] of [[LIST_KEEP, t('segKeep')], [LIST_SESSION, t('segSession')]]) {
       const o = document.createElement('option');
       o.value = v; o.textContent = label; o.selected = item.list === v;
       sel.append(o);
@@ -58,8 +59,8 @@ async function renderLists() {
     const tdX = document.createElement('td');
     tdX.className = 'x';
     const del = document.createElement('button');
-    del.textContent = 'Remove';
-    del.setAttribute('aria-label', `Remove ${item.expression}`);
+    del.textContent = t('remove');
+    del.setAttribute('aria-label', t('removeAria', item.expression));
     del.addEventListener('click', () => updateItem(item.expression, null));
     tdX.append(del);
     tr.append(tdE, tdL, tdX);
@@ -79,22 +80,22 @@ $('addForm').addEventListener('submit', async (e) => {
   const raw = $('expr').value;
   const expression = cleanExpression(raw);
   if (!compileExpression(expression)) {
-    msg('addMsg', 'That does not look like a domain. Try example.com or *.example.com.', true);
+    msg('addMsg', t('notDomain'), true);
     return;
   }
   const { lists = [] } = await chrome.storage.local.get('lists');
   const next = lists.filter((i) => cleanExpression(i.expression) !== expression);
   if (next.length >= MAX_LIST_ENTRIES) {
-    msg('addMsg', `Your lists are full (${MAX_LIST_ENTRIES.toLocaleString()} sites). Remove some first.`, true);
+    msg('addMsg', t('listsFull', num(MAX_LIST_ENTRIES)), true);
     return;
   }
   next.push({ expression, list: $('listType').value });
   await chrome.storage.local.set({ lists: next });
   $('expr').value = '';
   if (isPublicSuffixExpression(expression)) {
-    msg('addMsg', `Added ${expression}. Note: this covers every site ending in .${expression.replace(/^\*\./, '')}.`, true);
+    msg('addMsg', t('addedSuffix', expression, expression.replace(/^\*\./, '')), true);
   } else {
-    msg('addMsg', `Added ${expression}.`);
+    msg('addMsg', t('added', expression));
   }
 });
 
@@ -104,23 +105,23 @@ $('importFile').addEventListener('change', async (e) => {
   e.target.value = '';
   if (!file) return;
   if (file.size > MAX_IMPORT_BYTES) {
-    msg('importMsg', 'That file is too large to be a list of sites (limit 1 MB).', true);
+    msg('importMsg', t('fileTooLarge'), true);
     return;
   }
   const incoming = parseImport(await file.text());
   if (!incoming.length) {
-    msg('importMsg', 'No sites found in that file.', true);
+    msg('importMsg', t('noSitesFound'), true);
     return;
   }
   const { lists = [] } = await chrome.storage.local.get('lists');
   const { lists: merged, added } = mergeLists(lists.map((i) => ({ ...i })), incoming);
   if (merged.length > MAX_LIST_ENTRIES) {
-    msg('importMsg', `Too many sites: your lists can hold ${MAX_LIST_ENTRIES.toLocaleString()}. Nothing was imported.`, true);
+    msg('importMsg', t('tooManyImport', num(MAX_LIST_ENTRIES)), true);
     return;
   }
   await chrome.storage.local.set({ lists: merged });
   const skipped = incoming.length - added.length;
-  msg('importMsg', `Imported ${plural(added.length, 'site')}` + (skipped ? `, ${skipped} already on your lists.` : '.'));
+  msg('importMsg', skipped ? t('importedSkipped', tn('siteCount', added.length), num(skipped)) : t('imported', tn('siteCount', added.length)));
 });
 
 $('exportBtn').addEventListener('click', async () => {
@@ -133,11 +134,14 @@ $('exportBtn').addEventListener('click', async () => {
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 });
 
+// Log entries store the reason in English; show it in the UI language.
+const REASONS = { 'tab closed': 'reasonTabClosed', manual: 'reasonManual', 'browser start': 'reasonStartup' };
+
 async function renderActivity() {
   const { stats = {}, log = [] } = await chrome.storage.local.get(['stats', 'log']);
-  $('sCookies').textContent = (stats.cookies || 0).toLocaleString();
-  $('sSites').textContent = (stats.sites || 0).toLocaleString();
-  $('sRuns').textContent = (stats.runs || 0).toLocaleString();
+  $('sCookies').textContent = num(stats.cookies || 0);
+  $('sSites').textContent = num(stats.sites || 0);
+  $('sRuns').textContent = num(stats.runs || 0);
   const table = $('log');
   table.textContent = '';
   $('logEmpty').hidden = log.length > 0;
@@ -148,8 +152,8 @@ async function renderActivity() {
     when.textContent = new Date(entry.time).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' });
     const what = document.createElement('td');
     const total = entry.siteCount ?? entry.sites.length;
-    const sites = entry.sites.slice(0, 6).join(', ') + (total > 6 ? ` +${total - 6} more` : '');
-    what.textContent = `${plural(entry.cookies, 'cookie')} · ${sites || (entry.cookies ? 'private windows' : 'site data only')} · ${entry.reason}`;
+    const sites = entry.sites.slice(0, 6).join(', ') + (total > 6 ? ' ' + t('moreSites', num(total - 6)) : '');
+    what.textContent = `${tn('cookieCount', entry.cookies)} · ${sites || t(entry.cookies ? 'logPrivate' : 'logSiteDataOnly')} · ${t(REASONS[entry.reason] || 'reasonAuto')}`;
     tr.append(when, what);
     table.append(tr);
   }
@@ -195,7 +199,7 @@ function drawSetupSites() {
     name.textContent = site;
     const count = document.createElement('span');
     count.className = 'n';
-    count.textContent = plural(n, 'cookie');
+    count.textContent = tn('cookieCount', n);
     label.append(box, name, count);
     li.append(label);
     ul.append(li);
@@ -222,13 +226,13 @@ $('setupDone').addEventListener('click', async () => {
   const { lists = [] } = await chrome.storage.local.get('lists');
   const { lists: merged } = mergeLists(lists.map((i) => ({ ...i })), picked);
   if (merged.length > MAX_LIST_ENTRIES) {
-    msg('setupMsg', `Too many sites: your lists can hold ${MAX_LIST_ENTRIES.toLocaleString()}.`, true);
+    msg('setupMsg', t('tooManySetup', num(MAX_LIST_ENTRIES)), true);
     return;
   }
   const s = await getSettings();
   await chrome.storage.local.set({ lists: merged, settings: { ...s, enabled: true, needsSetup: false } });
   setupChecked.clear();
-  msg('addMsg', picked.length ? `Auto-clean is on. Kept ${plural(picked.length, 'site')}.` : 'Auto-clean is on.');
+  msg('addMsg', picked.length ? t('autoCleanOnKept', tn('siteCount', picked.length)) : t('autoCleanIsOn'));
 });
 
 chrome.storage.onChanged.addListener((changes) => {
@@ -237,6 +241,7 @@ chrome.storage.onChanged.addListener((changes) => {
   if (changes.log || changes.stats) renderActivity();
 });
 
+localize();
 renderSettings();
 renderSetup();
 renderLists();

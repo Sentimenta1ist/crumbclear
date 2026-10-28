@@ -13,6 +13,9 @@ const SETTLE_MAX_MS = 30000;
 const SETTLE_POLL_MS = 1000;
 // Closing more tabs postpones the clean, but by at most this much after the first close.
 const MAX_POSTPONE_MS = 30000;
+// The cookies of the last cleanup are kept in memory this long for Undo.
+const UNDO_MS = 10 * 60 * 1000;
+const UNDO_MAX_COOKIES = 1000;
 
 // ---------- storage ----------
 async function getState() {
@@ -151,6 +154,52 @@ async function removeCookie(c) {
   }
 }
 
+// Puts a removed cookie back with the same attributes.
+async function restoreCookie(c) {
+  const details = {
+    url: cookieUrl(c), name: c.name, value: c.value, path: c.path,
+    secure: c.secure, httpOnly: c.httpOnly, sameSite: c.sameSite, storeId: c.storeId,
+  };
+  if (!c.hostOnly) details.domain = c.domain;
+  if (!c.session && c.expirationDate) {
+    if (c.expirationDate * 1000 <= Date.now()) return false;
+    details.expirationDate = c.expirationDate;
+  }
+  if (c.partitionKey) details.partitionKey = c.partitionKey;
+  try {
+    return !!(await chrome.cookies.set(details));
+  } catch {
+    return false;
+  }
+}
+
+async function undoInfo() {
+  const { undo } = await chrome.storage.session.get('undo').catch(() => ({}));
+  if (!undo || Date.now() - undo.time > UNDO_MS) {
+    if (undo) await chrome.storage.session.remove('undo').catch(() => {});
+    return null;
+  }
+  return undo;
+}
+
+async function undoLastClean() {
+  const undo = await undoInfo();
+  if (!undo) return null;
+  await chrome.storage.session.remove('undo').catch(() => {});
+  let restored = 0;
+  for (const c of undo.cookies) if (await restoreCookie(c)) restored++;
+  // Restored sites are not cleaned again until they have been opened and closed.
+  const { restored: before = [] } = await chrome.storage.session.get('restored').catch(() => ({}));
+  const siteOfCookie = (c) => {
+    const top = c.partitionKey && c.partitionKey.topLevelSite;
+    return top ? siteOf(hostFromUrl(top)) : siteOf(c.domain);
+  };
+  const sites = [...new Set([...before, ...undo.cookies.map(siteOfCookie)])];
+  await chrome.storage.session.set({ restored: sites }).catch(() => {});
+  updateBadge();
+  return { restored };
+}
+
 async function log(entry) {
   const { log: entries = [] } = await chrome.storage.local.get('log');
   entries.unshift(entry);
@@ -183,11 +232,19 @@ async function doClean({ reason, startup, onlySite, scope }) {
   if (!onlySite && reason !== 'manual') await waitForTabsToSettle();
 
   const ctx = { openSites: await openSites(), lists, startup, onlySite };
+  // Sites put back by Undo count as open until they have been opened again.
+  const { restored = [] } = await chrome.storage.session.get('restored').catch(() => ({}));
+  if (restored.length) {
+    const waiting = restored.filter((site) => !ctx.openSites.has(site));
+    if (waiting.length !== restored.length) await chrome.storage.session.set({ restored: waiting }).catch(() => {});
+    if (!startup) for (const site of waiting) ctx.openSites.add(site);
+  }
   const cookies = await allCookies();
   const privateStores = await incognitoStoreIds();
   // A site opened while cookies were being read is open too.
   for (const site of await openSites()) ctx.openSites.add(site);
   const cleanedHosts = new Set();
+  const forUndo = [];
   let removed = 0;
 
   for (const c of cookies) {
@@ -196,7 +253,11 @@ async function doClean({ reason, startup, onlySite, scope }) {
     if (!remove) continue;
     if (await removeCookie(c)) {
       removed++;
-      if (!privateStores.has(c.storeId)) cleanedHosts.add(normHost(c.domain));
+      // Incognito cookies are not kept for Undo: they must die with the window.
+      if (!privateStores.has(c.storeId)) {
+        cleanedHosts.add(normHost(c.domain));
+        forUndo.push(c);
+      }
     }
   }
 
@@ -225,6 +286,11 @@ async function doClean({ reason, startup, onlySite, scope }) {
         try { await chrome.browsingData.remove({ origins: [origin] }, types); } catch { /* skip it */ }
       }
     }
+  }
+
+  if (forUndo.length) {
+    const undo = forUndo.length <= UNDO_MAX_COOKIES ? { time: Date.now(), cookies: forUndo } : null;
+    await (undo ? chrome.storage.session.set({ undo }) : chrome.storage.session.remove('undo')).catch(() => {});
   }
 
   const sites = [...new Set([...cleanedHosts].map((key) => siteOf(splitHostPort(key).host)))].sort();
@@ -359,12 +425,18 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     sendResponse(null);
     return false;
   }
-  if ((msg.type !== 'clean-now' && !validHost(msg.host)) || ('incognito' in msg && typeof msg.incognito !== 'boolean')) {
+  const needsHost = !['clean-now', 'undo-info', 'undo'].includes(msg.type);
+  if ((needsHost && !validHost(msg.host)) || ('incognito' in msg && typeof msg.incognito !== 'boolean')) {
     sendResponse(null);
     return false;
   }
   (async () => {
     if (msg.type === 'clean-now') return clean({ reason: 'manual' });
+    if (msg.type === 'undo-info') {
+      const undo = await undoInfo();
+      return undo && { cookies: undo.cookies.length, time: undo.time };
+    }
+    if (msg.type === 'undo') return undoLastClean();
     if (msg.type === 'clean-site') {
       return clean({ reason: 'manual', onlySite: siteOf(msg.host), scope: msg.incognito ? 'private' : 'regular' });
     }

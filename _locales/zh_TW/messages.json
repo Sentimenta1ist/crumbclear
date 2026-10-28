@@ -1,0 +1,460 @@
+{
+  "extName": {
+    "message": "CrumbClear：自動刪除 Cookie",
+    "description": "Extension name in the Chrome Web Store and chrome://extensions (max 75 chars)"
+  },
+  "extDescription": {
+    "message": "關閉分頁時自動刪除 Cookie。支援保留清單、分區 Cookie 與清單匯入。不追蹤。",
+    "description": "Store summary (max 132 chars)"
+  },
+  "actionTitle": {
+    "message": "CrumbClear"
+  },
+  "autoClean": {
+    "message": "自動清除"
+  },
+  "autoCleanOn": {
+    "message": "自動清除已開啟"
+  },
+  "autoCleanOff": {
+    "message": "自動清除已關閉"
+  },
+  "finishSetupFirst": {
+    "message": "請先在設定中完成初始設定"
+  },
+  "finishSetupToStart": {
+    "message": "請在設定中完成初始設定"
+  },
+  "cookiesCleaned_other": {
+    "message": "已清除 $P1$ 個 Cookie",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "hintClean": {
+    "message": "關閉此網站的最後一個分頁後，其 Cookie 和網站資料會被刪除。"
+  },
+  "hintSession": {
+    "message": "瀏覽器開啟期間保留，下次啟動瀏覽器時刪除（需開啟「瀏覽器啟動時清除」）。"
+  },
+  "hintKeep": {
+    "message": "永不自動清除。適用於想保持登入的網站。"
+  },
+  "pillKept": {
+    "message": "保留"
+  },
+  "pillSession": {
+    "message": "保留到重新啟動"
+  },
+  "pillClean": {
+    "message": "關閉時清除"
+  },
+  "pillPaused": {
+    "message": "自動清除已暫停"
+  },
+  "setByRule": {
+    "message": "由設定中的規則「$P1$」決定。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieCount_other": {
+    "message": "$P1$ 個 Cookie",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "partitionedCount_other": {
+    "message": "$P1$ 個分區",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "openInTabs_other": {
+    "message": "在 $P1$ 個分頁中開啟",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "ruleStillApplies": {
+    "message": "設定中的規則「$P1$」仍適用於 $P2$。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "cleanFailed": {
+    "message": "清除失敗。請再試一次，或在 chrome://extensions 重新載入 CrumbClear。"
+  },
+  "removedFromClosed": {
+    "message": "已從 $P2$刪除 $P1$。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "closedSiteCount_other": {
+    "message": "$P1$ 個已關閉的網站",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "nothingToClean": {
+    "message": "沒有需要清除的內容：已關閉的網站沒有殘留。"
+  },
+  "removedForSite": {
+    "message": "已刪除 $P2$ 的 $P1$。重新載入頁面即可看到已登出。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "noCookiesLeft": {
+    "message": "$P1$ 已沒有 Cookie。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "segAria": {
+    "message": "此網站 Cookie 的處理方式"
+  },
+  "segClean": {
+    "message": "關閉時清除"
+  },
+  "segSession": {
+    "message": "保留到重啟"
+  },
+  "segKeep": {
+    "message": "保留"
+  },
+  "noSite": {
+    "message": "此頁面沒有可管理的網站 Cookie。"
+  },
+  "cleanSite": {
+    "message": "清除此網站"
+  },
+  "cleanNow": {
+    "message": "清除已關閉的分頁"
+  },
+  "settings": {
+    "message": "設定"
+  },
+  "undo": {
+    "message": "復原"
+  },
+  "undoText": {
+    "message": "上次清除：$P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "undone": {
+    "message": "已還原 $P1$。這些網站會保留到你再次開啟並關閉它們。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "undoFailed": {
+    "message": "已經沒有可以復原的操作。"
+  },
+  "rateText": {
+    "message": "CrumbClear 對你有幫助嗎？在 Chrome 線上應用程式商店評分，能幫助更多人找到它。"
+  },
+  "rateYes": {
+    "message": "前往評分"
+  },
+  "rateNo": {
+    "message": "不用了"
+  },
+  "optionsTitle": {
+    "message": "CrumbClear 設定"
+  },
+  "optionsLead": {
+    "message": "關閉網站的最後一個分頁時，其 Cookie 和網站資料會被刪除。清單中的網站不受影響。"
+  },
+  "setupTitle": {
+    "message": "首先，選擇你想保持登入的網站"
+  },
+  "setupDesc": {
+    "message": "完成之前自動清除會保持關閉。之後，其他網站的 Cookie 會在關閉其分頁後被刪除。Google、Microsoft、Apple、GitHub 和 Okta 登入已在保留清單中。從 Cookie AutoDelete 轉移？請先在下方匯入你的清單。"
+  },
+  "filterSites": {
+    "message": "篩選網站"
+  },
+  "selectAll": {
+    "message": "全選"
+  },
+  "setupEmpty": {
+    "message": "目前沒有其他網站有 Cookie。"
+  },
+  "setupDone": {
+    "message": "保留所選網站並開啟自動清除"
+  },
+  "hCleaning": {
+    "message": "清除"
+  },
+  "optAutoClean": {
+    "message": "自動清除"
+  },
+  "optAutoCleanDesc": {
+    "message": "暫停後會保留所有內容，直到你重新開啟。"
+  },
+  "optDelay": {
+    "message": "關閉分頁後的延遲"
+  },
+  "optDelayDesc": {
+    "message": "在 Cookie 被刪除前重新開啟分頁的時間。多個已關閉的分頁會一起清除。"
+  },
+  "delay0": {
+    "message": "立即"
+  },
+  "delay30": {
+    "message": "30 秒"
+  },
+  "delay60": {
+    "message": "1 分鐘"
+  },
+  "delay300": {
+    "message": "5 分鐘"
+  },
+  "delay900": {
+    "message": "15 分鐘"
+  },
+  "optDomain": {
+    "message": "分頁切換到其他網站時清除"
+  },
+  "optDomainDesc": {
+    "message": "離開一個網站視為關閉了該網站。"
+  },
+  "optSiteData": {
+    "message": "同時刪除網站資料"
+  },
+  "optSiteDataDesc": {
+    "message": "不只 Cookie，還包括 localStorage、IndexedDB、快取儲存空間和 Service Worker。"
+  },
+  "optStartup": {
+    "message": "瀏覽器啟動時清除"
+  },
+  "optStartupDesc": {
+    "message": "刪除上次工作階段的殘留，包括「保留到重新啟動」的網站。關閉後，這些網站會像「保留」一樣保留。"
+  },
+  "optBadge": {
+    "message": "在圖示上顯示 Cookie 數量"
+  },
+  "optBadgeDesc": {
+    "message": "藍色：保留。琥珀色：保留到重新啟動。青色：將被清除。灰色：自動清除已暫停。"
+  },
+  "hLists": {
+    "message": "保留的網站"
+  },
+  "exprPlaceholder": {
+    "message": "example.com 或 *.example.com"
+  },
+  "exprAria": {
+    "message": "網站或規則"
+  },
+  "listAria": {
+    "message": "清單"
+  },
+  "add": {
+    "message": "新增"
+  },
+  "listsEmpty": {
+    "message": "還沒有網站。新增你想保持登入的網站。"
+  },
+  "hImport": {
+    "message": "匯入與匯出"
+  },
+  "importBtn": {
+    "message": "匯入清單…"
+  },
+  "exportBtn": {
+    "message": "匯出清單"
+  },
+  "importHelp": {
+    "message": "從 Cookie AutoDelete 轉移？在它的設定中選擇 Export，然後在這裡匯入該檔案。白名單會變成「保留」，灰名單會變成「保留到重新啟動」。每行一個網域的文字檔也可以。"
+  },
+  "hActivity": {
+    "message": "活動"
+  },
+  "statCookies": {
+    "message": "已刪除的 Cookie"
+  },
+  "statSites": {
+    "message": "已清除的網站"
+  },
+  "statRuns": {
+    "message": "清除次數"
+  },
+  "logEmpty": {
+    "message": "還沒有清除任何內容。關閉一個分頁並等待延遲結束。"
+  },
+  "clearLog": {
+    "message": "清除記錄"
+  },
+  "listFor": {
+    "message": "$P1$ 的清單",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "remove": {
+    "message": "移除"
+  },
+  "removeAria": {
+    "message": "移除 $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "notDomain": {
+    "message": "這看起來不像網域。請試試 example.com 或 *.example.com。"
+  },
+  "listsFull": {
+    "message": "清單已滿（$P1$ 個網站）。請先移除一些。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "addedSuffix": {
+    "message": "已新增 $P1$。注意：這會涵蓋所有以 .$P2$ 結尾的網站。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "added": {
+    "message": "已新增 $P1$。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fileTooLarge": {
+    "message": "檔案太大，不像網站清單（上限 1 MB）。"
+  },
+  "noSitesFound": {
+    "message": "在這個檔案中找不到網站。"
+  },
+  "tooManyImport": {
+    "message": "網站太多：清單最多可容納 $P1$ 個。沒有匯入任何內容。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "imported": {
+    "message": "已匯入 $P1$。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "importedSkipped": {
+    "message": "已匯入 $P1$，$P2$ 個已在清單中。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "siteCount_other": {
+    "message": "$P1$ 個網站",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "moreSites": {
+    "message": "另有 $P1$ 個",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "logPrivate": {
+    "message": "無痕視窗"
+  },
+  "logSiteDataOnly": {
+    "message": "僅網站資料"
+  },
+  "reasonTabClosed": {
+    "message": "關閉分頁"
+  },
+  "reasonManual": {
+    "message": "手動"
+  },
+  "reasonStartup": {
+    "message": "瀏覽器啟動"
+  },
+  "reasonAuto": {
+    "message": "自動"
+  },
+  "tooManySetup": {
+    "message": "網站太多：清單最多可容納 $P1$ 個。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoCleanOnKept": {
+    "message": "自動清除已開啟。已保留 $P1$。",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoCleanIsOn": {
+    "message": "自動清除已開啟。"
+  }
+}

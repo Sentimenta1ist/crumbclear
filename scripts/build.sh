@@ -13,6 +13,7 @@ node --test test/*.test.mjs > /dev/null 2>&1 || { node --test test/*.test.mjs; e
 FILES=$(
   echo manifest.json
   for s in 16 32 48 128; do echo "icons/icon$s.png"; done
+  find _locales -type f -name messages.json | LC_ALL=C sort
   find src -type f ! -name '.*' ! -path '*/.*' | LC_ALL=C sort
 )
 
@@ -22,7 +23,7 @@ mkdir -p dist
 echo "$FILES" | zip -X -D -q "$OUT" -@
 
 # Everything in the zip must be one of the allowed paths, and nothing else.
-UNEXPECTED=$(unzip -Z1 "$OUT" | grep -Ev '^(manifest\.json|icons/icon(16|32|48|128)\.png|src/[^.][^/]*(/[^.][^/]*)*)$' || true)
+UNEXPECTED=$(unzip -Z1 "$OUT" | grep -Ev '^(manifest\.json|icons/icon(16|32|48|128)\.png|_locales/[a-zA-Z_]+/messages\.json|src/[^.][^/]*(/[^.][^/]*)*)$' || true)
 if [ -n "$UNEXPECTED" ]; then
   echo "Unexpected files in $OUT:" >&2
   echo "$UNEXPECTED" >&2

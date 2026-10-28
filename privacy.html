@@ -26,7 +26,7 @@
   <h2>What the extension reads</h2>
   <ul>
     <li><b>Addresses of your open tabs.</b> Only the host name (for example <code>mail.example.com</code>) is used, to decide which sites are still open.</li>
-    <li><b>Cookies stored in your browser.</b> CrumbClear reads them to decide which belong to closed sites, and deletes those. Cookie values are never stored or copied.</li>
+    <li><b>Cookies stored in your browser.</b> CrumbClear reads them to decide which belong to closed sites, and deletes those. Cookie values are never written to disk and never leave your browser; the only copy is the Undo buffer described below.</li>
   </ul>
 
   <h2>What is stored, and where</h2>
@@ -39,7 +39,7 @@
     <li>Totals of cookies removed, sites cleaned and cleanups run.</li>
     <li>The version number of this storage format, for future updates.</li>
   </ul>
-  <p>In memory only, until you close the browser (<code>chrome.storage.session</code>): the host name currently shown in each tab, to notice when a tab moves to another site; whether the browser has finished restoring tabs after it started; and the time when the first tab waiting for cleanup was closed, so more closed tabs cannot postpone the cleanup for long.</p>
+  <p>In memory only, until you close the browser (<code>chrome.storage.session</code>): the host name currently shown in each tab, to notice when a tab moves to another site; whether the browser has finished restoring tabs after it started; the time when the first tab waiting for cleanup was closed, so more closed tabs cannot postpone the cleanup for long; the cookies removed by the last cleanup, for 10 minutes, so you can undo it (cookies of incognito windows are never kept); and the sites you restored with Undo, so they are not cleaned again before you open and close them.</p>
   <p>Uninstalling the extension deletes all of it.</p>
 
   <h2>What is sent anywhere</h2>

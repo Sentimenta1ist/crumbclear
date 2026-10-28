@@ -12,11 +12,16 @@
     .site-host { font-size: 15px; font-weight: 700; word-break: break-all; }
     .site-meta { margin-top: 4px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 12px; background: var(--line); padding: 3px; border-radius: 9px; }
-    .seg button { border: 0; background: transparent; padding: 6px 4px; font-size: 12px; border-radius: 7px; }
+    .seg button { border: 0; background: transparent; padding: 6px 4px; font-size: 12px; border-radius: 7px; line-height: 1.25; }
     .seg button[aria-pressed="true"] { background: var(--panel); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
     .hint { margin-top: 8px; font-size: 12px; min-height: 34px; }
     .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 0 14px 14px; }
     .no-site { padding: 18px 14px; }
+    .undo { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 14px 12px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; font-size: 12px; }
+    .undo button { padding: 4px 10px; font-size: 12px; }
+    .rate { margin: 0 14px 12px; padding: 10px; border-radius: 8px; background: color-mix(in srgb, var(--accent) 9%, var(--panel)); font-size: 12px; }
+    .rate-actions { display: flex; gap: 8px; margin-top: 8px; }
+    .rate-actions button { padding: 4px 10px; font-size: 12px; }
     footer { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-top: 1px solid var(--line); font-size: 12px; }
     footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
     .toast { padding: 0 14px 10px; font-size: 12px; color: var(--keep); min-height: 0; }
@@ -25,7 +30,7 @@
 <body>
   <header>
     <div class="brand"><img src="../icons/icon32.png" alt="">CrumbClear</div>
-    <label><span id="enabledLabel" class="muted">Auto-clean</span>
+    <label><span id="enabledLabel" class="muted" data-i18n="autoClean">Auto-clean</span>
       <span class="switch"><input type="checkbox" id="enabled"><span></span></span>
     </label>
   </header>
@@ -36,27 +41,40 @@
       <span class="pill" id="statusPill"></span>
       <span class="muted" id="count"></span>
     </div>
-    <div class="seg" role="group" aria-label="What happens to this site's cookies">
-      <button data-list="" aria-pressed="false">Clean on close</button>
-      <button data-list="session" aria-pressed="false">Until restart</button>
-      <button data-list="keep" aria-pressed="false">Keep</button>
+    <div class="seg" role="group" aria-label="What happens to this site's cookies" data-i18n-aria-label="segAria">
+      <button data-list="" aria-pressed="false" data-i18n="segClean">Clean on close</button>
+      <button data-list="session" aria-pressed="false" data-i18n="segSession">Until restart</button>
+      <button data-list="keep" aria-pressed="false" data-i18n="segKeep">Keep</button>
     </div>
     <div class="hint muted" id="hint"></div>
   </section>
 
-  <section class="no-site muted" id="noSite" hidden>
+  <section class="no-site muted" id="noSite" hidden data-i18n="noSite">
     This page has no site cookies to manage.
   </section>
 
   <div class="actions">
-    <button id="cleanSite">Clean this site</button>
-    <button id="cleanNow">Clean closed tabs</button>
+    <button id="cleanSite" data-i18n="cleanSite">Clean this site</button>
+    <button id="cleanNow" data-i18n="cleanNow">Clean closed tabs</button>
   </div>
   <div class="toast" id="toast" role="status"></div>
 
+  <div class="undo" id="undoBox" hidden>
+    <span id="undoText" class="muted"></span>
+    <button id="undo" data-i18n="undo">Undo</button>
+  </div>
+
+  <section class="rate" id="rateBox" hidden aria-labelledby="rateText">
+    <div id="rateText" data-i18n="rateText">Is CrumbClear useful? A rating in the Chrome Web Store helps others find it.</div>
+    <div class="rate-actions">
+      <button id="rateYes" class="primary" data-i18n="rateYes">Rate it</button>
+      <button id="rateNo" data-i18n="rateNo">No thanks</button>
+    </div>
+  </section>
+
   <footer>
     <span class="muted" id="stats"></span>
-    <a href="#" id="openOptions">Settings</a>
+    <a href="#" id="openOptions" data-i18n="settings">Settings</a>
   </footer>
   <script type="module" src="popup.js"></script>
 </body>

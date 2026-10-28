@@ -1,0 +1,500 @@
+{
+  "extName": {
+    "message": "CrumbClear: Cookies automatisch löschen",
+    "description": "Extension name in the Chrome Web Store and chrome://extensions (max 75 chars)"
+  },
+  "extDescription": {
+    "message": "Löscht Cookies automatisch beim Schließen eines Tabs. Mit Ausnahmelisten, partitionierten Cookies und Listenimport. Kein Tracking.",
+    "description": "Store summary (max 132 chars)"
+  },
+  "actionTitle": {
+    "message": "CrumbClear"
+  },
+  "autoClean": {
+    "message": "Auto-Löschen"
+  },
+  "autoCleanOn": {
+    "message": "Auto-Löschen an"
+  },
+  "autoCleanOff": {
+    "message": "Auto-Löschen aus"
+  },
+  "finishSetupFirst": {
+    "message": "Schließen Sie zuerst die Einrichtung in den Einstellungen ab"
+  },
+  "finishSetupToStart": {
+    "message": "Einrichtung in den Einstellungen abschließen"
+  },
+  "cookiesCleaned_one": {
+    "message": "$P1$ Cookie gelöscht",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookiesCleaned_other": {
+    "message": "$P1$ Cookies gelöscht",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "hintClean": {
+    "message": "Cookies und Websitedaten werden gelöscht, nachdem Sie den letzten Tab dieser Website geschlossen haben."
+  },
+  "hintSession": {
+    "message": "Bleibt, solange der Browser offen ist, und wird beim nächsten Browserstart gelöscht (wenn „Beim Browserstart löschen“ an ist)."
+  },
+  "hintKeep": {
+    "message": "Wird nie automatisch gelöscht. Für Websites, bei denen Sie angemeldet bleiben möchten."
+  },
+  "pillKept": {
+    "message": "Behalten"
+  },
+  "pillSession": {
+    "message": "Bis zum Neustart"
+  },
+  "pillClean": {
+    "message": "Wird beim Schließen gelöscht"
+  },
+  "pillPaused": {
+    "message": "Auto-Löschen pausiert"
+  },
+  "setByRule": {
+    "message": "Festgelegt durch die Regel „$P1$“ in den Einstellungen.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieCount_one": {
+    "message": "$P1$ Cookie",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieCount_other": {
+    "message": "$P1$ Cookies",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "partitionedCount_other": {
+    "message": "$P1$ partitioniert",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "openInTabs_one": {
+    "message": "in $P1$ Tab offen",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "openInTabs_other": {
+    "message": "in $P1$ Tabs offen",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "ruleStillApplies": {
+    "message": "Die Regel „$P1$“ in den Einstellungen gilt weiterhin für $P2$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "cleanFailed": {
+    "message": "Löschen fehlgeschlagen. Versuchen Sie es erneut oder laden Sie CrumbClear unter chrome://extensions neu."
+  },
+  "removedFromClosed": {
+    "message": "$P1$ von $P2$ gelöscht.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "closedSiteCount_one": {
+    "message": "$P1$ geschlossenen Website",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "closedSiteCount_other": {
+    "message": "$P1$ geschlossenen Websites",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "nothingToClean": {
+    "message": "Nichts zu löschen: keine Reste geschlossener Websites."
+  },
+  "removedForSite": {
+    "message": "$P1$ für $P2$ gelöscht. Laden Sie die Seite neu, um abgemeldet zu sein.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "noCookiesLeft": {
+    "message": "Keine Cookies mehr für $P1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "segAria": {
+    "message": "Was mit den Cookies dieser Website passiert"
+  },
+  "segClean": {
+    "message": "Beim Schließen löschen"
+  },
+  "segSession": {
+    "message": "Bis zum Neustart"
+  },
+  "segKeep": {
+    "message": "Behalten"
+  },
+  "noSite": {
+    "message": "Diese Seite hat keine Website-Cookies zum Verwalten."
+  },
+  "cleanSite": {
+    "message": "Diese Website löschen"
+  },
+  "cleanNow": {
+    "message": "Geschlossene Tabs löschen"
+  },
+  "settings": {
+    "message": "Einstellungen"
+  },
+  "undo": {
+    "message": "Rückgängig"
+  },
+  "undoText": {
+    "message": "Letzte Bereinigung: $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "undone": {
+    "message": "$P1$ wiederhergestellt. Diese Websites bleiben, bis Sie sie erneut öffnen und schließen.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "undoFailed": {
+    "message": "Es gibt nichts mehr rückgängig zu machen."
+  },
+  "rateText": {
+    "message": "Ist CrumbClear nützlich? Eine Bewertung im Chrome Web Store hilft anderen, es zu finden."
+  },
+  "rateYes": {
+    "message": "Bewerten"
+  },
+  "rateNo": {
+    "message": "Nein, danke"
+  },
+  "optionsTitle": {
+    "message": "CrumbClear-Einstellungen"
+  },
+  "optionsLead": {
+    "message": "Cookies und Websitedaten werden gelöscht, wenn Sie den letzten Tab einer Website schließen. Websites auf Ihren Listen bleiben unberührt."
+  },
+  "setupTitle": {
+    "message": "Wählen Sie zuerst die Websites, bei denen Sie angemeldet bleiben möchten"
+  },
+  "setupDesc": {
+    "message": "Auto-Löschen bleibt aus, bis Sie fertig sind. Danach werden die Cookies aller anderen Websites gelöscht, sobald Sie deren Tabs schließen. Die Anmeldung bei Google, Microsoft, Apple, GitHub und Okta ist bereits auf Ihrer Behalten-Liste. Sie kommen von Cookie AutoDelete? Importieren Sie zuerst unten Ihre Liste."
+  },
+  "filterSites": {
+    "message": "Websites filtern"
+  },
+  "selectAll": {
+    "message": "Alle auswählen"
+  },
+  "setupEmpty": {
+    "message": "Gerade haben keine anderen Websites Cookies."
+  },
+  "setupDone": {
+    "message": "Auswahl behalten und Auto-Löschen einschalten"
+  },
+  "hCleaning": {
+    "message": "Löschen"
+  },
+  "optAutoClean": {
+    "message": "Auto-Löschen"
+  },
+  "optAutoCleanDesc": {
+    "message": "Pausieren, um alles zu behalten, bis Sie es wieder einschalten."
+  },
+  "optDelay": {
+    "message": "Verzögerung nach dem Schließen eines Tabs"
+  },
+  "optDelayDesc": {
+    "message": "Zeit, um einen Tab wieder zu öffnen, bevor seine Cookies weg sind. Mehrere geschlossene Tabs werden zusammen gelöscht."
+  },
+  "delay0": {
+    "message": "Sofort"
+  },
+  "delay30": {
+    "message": "30 Sekunden"
+  },
+  "delay60": {
+    "message": "1 Minute"
+  },
+  "delay300": {
+    "message": "5 Minuten"
+  },
+  "delay900": {
+    "message": "15 Minuten"
+  },
+  "optDomain": {
+    "message": "Löschen, wenn ein Tab zu einer anderen Website wechselt"
+  },
+  "optDomainDesc": {
+    "message": "Wegnavigieren zählt wie das Schließen der alten Website."
+  },
+  "optSiteData": {
+    "message": "Auch Websitedaten löschen"
+  },
+  "optSiteDataDesc": {
+    "message": "localStorage, IndexedDB, Cache-Speicher und Service Worker, nicht nur Cookies."
+  },
+  "optStartup": {
+    "message": "Beim Browserstart löschen"
+  },
+  "optStartupDesc": {
+    "message": "Entfernt Reste der letzten Sitzung, auch von Websites „bis zum Neustart“. Wenn aus, werden diese wie „Behalten“ behandelt."
+  },
+  "optBadge": {
+    "message": "Cookie-Anzahl am Symbol"
+  },
+  "optBadgeDesc": {
+    "message": "Blau: behalten. Gelb: bis zum Neustart. Türkis: wird gelöscht. Grau: Auto-Löschen pausiert."
+  },
+  "hLists": {
+    "message": "Behaltene Websites"
+  },
+  "exprPlaceholder": {
+    "message": "example.com oder *.example.com"
+  },
+  "exprAria": {
+    "message": "Website oder Muster"
+  },
+  "listAria": {
+    "message": "Liste"
+  },
+  "add": {
+    "message": "Hinzufügen"
+  },
+  "listsEmpty": {
+    "message": "Noch keine Websites. Fügen Sie die hinzu, bei denen Sie angemeldet bleiben möchten."
+  },
+  "hImport": {
+    "message": "Import und Export"
+  },
+  "importBtn": {
+    "message": "Listen importieren…"
+  },
+  "exportBtn": {
+    "message": "Listen exportieren"
+  },
+  "importHelp": {
+    "message": "Sie kommen von Cookie AutoDelete? Wählen Sie dort in den Einstellungen „Export“ und importieren Sie die Datei hier. Die Whitelist wird zu „Behalten“, die Greylist zu „Bis zum Neustart“. Eine Textdatei mit einer Domain pro Zeile geht auch."
+  },
+  "hActivity": {
+    "message": "Aktivität"
+  },
+  "statCookies": {
+    "message": "Cookies gelöscht"
+  },
+  "statSites": {
+    "message": "Websites bereinigt"
+  },
+  "statRuns": {
+    "message": "Bereinigungen"
+  },
+  "logEmpty": {
+    "message": "Noch nichts gelöscht. Schließen Sie einen Tab und warten Sie die Verzögerung ab."
+  },
+  "clearLog": {
+    "message": "Verlauf löschen"
+  },
+  "listFor": {
+    "message": "Liste für $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "remove": {
+    "message": "Entfernen"
+  },
+  "removeAria": {
+    "message": "$P1$ entfernen",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "notDomain": {
+    "message": "Das sieht nicht wie eine Domain aus. Versuchen Sie example.com oder *.example.com."
+  },
+  "listsFull": {
+    "message": "Ihre Listen sind voll ($P1$ Websites). Entfernen Sie zuerst einige.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "addedSuffix": {
+    "message": "$P1$ hinzugefügt. Hinweis: Das umfasst jede Website, die auf .$P2$ endet.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "added": {
+    "message": "$P1$ hinzugefügt.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fileTooLarge": {
+    "message": "Die Datei ist zu groß für eine Website-Liste (maximal 1 MB)."
+  },
+  "noSitesFound": {
+    "message": "In dieser Datei wurden keine Websites gefunden."
+  },
+  "tooManyImport": {
+    "message": "Zu viele Websites: Ihre Listen fassen $P1$. Es wurde nichts importiert.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "imported": {
+    "message": "$P1$ importiert.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "importedSkipped": {
+    "message": "$P1$ importiert, $P2$ waren schon auf Ihren Listen.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "siteCount_one": {
+    "message": "$P1$ Website",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "siteCount_other": {
+    "message": "$P1$ Websites",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "moreSites": {
+    "message": "+$P1$ weitere",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "logPrivate": {
+    "message": "private Fenster"
+  },
+  "logSiteDataOnly": {
+    "message": "nur Websitedaten"
+  },
+  "reasonTabClosed": {
+    "message": "Tab geschlossen"
+  },
+  "reasonManual": {
+    "message": "manuell"
+  },
+  "reasonStartup": {
+    "message": "Browserstart"
+  },
+  "reasonAuto": {
+    "message": "automatisch"
+  },
+  "tooManySetup": {
+    "message": "Zu viele Websites: Ihre Listen fassen $P1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoCleanOnKept": {
+    "message": "Auto-Löschen ist an. $P1$ behalten.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoCleanIsOn": {
+    "message": "Auto-Löschen ist an."
+  }
+}

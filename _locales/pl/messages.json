@@ -1,0 +1,572 @@
+{
+  "extName": {
+    "message": "CrumbClear: automatyczne usuwanie cookies",
+    "description": "Extension name in the Chrome Web Store and chrome://extensions (max 75 chars)"
+  },
+  "extDescription": {
+    "message": "Automatycznie usuwa pliki cookie po zamknięciu karty. Listy wyjątków, obsługa partycjonowanych cookies, import list. Bez śledzenia.",
+    "description": "Store summary (max 132 chars)"
+  },
+  "actionTitle": {
+    "message": "CrumbClear"
+  },
+  "autoClean": {
+    "message": "Autoczyszczenie"
+  },
+  "autoCleanOn": {
+    "message": "Autoczyszczenie wł."
+  },
+  "autoCleanOff": {
+    "message": "Autoczyszczenie wył."
+  },
+  "finishSetupFirst": {
+    "message": "Najpierw dokończ konfigurację w Ustawieniach"
+  },
+  "finishSetupToStart": {
+    "message": "Dokończ konfigurację w Ustawieniach"
+  },
+  "cookiesCleaned_one": {
+    "message": "Usunięto $P1$ plik cookie",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookiesCleaned_few": {
+    "message": "Usunięto $P1$ pliki cookie",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookiesCleaned_many": {
+    "message": "Usunięto $P1$ plików cookie",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookiesCleaned_other": {
+    "message": "Usunięto $P1$ pliku cookie",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "hintClean": {
+    "message": "Pliki cookie i dane witryny są usuwane po zamknięciu ostatniej karty tej witryny."
+  },
+  "hintSession": {
+    "message": "Zachowane, dopóki przeglądarka jest otwarta, usuwane przy następnym uruchomieniu (jeśli „Czyść przy uruchomieniu przeglądarki” jest włączone)."
+  },
+  "hintKeep": {
+    "message": "Nigdy nie czyszczone automatycznie. Dla witryn, w których chcesz pozostać zalogowany."
+  },
+  "pillKept": {
+    "message": "Zachowane"
+  },
+  "pillSession": {
+    "message": "Do ponownego uruchomienia"
+  },
+  "pillClean": {
+    "message": "Czyszczone po zamknięciu"
+  },
+  "pillPaused": {
+    "message": "Autoczyszczenie wstrzymane"
+  },
+  "setByRule": {
+    "message": "Ustawione przez regułę „$P1$” w Ustawieniach.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieCount_one": {
+    "message": "$P1$ plik cookie",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieCount_few": {
+    "message": "$P1$ pliki cookie",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieCount_many": {
+    "message": "$P1$ plików cookie",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieCount_other": {
+    "message": "$P1$ pliku cookie",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "partitionedCount_one": {
+    "message": "$P1$ partycjonowany",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "partitionedCount_few": {
+    "message": "$P1$ partycjonowane",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "partitionedCount_many": {
+    "message": "$P1$ partycjonowanych",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "partitionedCount_other": {
+    "message": "$P1$ partycjonowanego",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "openInTabs_one": {
+    "message": "otwarta w $P1$ karcie",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "openInTabs_other": {
+    "message": "otwarta w $P1$ kartach",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "ruleStillApplies": {
+    "message": "Reguła „$P1$” w Ustawieniach nadal dotyczy $P2$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "cleanFailed": {
+    "message": "Nie udało się wyczyścić. Spróbuj ponownie lub przeładuj CrumbClear w chrome://extensions."
+  },
+  "removedFromClosed": {
+    "message": "Usunięto: $P1$ z $P2$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "closedSiteCount_one": {
+    "message": "$P1$ zamkniętej witryny",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "closedSiteCount_other": {
+    "message": "$P1$ zamkniętych witryn",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "nothingToClean": {
+    "message": "Nie ma czego czyścić: zamknięte witryny nic nie zostawiły."
+  },
+  "removedForSite": {
+    "message": "Usunięto: $P1$ dla $P2$. Przeładuj stronę, aby zobaczyć wylogowanie.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "noCookiesLeft": {
+    "message": "Brak plików cookie dla $P1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "segAria": {
+    "message": "Co dzieje się z plikami cookie tej witryny"
+  },
+  "segClean": {
+    "message": "Czyść po zamknięciu"
+  },
+  "segSession": {
+    "message": "Do restartu"
+  },
+  "segKeep": {
+    "message": "Zachowaj"
+  },
+  "noSite": {
+    "message": "Ta strona nie ma plików cookie witryny do zarządzania."
+  },
+  "cleanSite": {
+    "message": "Wyczyść tę witrynę"
+  },
+  "cleanNow": {
+    "message": "Wyczyść zamknięte karty"
+  },
+  "settings": {
+    "message": "Ustawienia"
+  },
+  "undo": {
+    "message": "Cofnij"
+  },
+  "undoText": {
+    "message": "Ostatnie czyszczenie: $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "undone": {
+    "message": "Przywrócono: $P1$. Te witryny są zachowane, dopóki ich ponownie nie otworzysz i nie zamkniesz.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "undoFailed": {
+    "message": "Nie ma już nic do cofnięcia."
+  },
+  "rateText": {
+    "message": "CrumbClear się przydaje? Ocena w Chrome Web Store pomaga innym go znaleźć."
+  },
+  "rateYes": {
+    "message": "Oceń"
+  },
+  "rateNo": {
+    "message": "Nie, dziękuję"
+  },
+  "optionsTitle": {
+    "message": "Ustawienia CrumbClear"
+  },
+  "optionsLead": {
+    "message": "Pliki cookie i dane witryny są usuwane po zamknięciu ostatniej karty witryny. Witryny z Twoich list pozostają nietknięte."
+  },
+  "setupTitle": {
+    "message": "Najpierw wybierz witryny, w których chcesz pozostać zalogowany"
+  },
+  "setupDesc": {
+    "message": "Autoczyszczenie jest wyłączone, dopóki nie skończysz. Potem pliki cookie wszystkich innych witryn są usuwane po zamknięciu ich kart. Logowanie Google, Microsoft, Apple, GitHub i Okta jest już na liście Zachowaj. Przechodzisz z Cookie AutoDelete? Najpierw zaimportuj swoją listę poniżej."
+  },
+  "filterSites": {
+    "message": "Filtruj witryny"
+  },
+  "selectAll": {
+    "message": "Zaznacz wszystkie"
+  },
+  "setupEmpty": {
+    "message": "Żadna inna witryna nie ma teraz plików cookie."
+  },
+  "setupDone": {
+    "message": "Zachowaj zaznaczone i włącz autoczyszczenie"
+  },
+  "hCleaning": {
+    "message": "Czyszczenie"
+  },
+  "optAutoClean": {
+    "message": "Autoczyszczenie"
+  },
+  "optAutoCleanDesc": {
+    "message": "Wstrzymaj, aby zachować wszystko, dopóki go ponownie nie włączysz."
+  },
+  "optDelay": {
+    "message": "Opóźnienie po zamknięciu karty"
+  },
+  "optDelayDesc": {
+    "message": "Czas na ponowne otwarcie karty, zanim jej pliki cookie znikną. Kilka zamkniętych kart jest czyszczonych razem."
+  },
+  "delay0": {
+    "message": "Od razu"
+  },
+  "delay30": {
+    "message": "30 sekund"
+  },
+  "delay60": {
+    "message": "1 minuta"
+  },
+  "delay300": {
+    "message": "5 minut"
+  },
+  "delay900": {
+    "message": "15 minut"
+  },
+  "optDomain": {
+    "message": "Czyść, gdy karta przechodzi na inną witrynę"
+  },
+  "optDomainDesc": {
+    "message": "Przejście na inną witrynę liczy się jak zamknięcie poprzedniej."
+  },
+  "optSiteData": {
+    "message": "Usuwaj też dane witryn"
+  },
+  "optSiteDataDesc": {
+    "message": "localStorage, IndexedDB, pamięć podręczna i service workery, nie tylko pliki cookie."
+  },
+  "optStartup": {
+    "message": "Czyść przy uruchomieniu przeglądarki"
+  },
+  "optStartupDesc": {
+    "message": "Usuwa pozostałości ostatniej sesji, także witryn „do restartu”. Gdy wyłączone, są one zachowywane jak „Zachowaj”."
+  },
+  "optBadge": {
+    "message": "Liczba plików cookie na ikonie"
+  },
+  "optBadgeDesc": {
+    "message": "Niebieski: zachowane. Bursztynowy: do restartu. Morski: zostanie wyczyszczone. Szary: autoczyszczenie wstrzymane."
+  },
+  "hLists": {
+    "message": "Zachowywane witryny"
+  },
+  "exprPlaceholder": {
+    "message": "example.com lub *.example.com"
+  },
+  "exprAria": {
+    "message": "Witryna lub wzorzec"
+  },
+  "listAria": {
+    "message": "Lista"
+  },
+  "add": {
+    "message": "Dodaj"
+  },
+  "listsEmpty": {
+    "message": "Brak witryn. Dodaj te, w których chcesz pozostać zalogowany."
+  },
+  "hImport": {
+    "message": "Import i eksport"
+  },
+  "importBtn": {
+    "message": "Importuj listy…"
+  },
+  "exportBtn": {
+    "message": "Eksportuj listy"
+  },
+  "importHelp": {
+    "message": "Przechodzisz z Cookie AutoDelete? W jego ustawieniach wybierz Export, a potem zaimportuj ten plik tutaj. Biała lista staje się „Zachowaj”, szara „Do restartu”. Działa też plik tekstowy z jedną domeną w wierszu."
+  },
+  "hActivity": {
+    "message": "Aktywność"
+  },
+  "statCookies": {
+    "message": "usunięte pliki cookie"
+  },
+  "statSites": {
+    "message": "wyczyszczone witryny"
+  },
+  "statRuns": {
+    "message": "czyszczenia"
+  },
+  "logEmpty": {
+    "message": "Jeszcze nic nie wyczyszczono. Zamknij kartę i poczekaj na koniec opóźnienia."
+  },
+  "clearLog": {
+    "message": "Wyczyść historię"
+  },
+  "listFor": {
+    "message": "Lista dla $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "remove": {
+    "message": "Usuń"
+  },
+  "removeAria": {
+    "message": "Usuń $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "notDomain": {
+    "message": "To nie wygląda na domenę. Spróbuj example.com lub *.example.com."
+  },
+  "listsFull": {
+    "message": "Twoje listy są pełne ($P1$ witryn). Najpierw usuń kilka.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "addedSuffix": {
+    "message": "Dodano $P1$. Uwaga: obejmuje to każdą witrynę kończącą się na .$P2$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "added": {
+    "message": "Dodano $P1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fileTooLarge": {
+    "message": "Ten plik jest za duży jak na listę witryn (limit 1 MB)."
+  },
+  "noSitesFound": {
+    "message": "W tym pliku nie znaleziono witryn."
+  },
+  "tooManyImport": {
+    "message": "Za dużo witryn: listy mieszczą $P1$. Nic nie zaimportowano.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "imported": {
+    "message": "Zaimportowano: $P1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "importedSkipped": {
+    "message": "Zaimportowano: $P1$, $P2$ już było na listach.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "siteCount_one": {
+    "message": "$P1$ witryna",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "siteCount_few": {
+    "message": "$P1$ witryny",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "siteCount_many": {
+    "message": "$P1$ witryn",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "siteCount_other": {
+    "message": "$P1$ witryny",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "moreSites": {
+    "message": "i $P1$ więcej",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "logPrivate": {
+    "message": "okna incognito"
+  },
+  "logSiteDataOnly": {
+    "message": "tylko dane witryn"
+  },
+  "reasonTabClosed": {
+    "message": "zamknięta karta"
+  },
+  "reasonManual": {
+    "message": "ręcznie"
+  },
+  "reasonStartup": {
+    "message": "uruchomienie przeglądarki"
+  },
+  "reasonAuto": {
+    "message": "automatycznie"
+  },
+  "tooManySetup": {
+    "message": "Za dużo witryn: listy mieszczą $P1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoCleanOnKept": {
+    "message": "Autoczyszczenie włączone. Zachowano: $P1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoCleanIsOn": {
+    "message": "Autoczyszczenie włączone."
+  }
+}

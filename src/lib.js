@@ -12,6 +12,7 @@ export const DEFAULT_SETTINGS = {
   cleanOnStartup: true,  // also clears keep-until-restart sites
   showBadge: true,
   needsSetup: false,     // true from install until the user picks sites to keep
+  ratePrompt: '',        // '' until the rating request is answered: 'done' or 'dismissed'
 };
 
 // Sign-in services that other sites depend on while they are open. Added to
