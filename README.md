@@ -40,15 +40,15 @@ It started as a replacement for Cookie AutoDelete, which stopped working when Ch
 
 | | |
 |---|---|
-| 🧹 **Cleans on tab close** | Cookies and, optionally, localStorage, IndexedDB, cache storage and service workers, after a delay you choose (instantly to 15 minutes). |
-| 📌 **Keep and Until restart lists** | Keep sites forever or until the next browser start. One click in the popup, or patterns like `*.example.com`. |
-| 🧩 **Partitioned cookies** | CHIPS cookies are cleaned together with the site they belong to. |
-| 🛟 **Safe first run** | Nothing is deleted after install until you pick the sites you want to stay logged in to. |
-| 🔑 **Sign-in keeps working** | Google, Microsoft, Apple, GitHub and Okta sign-in are on the Keep list from the start. Remove any you don't want. |
-| 📥 **Cookie AutoDelete import** | Whitelist becomes Keep, greylist becomes Until restart. Plain text lists work too. |
-| 🔢 **See what happens** | Cookie count on the icon, colored by what will happen to the site, and a local activity log. |
-| ↩️ **Undo** | Cleaned too much? The last cleanup's cookies can be put back for 10 minutes. |
-| 🌍 **Six languages** | English, Deutsch, 日本語, 简体中文, 繁體中文, Polski. |
+| <img src="icons/readme/eraser.svg" width="18" height="18" alt="" align="top"> **Cleans on tab close** | Cookies and, optionally, localStorage, IndexedDB, cache storage and service workers, after a delay you choose (instantly to 15 minutes). |
+| <img src="icons/readme/pin.svg" width="18" height="18" alt="" align="top"> **Keep and Until restart lists** | Keep sites forever or until the next browser start. One click in the popup, or patterns like `*.example.com`. |
+| <img src="icons/readme/cookie.svg" width="18" height="18" alt="" align="top"> **Partitioned cookies** | CHIPS cookies are cleaned together with the site they belong to. |
+| <img src="icons/readme/shield-check.svg" width="18" height="18" alt="" align="top"> **Safe first run** | Nothing is deleted after install until you pick the sites you want to stay logged in to. |
+| <img src="icons/readme/key-round.svg" width="18" height="18" alt="" align="top"> **Sign-in keeps working** | Google, Microsoft, Apple, GitHub and Okta sign-in are on the Keep list from the start. Remove any you don't want. |
+| <img src="icons/readme/file-input.svg" width="18" height="18" alt="" align="top"> **Cookie AutoDelete import** | Whitelist becomes Keep, greylist becomes Until restart. Plain text lists work too. |
+| <img src="icons/readme/eye.svg" width="18" height="18" alt="" align="top"> **See what happens** | Cookie count on the icon, colored by what will happen to the site, and a local activity log. |
+| <img src="icons/readme/undo-2.svg" width="18" height="18" alt="" align="top"> **Undo** | Cleaned too much? The last cleanup's cookies can be put back for 10 minutes. |
+| <img src="icons/readme/languages.svg" width="18" height="18" alt="" align="top"> **Six languages** | English, Deutsch, 日本語, 简体中文, 繁體中文, Polski. |
 
 <p align="center">
   <picture>
