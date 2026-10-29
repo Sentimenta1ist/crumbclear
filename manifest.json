@@ -3,7 +3,7 @@
   "default_locale": "en",
   "name": "__MSG_extName__",
   "short_name": "CrumbClear",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "__MSG_extDescription__",
   "minimum_chrome_version": "120",
   "icons": {

@@ -18,6 +18,19 @@ test('every form control has an accessible name', () => {
   }
 });
 
+// The checkbox inside .switch is hidden and 0x0, so a click on the drawn switch
+// reaches it only through a <label> (issue #1).
+test('every switch is clickable: a <label> itself or inside one', () => {
+  for (const file of ['popup.html', 'options.html']) {
+    const html = read(file);
+    for (const m of html.matchAll(/<(\w+) class="switch">/g)) {
+      const before = html.slice(0, m.index);
+      const inLabel = before.lastIndexOf('<label') > before.lastIndexOf('</label>');
+      assert.ok(m[1] === 'label' || inLabel, `${file}: ${m[0]} at ${m.index}`);
+    }
+  }
+});
+
 const luminance = (hex) => {
   const c = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
     .map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));

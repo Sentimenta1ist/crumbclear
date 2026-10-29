@@ -13,7 +13,7 @@
   <img alt="Manifest V3" src="https://img.shields.io/badge/Manifest-V3-0f766e">
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-2f8f5b">
   <img alt="No network requests" src="https://img.shields.io/badge/network%20requests-none-2f8f5b">
-  <img alt="Version" src="https://img.shields.io/badge/version-1.1.0-555">
+  <img alt="Version" src="https://img.shields.io/badge/version-1.1.1-555">
   <img alt="Languages" src="https://img.shields.io/badge/languages-6-555">
 </p>
 

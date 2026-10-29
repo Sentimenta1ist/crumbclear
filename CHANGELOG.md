@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.1 — 2026-10-29
+
+### Fixed
+- Settings switches did not respond to clicks, only to the keyboard ([#1](https://github.com/Sentimenta1ist/crumbclear/issues/1)).
+
 ## 1.1.0 — 2026-10-28
 
 ### Added

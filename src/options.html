@@ -73,7 +73,7 @@
   <h2 data-i18n="hCleaning">Cleaning</h2>
   <div class="card">
     <div class="row"><div><div class="t" data-i18n="optAutoClean">Auto-clean</div><div class="d" data-i18n="optAutoCleanDesc">Pause to keep everything until you turn it back on.</div></div>
-      <span class="switch"><input type="checkbox" data-setting="enabled" aria-label="Auto-clean" data-i18n-aria-label="optAutoClean"><span></span></span></div>
+      <label class="switch"><input type="checkbox" data-setting="enabled" aria-label="Auto-clean" data-i18n-aria-label="optAutoClean"><span></span></label></div>
     <div class="row"><div><div class="t" data-i18n="optDelay">Delay after closing a tab</div><div class="d" data-i18n="optDelayDesc">Time to reopen a tab before its cookies are gone. Several closed tabs are cleaned together.</div></div>
       <select data-setting="delaySec" data-type="number" aria-label="Delay after closing a tab" data-i18n-aria-label="optDelay">
         <option value="0" data-i18n="delay0">Immediately</option>
@@ -83,13 +83,13 @@
         <option value="900" data-i18n="delay900">15 minutes</option>
       </select></div>
     <div class="row"><div><div class="t" data-i18n="optDomain">Clean when a tab moves to another site</div><div class="d" data-i18n="optDomainDesc">Navigating away counts as closing the old site.</div></div>
-      <span class="switch"><input type="checkbox" data-setting="cleanOnDomainChange" aria-label="Clean when a tab moves to another site" data-i18n-aria-label="optDomain"><span></span></span></div>
+      <label class="switch"><input type="checkbox" data-setting="cleanOnDomainChange" aria-label="Clean when a tab moves to another site" data-i18n-aria-label="optDomain"><span></span></label></div>
     <div class="row"><div><div class="t" data-i18n="optSiteData">Also delete site data</div><div class="d" data-i18n="optSiteDataDesc">localStorage, IndexedDB, cache storage and service workers, not just cookies.</div></div>
-      <span class="switch"><input type="checkbox" data-setting="cleanSiteData" aria-label="Also delete site data" data-i18n-aria-label="optSiteData"><span></span></span></div>
+      <label class="switch"><input type="checkbox" data-setting="cleanSiteData" aria-label="Also delete site data" data-i18n-aria-label="optSiteData"><span></span></label></div>
     <div class="row"><div><div class="t" data-i18n="optStartup">Clean on browser start</div><div class="d" data-i18n="optStartupDesc">Removes leftovers from the last session, including "until restart" sites. When off, "until restart" sites are kept like Keep.</div></div>
-      <span class="switch"><input type="checkbox" data-setting="cleanOnStartup" aria-label="Clean on browser start" data-i18n-aria-label="optStartup"><span></span></span></div>
+      <label class="switch"><input type="checkbox" data-setting="cleanOnStartup" aria-label="Clean on browser start" data-i18n-aria-label="optStartup"><span></span></label></div>
     <div class="row"><div><div class="t" data-i18n="optBadge">Cookie count on the icon</div><div class="d" data-i18n="optBadgeDesc">Blue: kept. Amber: kept until restart. Teal: will be cleaned. Grey: auto-clean is paused.</div></div>
-      <span class="switch"><input type="checkbox" data-setting="showBadge" aria-label="Cookie count on the icon" data-i18n-aria-label="optBadge"><span></span></span></div>
+      <label class="switch"><input type="checkbox" data-setting="showBadge" aria-label="Cookie count on the icon" data-i18n-aria-label="optBadge"><span></span></label></div>
   </div>
 
   <h2 data-i18n="hLists">Sites you keep</h2>

@@ -233,7 +233,7 @@ The store shows sources of page views under Analytics → Impressions when links
 • X, Reddit, forums: `?utm_source=x`, `?utm_source=reddit`, `?utm_source=forum`
 
 ## Microsoft Edge Add-ons
-The same zip works in Edge. Partner Center (https://partner.microsoft.com/dashboard/microsoftedge) → New extension → upload `dist/crumbclear-1.1.0.zip`. Use the descriptions above, the same screenshots, the same privacy policy URL. The rating request in the popup only shows in Chrome.
+The same zip works in Edge. Partner Center (https://partner.microsoft.com/dashboard/microsoftedge) → New extension → upload `dist/crumbclear-1.1.1.zip`. Use the descriptions above, the same screenshots, the same privacy policy URL. The rating request in the popup only shows in Chrome.
 
 ## Featured badge
 After 1.1 is live: Chrome Web Store One Stop Support (https://support.google.com/chrome_webstore/contact/one_stop_support) → "I want to nominate my extension for featuring". Points to mention: open source, no network requests, strict CSP, minimal permissions, safe first run, six languages.
