@@ -9,18 +9,18 @@ Store policy: no keyword lists, no fake reviews, no other product names in the n
 ## Name and summary (from the package)
 | Language | Name | Summary |
 |---|---|---|
-| en | CrumbClear: Auto Delete Cookies | Auto delete cookies when you close a tab. Cookie cleaner with keep lists, partitioned cookie support and list import. No tracking. |
-| de | CrumbClear: Cookies automatisch löschen | Löscht Cookies automatisch beim Schließen eines Tabs. Mit Ausnahmelisten, partitionierten Cookies und Listenimport. Kein Tracking. |
-| ja | CrumbClear: Cookie 自動削除 | タブを閉じると Cookie を自動で削除。残すサイトのリスト、パーティション Cookie 対応、リストのインポート。トラッキングなし。 |
-| zh_CN | CrumbClear：自动删除 Cookie | 关闭标签页时自动删除 Cookie。支持保留列表、分区 Cookie 和列表导入。无跟踪。 |
-| zh_TW | CrumbClear：自動刪除 Cookie | 關閉分頁時自動刪除 Cookie。支援保留清單、分區 Cookie 與清單匯入。不追蹤。 |
-| pl | CrumbClear: automatyczne usuwanie cookies | Automatycznie usuwa pliki cookie po zamknięciu karty. Listy wyjątków, obsługa partycjonowanych cookies, import list. Bez śledzenia. |
+| en | CrumbClear: Auto Delete Cookies on Tab Close | Auto delete cookies and site data when you close a tab. Keep lists, Undo, list import. Free, open source, no tracking. |
+| de | CrumbClear: Cookies beim Schließen des Tabs löschen | Löscht Cookies und Websitedaten automatisch beim Schließen eines Tabs. Ausnahmelisten, Rückgängig, Listenimport. Open Source. |
+| ja | CrumbClear: タブを閉じたら Cookie を自動削除 | タブを閉じると Cookie とサイトデータを自動で削除。残すサイトのリスト、元に戻す、リストのインポート。無料・オープンソース・トラッキングなし。 |
+| zh_CN | CrumbClear：关闭标签页时自动删除 Cookie | 关闭标签页时自动删除 Cookie 和网站数据。支持保留列表、撤销和列表导入。免费开源，无跟踪。 |
+| zh_TW | CrumbClear：關閉分頁時自動刪除 Cookie | 關閉分頁時自動刪除 Cookie 和網站資料。支援保留清單、復原與清單匯入。免費開源，不追蹤。 |
+| pl | CrumbClear: usuwanie cookies po zamknięciu karty | Usuwa pliki cookie i dane witryn po zamknięciu karty. Listy wyjątków, cofanie, import list. Darmowy, open source, bez śledzenia. |
 
 ## Category
 Privacy & Security
 
 ## Description — English (Global / English) · screenshots: store/screenshots/en/
-Auto delete cookies when you close a tab. CrumbClear is a free, open-source cookie cleaner for Chrome: close the last tab of a site and its cookies and site data are cleared automatically, while the sites on your Keep list stay logged in.
+Auto delete cookies and site data when you close a tab. CrumbClear is a free, open-source cookie cleaner for Chrome: close the last tab of a site and its cookies, localStorage, IndexedDB, cache and service workers are cleared automatically, while the sites on your Keep list stay logged in.
 
 Looking for a Cookie AutoDelete alternative that works with Manifest V3? CrumbClear imports your old whitelist and greylist in one step. It is an independent project, not affiliated with Cookie AutoDelete.
 
@@ -38,10 +38,9 @@ KEEP WHAT YOU NEED
 • Until restart: kept while the browser is open, cleaned the next time it starts.
 • One click in the popup, or patterns like *.example.com in settings.
 
-NEW IN 1.1
-• Undo: put back the cookies of the last cleanup for 10 minutes.
-• Available in English, Deutsch, 日本語, 简体中文, 繁體中文 and Polski.
-• The popup shows when a site is open in several tabs.
+RECENT UPDATES
+• 1.2: "Clean this site" deletes the site's localStorage, IndexedDB, cache and service workers too, not only cookies. "Report a problem" in the popup.
+• 1.1: Undo puts back the cookies of the last cleanup for 10 minutes. English, Deutsch, 日本語, 简体中文, 繁體中文 and Polski. The popup shows when a site is open in several tabs.
 
 WHAT MAKES IT DIFFERENT
 • Partitioned cookies (CHIPS) of the closed site are cleaned too, so trackers embedded on it go with it.
@@ -52,7 +51,7 @@ PRIVACY
 No servers, no analytics, no ads. Settings and lists stay in your browser. Nothing is sent anywhere. Source code: github.com/Sentimenta1ist/crumbclear
 
 ## Description — German / Deutsch · screenshots: store/screenshots/de/
-Löscht Cookies automatisch, wenn Sie einen Tab schließen. CrumbClear ist ein kostenloser Open-Source-Cookie-Cleaner für Chrome: Schließen Sie den letzten Tab einer Website, werden ihre Cookies und Websitedaten automatisch gelöscht. Websites auf Ihrer Behalten-Liste bleiben angemeldet.
+Löscht Cookies und Websitedaten automatisch, wenn Sie einen Tab schließen. CrumbClear ist ein kostenloser Open-Source-Cookie-Cleaner für Chrome: Schließen Sie den letzten Tab einer Website, werden ihre Cookies und Websitedaten automatisch gelöscht. Websites auf Ihrer Behalten-Liste bleiben angemeldet.
 
 Sie suchen eine Alternative zu Cookie AutoDelete für Manifest V3? CrumbClear importiert Ihre Whitelist und Greylist in einem Schritt. Unabhängiges Projekt, nicht mit Cookie AutoDelete verbunden.
 
@@ -68,9 +67,9 @@ LISTEN
 • Behalten: wird nie automatisch gelöscht. Bis zum Neustart: bleibt, solange der Browser offen ist.
 • Ein Klick im Popup oder Muster wie *.example.com in den Einstellungen.
 
-NEU IN 1.1
-• Rückgängig: Die Cookies der letzten Bereinigung lassen sich 10 Minuten lang wiederherstellen.
-• Auf Deutsch, Englisch, Japanisch, Chinesisch und Polnisch.
+NEUIGKEITEN
+• 1.2: „Diese Website löschen“ löscht jetzt auch localStorage, IndexedDB, Cache und Service Worker der Website, nicht nur Cookies. „Problem melden“ im Popup.
+• 1.1: Rückgängig: Die Cookies der letzten Bereinigung lassen sich 10 Minuten lang wiederherstellen. Auf Deutsch, Englisch, Japanisch, Chinesisch und Polnisch.
 
 AUSSERDEM
 • Partitionierte Cookies (CHIPS) der geschlossenen Website werden mit gelöscht.
@@ -81,7 +80,7 @@ DATENSCHUTZ
 Keine Server, keine Analyse, keine Werbung. Einstellungen und Listen bleiben in Ihrem Browser. Quellcode: github.com/Sentimenta1ist/crumbclear
 
 ## Description — Japanese / 日本語 · screenshots: store/screenshots/ja/
-タブを閉じると Cookie を自動で削除。CrumbClear は無料・オープンソースの Chrome 用 Cookie クリーナーです。サイトの最後のタブを閉じると、その Cookie とサイトデータが自動で削除されます。保持リストのサイトはログインしたままです。
+タブを閉じると Cookie とサイトデータを自動で削除。CrumbClear は無料・オープンソースの Chrome 用 Cookie クリーナーです。サイトの最後のタブを閉じると、その Cookie とサイトデータが自動で削除されます。保持リストのサイトはログインしたままです。
 
 Manifest V3 で使える Cookie AutoDelete の代わりを探していますか？ ホワイトリストとグレーリストをそのままインポートできます。Cookie AutoDelete とは無関係の独立したプロジェクトです。
 
@@ -97,9 +96,9 @@ Manifest V3 で使える Cookie AutoDelete の代わりを探していますか�
 • 保持: 自動では削除しない。再起動まで: ブラウザを開いている間だけ保持。
 • ポップアップでワンクリック、または設定で *.example.com のようなパターン。
 
-1.1 の新機能
-• 元に戻す: 前回の削除で消えた Cookie を 10 分間復元できます。
-• 日本語に対応しました。
+最近の更新
+• 1.2: 「このサイトを削除」で Cookie だけでなく localStorage、IndexedDB、キャッシュ、Service Worker も削除。ポップアップに「問題を報告」。
+• 1.1: 元に戻す（前回の削除で消えた Cookie を 10 分間復元）。日本語に対応。
 
 そのほか
 • 閉じたサイトのパーティション Cookie（CHIPS）も削除。
@@ -110,7 +109,7 @@ Manifest V3 で使える Cookie AutoDelete の代わりを探していますか�
 サーバーなし、分析なし、広告なし。設定とリストはブラウザ内に保存され、どこにも送信されません。ソースコード: github.com/Sentimenta1ist/crumbclear
 
 ## Description — Chinese (China) / 中文（中国）, simplified 简体 · screenshots: store/screenshots/zh_CN/
-关闭标签页时自动删除 Cookie。CrumbClear 是免费开源的 Chrome Cookie 清理工具：关闭网站的最后一个标签页后，其 Cookie 和网站数据会被自动删除，保留列表中的网站保持登录。
+关闭标签页时自动删除 Cookie 和网站数据。CrumbClear 是免费开源的 Chrome Cookie 清理工具：关闭网站的最后一个标签页后，其 Cookie 和网站数据会被自动删除，保留列表中的网站保持登录。
 
 在找适用于 Manifest V3 的 Cookie AutoDelete 替代品？CrumbClear 可一键导入你的白名单和灰名单。独立项目，与 Cookie AutoDelete 无关。
 
@@ -126,9 +125,9 @@ Manifest V3 で使える Cookie AutoDelete の代わりを探していますか�
 • 保留：永不自动清理。保留到重启：浏览器打开期间保留。
 • 在弹出窗口中一键设置，或在设置中使用 *.example.com 这样的规则。
 
-1.1 新功能
-• 撤销：上次清理删除的 Cookie 可在 10 分钟内恢复。
-• 支持简体中文。
+最近更新
+• 1.2：“清理此网站”现在也会删除该网站的 localStorage、IndexedDB、缓存和 Service Worker，而不只是 Cookie。弹出窗口新增“报告问题”。
+• 1.1：撤销（上次清理删除的 Cookie 可在 10 分钟内恢复）。支持简体中文。
 
 更多
 • 同时清理已关闭网站的分区 Cookie（CHIPS）。
@@ -139,7 +138,7 @@ Manifest V3 で使える Cookie AutoDelete の代わりを探していますか�
 无服务器、无分析、无广告。设置和列表保存在你的浏览器中，不会发送到任何地方。源代码：github.com/Sentimenta1ist/crumbclear
 
 ## Description — Chinese (Taiwan) / 中文（台灣）, traditional 繁體 · screenshots: store/screenshots/zh_TW/
-關閉分頁時自動刪除 Cookie。CrumbClear 是免費開源的 Chrome Cookie 清除工具：關閉網站的最後一個分頁後，其 Cookie 和網站資料會被自動刪除，保留清單中的網站維持登入。
+關閉分頁時自動刪除 Cookie 和網站資料。CrumbClear 是免費開源的 Chrome Cookie 清除工具：關閉網站的最後一個分頁後，其 Cookie 和網站資料會被自動刪除，保留清單中的網站維持登入。
 
 在找適用於 Manifest V3 的 Cookie AutoDelete 替代方案？CrumbClear 可一鍵匯入你的白名單和灰名單。獨立專案，與 Cookie AutoDelete 無關。
 
@@ -155,9 +154,9 @@ Manifest V3 で使える Cookie AutoDelete の代わりを探していますか�
 • 保留：永不自動清除。保留到重新啟動：瀏覽器開啟期間保留。
 • 在彈出視窗中一鍵設定，或在設定中使用 *.example.com 這樣的規則。
 
-1.1 新功能
-• 復原：上次清除刪掉的 Cookie 可在 10 分鐘內還原。
-• 支援繁體中文。
+最近更新
+• 1.2：「清除此網站」現在也會刪除該網站的 localStorage、IndexedDB、快取和 Service Worker，而不只是 Cookie。彈出視窗新增「回報問題」。
+• 1.1：復原（上次清除刪掉的 Cookie 可在 10 分鐘內還原）。支援繁體中文。
 
 更多
 • 同時清除已關閉網站的分區 Cookie（CHIPS）。
@@ -168,7 +167,7 @@ Manifest V3 で使える Cookie AutoDelete の代わりを探していますか�
 沒有伺服器、沒有分析、沒有廣告。設定和清單保存在你的瀏覽器中，不會傳送到任何地方。原始碼：github.com/Sentimenta1ist/crumbclear
 
 ## Description — Polish / Polski · screenshots: store/screenshots/pl/
-Automatycznie usuwa pliki cookie po zamknięciu karty. CrumbClear to darmowy cleaner cookies dla Chrome o otwartym kodzie: zamknij ostatnią kartę witryny, a jej pliki cookie i dane zostaną usunięte. Witryny z listy Zachowaj pozostają zalogowane.
+Automatycznie usuwa pliki cookie i dane witryn po zamknięciu karty. CrumbClear to darmowy cleaner cookies dla Chrome o otwartym kodzie: zamknij ostatnią kartę witryny, a jej pliki cookie i dane zostaną usunięte. Witryny z listy Zachowaj pozostają zalogowane.
 
 Szukasz zamiennika Cookie AutoDelete działającego w Manifest V3? CrumbClear importuje białą i szarą listę jednym krokiem. Niezależny projekt, niepowiązany z Cookie AutoDelete.
 
@@ -184,9 +183,9 @@ LISTY
 • Zachowaj: nigdy nie czyszczone automatycznie. Do restartu: zachowane, dopóki przeglądarka jest otwarta.
 • Jedno kliknięcie w okienku albo wzorce typu *.example.com w ustawieniach.
 
-NOWOŚCI W 1.1
-• Cofnij: pliki cookie z ostatniego czyszczenia można przywrócić przez 10 minut.
-• Wersja polska.
+OSTATNIE ZMIANY
+• 1.2: „Wyczyść tę witrynę” usuwa też localStorage, IndexedDB, pamięć podręczną i service workery witryny, nie tylko pliki cookie. „Zgłoś problem” w okienku.
+• 1.1: Cofnij: pliki cookie z ostatniego czyszczenia można przywrócić przez 10 minut. Wersja polska.
 
 PONADTO
 • Czyści też partycjonowane pliki cookie (CHIPS) zamkniętej witryny.
@@ -233,7 +232,7 @@ The store shows sources of page views under Analytics → Impressions when links
 • X, Reddit, forums: `?utm_source=x`, `?utm_source=reddit`, `?utm_source=forum`
 
 ## Microsoft Edge Add-ons
-The same zip works in Edge. Partner Center (https://partner.microsoft.com/dashboard/microsoftedge) → New extension → upload `dist/crumbclear-1.1.1.zip`. Use the descriptions above, the same screenshots, the same privacy policy URL. The rating request in the popup only shows in Chrome.
+The same zip works in Edge. Partner Center (https://partner.microsoft.com/dashboard/microsoftedge) → New extension → upload `dist/crumbclear-1.2.0.zip`. Use the descriptions above, the same screenshots, the same privacy policy URL. The rating request in the popup only shows in Chrome.
 
 ## Featured badge
 After 1.1 is live: Chrome Web Store One Stop Support (https://support.google.com/chrome_webstore/contact/one_stop_support) → "I want to nominate my extension for featuring". Points to mention: open source, no network requests, strict CSP, minimal permissions, safe first run, six languages.

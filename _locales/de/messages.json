@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "CrumbClear: Cookies automatisch löschen",
+    "message": "CrumbClear: Cookies beim Schließen des Tabs löschen",
     "description": "Extension name in the Chrome Web Store and chrome://extensions (max 75 chars)"
   },
   "extDescription": {
-    "message": "Löscht Cookies automatisch beim Schließen eines Tabs. Mit Ausnahmelisten, partitionierten Cookies und Listenimport. Kein Tracking.",
+    "message": "Löscht Cookies und Websitedaten automatisch beim Schließen eines Tabs. Ausnahmelisten, Rückgängig, Listenimport. Open Source.",
     "description": "Store summary (max 132 chars)"
   },
   "actionTitle": {
@@ -196,6 +196,9 @@
   },
   "settings": {
     "message": "Einstellungen"
+  },
+  "reportProblem": {
+    "message": "Problem melden"
   },
   "undo": {
     "message": "Rückgängig"

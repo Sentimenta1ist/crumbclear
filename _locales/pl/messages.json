@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "CrumbClear: automatyczne usuwanie cookies",
+    "message": "CrumbClear: usuwanie cookies po zamknięciu karty",
     "description": "Extension name in the Chrome Web Store and chrome://extensions (max 75 chars)"
   },
   "extDescription": {
-    "message": "Automatycznie usuwa pliki cookie po zamknięciu karty. Listy wyjątków, obsługa partycjonowanych cookies, import list. Bez śledzenia.",
+    "message": "Usuwa pliki cookie i dane witryn po zamknięciu karty. Listy wyjątków, cofanie, import list. Darmowy, open source, bez śledzenia.",
     "description": "Store summary (max 132 chars)"
   },
   "actionTitle": {
@@ -252,6 +252,9 @@
   },
   "settings": {
     "message": "Ustawienia"
+  },
+  "reportProblem": {
+    "message": "Zgłoś problem"
   },
   "undo": {
     "message": "Cofnij"

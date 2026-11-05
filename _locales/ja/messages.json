@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "CrumbClear: Cookie 自動削除",
+    "message": "CrumbClear: タブを閉じたら Cookie を自動削除",
     "description": "Extension name in the Chrome Web Store and chrome://extensions (max 75 chars)"
   },
   "extDescription": {
-    "message": "タブを閉じると Cookie を自動で削除。残すサイトのリスト、パーティション Cookie 対応、リストのインポート。トラッキングなし。",
+    "message": "タブを閉じると Cookie とサイトデータを自動で削除。残すサイトのリスト、元に戻す、リストのインポート。無料・オープンソース・トラッキングなし。",
     "description": "Store summary (max 132 chars)"
   },
   "actionTitle": {
@@ -164,6 +164,9 @@
   },
   "settings": {
     "message": "設定"
+  },
+  "reportProblem": {
+    "message": "問題を報告"
   },
   "undo": {
     "message": "元に戻す"

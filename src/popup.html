@@ -24,6 +24,9 @@
     .rate-actions button { padding: 4px 10px; font-size: 12px; }
     footer { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-top: 1px solid var(--line); font-size: 12px; }
     footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    footer .links { display: flex; gap: 12px; white-space: nowrap; }
+    footer #report { color: var(--muted); font-weight: 400; }
+    footer { gap: 8px; }
     .toast { padding: 0 14px 10px; font-size: 12px; color: var(--keep); min-height: 0; }
   </style>
 </head>
@@ -74,7 +77,7 @@
 
   <footer>
     <span class="muted" id="stats"></span>
-    <a href="#" id="openOptions" data-i18n="settings">Settings</a>
+    <span class="links"><a href="#" id="report" data-i18n="reportProblem">Report a problem</a><a href="#" id="openOptions" data-i18n="settings">Settings</a></span>
   </footer>
   <script type="module" src="popup.js"></script>
 </body>

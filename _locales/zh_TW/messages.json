@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "CrumbClear：自動刪除 Cookie",
+    "message": "CrumbClear：關閉分頁時自動刪除 Cookie",
     "description": "Extension name in the Chrome Web Store and chrome://extensions (max 75 chars)"
   },
   "extDescription": {
-    "message": "關閉分頁時自動刪除 Cookie。支援保留清單、分區 Cookie 與清單匯入。不追蹤。",
+    "message": "關閉分頁時自動刪除 Cookie 和網站資料。支援保留清單、復原與清單匯入。免費開源，不追蹤。",
     "description": "Store summary (max 132 chars)"
   },
   "actionTitle": {
@@ -164,6 +164,9 @@
   },
   "settings": {
     "message": "設定"
+  },
+  "reportProblem": {
+    "message": "回報問題"
   },
   "undo": {
     "message": "復原"

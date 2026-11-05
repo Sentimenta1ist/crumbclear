@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "CrumbClear: Auto Delete Cookies",
+    "message": "CrumbClear: Auto Delete Cookies on Tab Close",
     "description": "Extension name in the Chrome Web Store and chrome://extensions (max 75 chars)"
   },
   "extDescription": {
-    "message": "Auto delete cookies when you close a tab. Cookie cleaner with keep lists, partitioned cookie support and list import. No tracking.",
+    "message": "Auto delete cookies and site data when you close a tab. Keep lists, Undo, list import. Free, open source, no tracking.",
     "description": "Store summary (max 132 chars)"
   },
   "actionTitle": {
@@ -196,6 +196,9 @@
   },
   "settings": {
     "message": "Settings"
+  },
+  "reportProblem": {
+    "message": "Report a problem"
   },
   "undo": {
     "message": "Undo"

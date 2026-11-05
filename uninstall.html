@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>CrumbClear was removed</title>
+  <link rel="icon" href="icons/icon48.png">
+  <style>
+    :root { --bg: #f3f7f6; --panel: #ffffff; --ink: #0e1f1c; --muted: #566b67; --line: #dce6e3; --accent: #0f766e; color-scheme: light; }
+    @media (prefers-color-scheme: dark) { :root { --bg: #0f1716; --panel: #16211f; --ink: #e6f0ee; --muted: #93a8a4; --line: #263533; --accent: #2dd4bf; color-scheme: dark; } }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    main { max-width: 620px; margin: 0 auto; padding: 48px 16px 64px; }
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    p { color: var(--muted); }
+    ul { list-style: none; padding: 0; margin: 20px 0; }
+    li a { display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; margin: 8px 0; color: var(--ink); text-decoration: none; }
+    li a:hover { border-color: var(--accent); }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+<main>
+  <h1>CrumbClear was removed</h1>
+  <p>Your settings and lists were deleted with it. If you have a minute, tell me why: pick the closest reason. It opens an email or a GitHub issue that you can edit or not send at all.</p>
+  <ul id="reasons">
+    <li><a data-reason="It logged me out of sites I wanted to keep" href="#">It logged me out of sites I wanted to keep</a></li>
+    <li><a data-reason="Something did not work" href="#">Something did not work</a></li>
+    <li><a data-reason="I did not understand how to use it" href="#">I did not understand how to use it</a></li>
+    <li><a data-reason="It is missing a feature I need" href="#">It is missing a feature I need</a></li>
+    <li><a data-reason="I only wanted to try it" href="#">I only wanted to try it</a></li>
+    <li><a data-reason="Other" href="#">Other</a></li>
+  </ul>
+  <p>Prefer GitHub? <a id="issue" href="https://github.com/Sentimenta1ist/crumbclear/issues/new">Open an issue</a>. Changed your mind? <a href="https://chromewebstore.google.com/detail/aggadloggaflppnahldcfmhhedonhjia?utm_source=uninstall">Install it again</a>.</p>
+</main>
+<script>
+  // Only the version from this page's address goes into the message.
+  const v = (new URLSearchParams(location.search).get('v') || '').replace(/[^0-9.]/g, '').slice(0, 20);
+  const tag = v ? ' (CrumbClear ' + v + ')' : '';
+  for (const a of document.querySelectorAll('[data-reason]')) {
+    const reason = a.dataset.reason;
+    a.href = 'mailto:ivanenko.dev@gmail.com?subject=' + encodeURIComponent('Uninstalled CrumbClear: ' + reason + tag) +
+      '&body=' + encodeURIComponent('Reason: ' + reason + '\n\nDetails (optional):\n');
+  }
+  document.getElementById('issue').href += '?title=' + encodeURIComponent('Feedback after uninstall' + tag);
+</script>
+</body>
+</html>

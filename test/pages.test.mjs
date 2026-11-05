@@ -165,10 +165,10 @@ test('popup: says when a site is open in several tabs, and cleans in the window\
   assert.deepEqual(sent.find((m) => m.type === 'clean-site'), { type: 'clean-site', host: 'www.shop.com', incognito: true });
 });
 
-test('popup asks for a rating once after 20 cleanups, and remembers the answer', async () => {
+test('popup asks for a rating once after 10 cleanups, and remembers the answer', async () => {
   const base = { settings: { ...DEFAULT_SETTINGS }, lists: [] };
   let { $ } = await open('popup', { store: { ...base, stats: { cookies: 5, sites: 2, runs: 3 } }, tab: { id: 1, url: 'https://a.com/' } });
-  assert.equal($('rateBox').hidden, true, 'not before 20 cleanups');
+  assert.equal($('rateBox').hidden, true, 'not before 10 cleanups');
 
   let store;
   ({ $, store } = await open('popup', { store: { ...base, stats: { cookies: 500, sites: 90, runs: 25 } }, tab: { id: 1, url: 'https://a.com/' } }));
@@ -183,6 +183,15 @@ test('popup asks for a rating once after 20 cleanups, and remembers the answer',
   assert.equal(store.settings.ratePrompt, 'dismissed');
   assert.equal($('rateBox').hidden, true);
   assert.equal(chrome.created.length, 0);
+});
+
+test('popup "Report a problem" opens a new GitHub issue with the version', async () => {
+  const { $ } = await open('popup', { store: { settings: { ...DEFAULT_SETTINGS }, lists: [] }, tab: null });
+  await $('report').click(); await settle();
+  assert.equal(chrome.created.length, 1);
+  const url = new URL(chrome.created[0].url);
+  assert.equal(url.origin + url.pathname, 'https://github.com/Sentimenta1ist/crumbclear/issues/new');
+  assert.match(url.searchParams.get('body'), /^CrumbClear 9\.9\.9\n/);
 });
 
 test('popup offers Undo while the last cleanup can be undone', async () => {

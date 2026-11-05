@@ -6,14 +6,14 @@
 
 <p align="center">
   <b>Auto delete cookies when you close a tab.</b><br>
-  A free, open-source cookie cleaner for Chrome. Sites you trust stay logged in.
+  Cookies, localStorage, IndexedDB, cache and service workers of the closed site, gone. Sites you trust stay logged in. Free and open source.
 </p>
 
 <p align="center">
   <img alt="Manifest V3" src="https://img.shields.io/badge/Manifest-V3-0f766e">
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-2f8f5b">
   <img alt="No network requests" src="https://img.shields.io/badge/network%20requests-none-2f8f5b">
-  <img alt="Version" src="https://img.shields.io/badge/version-1.1.1-555">
+  <img alt="Version" src="https://img.shields.io/badge/version-1.2.0-555">
   <img alt="Languages" src="https://img.shields.io/badge/languages-6-555">
 </p>
 
@@ -42,7 +42,7 @@ It started as a replacement for Cookie AutoDelete, which stopped working when Ch
 |---|---|
 | <img src="icons/readme/eraser.svg" width="18" height="18" alt="" align="top"> **Cleans on tab close** | Cookies and, optionally, localStorage, IndexedDB, cache storage and service workers, after a delay you choose (instantly to 15 minutes). |
 | <img src="icons/readme/pin.svg" width="18" height="18" alt="" align="top"> **Keep and Until restart lists** | Keep sites forever or until the next browser start. One click in the popup, or patterns like `*.example.com`. |
-| <img src="icons/readme/cookie.svg" width="18" height="18" alt="" align="top"> **Partitioned cookies** | CHIPS cookies are cleaned together with the site they belong to. |
+| <img src="icons/readme/cookie.svg" width="18" height="18" alt="" align="top"> **More than cookies** | Partitioned (CHIPS) cookies stored under the closed site go too, and so does its site data unless you turn that off. |
 | <img src="icons/readme/shield-check.svg" width="18" height="18" alt="" align="top"> **Safe first run** | Nothing is deleted after install until you pick the sites you want to stay logged in to. |
 | <img src="icons/readme/key-round.svg" width="18" height="18" alt="" align="top"> **Sign-in keeps working** | Google, Microsoft, Apple, GitHub and Okta sign-in are on the Keep list from the start. Remove any you don't want. |
 | <img src="icons/readme/file-input.svg" width="18" height="18" alt="" align="top"> **Cookie AutoDelete import** | Whitelist becomes Keep, greylist becomes Until restart. Plain text lists work too. |
@@ -66,9 +66,14 @@ It started as a replacement for Cookie AutoDelete, which stopped working when Ch
 
 CrumbClear is an independent project, not affiliated with Cookie AutoDelete.
 
+## What it does not protect against
+
+CrumbClear cleans up after a site is closed. It does not stop malware or another extension on your computer from taking a session while the site is open, it does not block trackers while a page is open, and it does not hide your IP address. Pair it with a content blocker if you want that. What it does: a site and its trackers find nothing when you come back, and a one-time copy of your browser data holds only the sites you keep.
+
 ## Privacy
 
 - No servers, no analytics, no ads, no network requests. A strict Content Security Policy blocks network access from the extension's pages.
+- "Report a problem" opens a GitHub issue in a new tab, and after uninstalling Chrome opens a short feedback page. Both are ordinary pages that carry only the version number.
 - Settings, lists and the activity log stay on your device in `chrome.storage`. Cookies for Undo are held in memory only, for 10 minutes.
 - No content scripts: the extension never reads the pages you visit.
 
@@ -76,7 +81,7 @@ Full policy: [privacy.html](https://sentimenta1ist.github.io/crumbclear/privacy.
 
 ## Install
 
-- **Chrome Web Store:** [CrumbClear: Auto Delete Cookies](https://chromewebstore.google.com/detail/aggadloggaflppnahldcfmhhedonhjia?utm_source=github&utm_medium=readme).
+- **Chrome Web Store:** [CrumbClear: Auto Delete Cookies on Tab Close](https://chromewebstore.google.com/detail/aggadloggaflppnahldcfmhhedonhjia?utm_source=github&utm_medium=readme).
 - **From source:** run `scripts/build.sh`, unzip `dist/crumbclear-<version>.zip`, open `chrome://extensions`, turn on Developer mode, click **Load unpacked** and choose the unzipped folder.
 
 <details>

@@ -7,7 +7,7 @@ let site = null;
 let incognito = false;
 
 // Ask for a store rating once, after the extension has proved itself.
-const RATE_AFTER_RUNS = 20;
+const RATE_AFTER_RUNS = 10;
 
 const HINTS = {
   '': 'hintClean',
@@ -148,6 +148,15 @@ $('rateYes').addEventListener('click', async () => {
 $('rateNo').addEventListener('click', async () => {
   await setSetting({ ratePrompt: 'dismissed' });
   load();
+});
+
+// Opens a new GitHub issue with the version filled in; nothing is sent by the extension.
+const ISSUE_URL = 'https://github.com/Sentimenta1ist/crumbclear/issues/new';
+$('report').addEventListener('click', (e) => {
+  e.preventDefault();
+  const version = chrome.runtime.getManifest ? chrome.runtime.getManifest().version : '';
+  const body = `CrumbClear ${version}\n\nWhat happened:\n\nWhat you expected:\n`;
+  chrome.tabs.create({ url: `${ISSUE_URL}?body=${encodeURIComponent(body)}` });
 });
 
 $('openOptions').addEventListener('click', (e) => {

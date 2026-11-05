@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.2.0 — 2026-11-06
+
+### Added
+- "Report a problem" in the popup opens a new GitHub issue with the version filled in.
+- After uninstalling, Chrome opens a short page asking why (the address carries only the version).
+
+### Changed
+- Name and store summary say what it does: "Auto Delete Cookies on Tab Close", and that site data goes too.
+- The rating request appears after 10 cleanups instead of 20.
+
+### Fixed
+- "Clean this site" now also deletes the site's localStorage, IndexedDB, cache storage and service workers, even when the site is on a list or was opened before CrumbClear was installed. Before, only its cookies went.
+
 ## 1.1.1 — 2026-10-29
 
 ### Fixed

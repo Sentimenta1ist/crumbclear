@@ -102,7 +102,7 @@ export function fakeChrome({ store, cookies = [], tab = null, replies = {}, lang
     },
     cookies: { getAll: async () => structuredClone(cookies) },
     tabs: { query: async () => (tab ? [tab] : []), create: (o) => { created.push(o); } },
-    runtime: { id: 'crumbclear-test-id', sendMessage: async (msg) => replies[msg.type] ?? null, openOptionsPage: () => {} },
+    runtime: { id: 'crumbclear-test-id', getManifest: () => ({ version: '9.9.9' }), sendMessage: async (msg) => replies[msg.type] ?? null, openOptionsPage: () => {} },
     i18n: fakeI18n(lang),
     created,
   };

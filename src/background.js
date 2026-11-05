@@ -214,19 +214,19 @@ let queuedAuto = null;
 
 // scope (with onlySite): 'private' cleans only incognito cookie stores,
 // 'regular' only the normal profile, so "Clean this site" stays in its window.
-function clean({ reason = 'auto', startup = false, onlySite = null, scope = null } = {}) {
+function clean({ reason = 'auto', startup = false, onlySite = null, onlyHost = null, scope = null } = {}) {
   const auto = !onlySite && !startup && reason !== 'manual';
   if (auto && queuedAuto) return queuedAuto;
   const run = queue.then(() => {
     if (queuedAuto === run) queuedAuto = null;
-    return doClean({ reason, startup, onlySite, scope });
+    return doClean({ reason, startup, onlySite, onlyHost, scope });
   });
   if (auto) queuedAuto = run;
   queue = run.catch(() => {});
   return run;
 }
 
-async function doClean({ reason, startup, onlySite, scope }) {
+async function doClean({ reason, startup, onlySite, onlyHost, scope }) {
   const { settings, lists, stats } = await getState();
   if (!settings.enabled && !onlySite && reason !== 'manual') return { cookies: 0, sites: [] };
   if (!onlySite && reason !== 'manual') await waitForTabsToSettle();
@@ -263,17 +263,28 @@ async function doClean({ reason, startup, onlySite, scope }) {
 
   // Site data for visited hosts that are now closed and not on a list.
   // Incognito sites are never in this list, and their data goes with the window.
+  // "Clean this site" is an explicit request: like its cookies, the site's data
+  // goes even when the site is on a list or was opened before CrumbClear was.
   if (scope !== 'private') await updateVisited((visited) => visited.filter((key) => {
     const { host } = splitHostPort(key);
     const site = siteOf(host);
+    if (onlySite) {
+      if (site !== onlySite) return true;
+      cleanedHosts.add(key);
+      return false;
+    }
     const status = listStatus(host, lists);
     const keep =
       status === LIST_KEEP ||
       (!startup && status === LIST_SESSION) ||
-      (onlySite ? site !== onlySite : ctx.openSites.has(site));
+      ctx.openSites.has(site);
     if (!keep) cleanedHosts.add(key);
     return keep;
   }));
+  if (onlySite && scope !== 'private') {
+    cleanedHosts.add(onlySite);
+    if (onlyHost && siteOf(onlyHost) === onlySite) cleanedHosts.add(onlyHost);
+  }
 
   const origins = originsFor(cleanedHosts);
   if (settings.cleanSiteData && origins.length) {
@@ -348,6 +359,18 @@ async function updateBadge() {
 // Last committed host per tab, to notice domain changes. Kept in
 // storage.session: the worker is stopped when idle and loses its memory.
 const tabKey = (tabId) => `tabHost.${tabId}`;
+
+// ---------- uninstall feedback ----------
+// Chrome opens this page after the extension is removed; the extension itself
+// sends nothing. Only the version goes in the address.
+const UNINSTALL_URL = 'https://sentimenta1ist.github.io/crumbclear/uninstall.html';
+function setUninstallPage() {
+  try {
+    const p = chrome.runtime.setUninstallURL(`${UNINSTALL_URL}?v=${encodeURIComponent(chrome.runtime.getManifest().version)}`);
+    if (p && p.catch) p.catch(() => {});
+  } catch { /* not supported */ }
+}
+setUninstallPage();
 
 // ---------- events ----------
 chrome.tabs.onRemoved.addListener((tabId) => {
@@ -438,7 +461,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }
     if (msg.type === 'undo') return undoLastClean();
     if (msg.type === 'clean-site') {
-      return clean({ reason: 'manual', onlySite: siteOf(msg.host), scope: msg.incognito ? 'private' : 'regular' });
+      return clean({ reason: 'manual', onlySite: siteOf(msg.host), onlyHost: normHost(msg.host), scope: msg.incognito ? 'private' : 'regular' });
     }
     if (msg.type === 'site-info') {
       const site = siteOf(msg.host);

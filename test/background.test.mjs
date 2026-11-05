@@ -86,7 +86,7 @@ globalThis.chrome = {
     },
   },
   action: { setBadgeText: async () => {}, setBadgeBackgroundColor: async () => {} },
-  runtime: { id: 'crumbclear-test-id', onStartup: on('runtime.onStartup'), onInstalled: on('runtime.onInstalled'), onMessage: on('runtime.onMessage'), openOptionsPage: () => {} },
+  runtime: { id: 'crumbclear-test-id', getManifest: () => ({ version: '9.9.9' }), setUninstallURL: async (u) => { calls.uninstallUrl = u; }, onStartup: on('runtime.onStartup'), onInstalled: on('runtime.onInstalled'), onMessage: on('runtime.onMessage'), openOptionsPage: () => {} },
 };
 
 const ck = (domain, name, extra = {}) => ({ domain, name, path: '/', secure: true, storeId: '0', ...extra });
@@ -157,6 +157,24 @@ test('popup messages: site info and clean this site', async () => {
   const r = await send({ type: 'clean-site', host: 'google.com' });
   assert.equal(r.cookies, 2);
   assert.deepEqual(cookies.map((c) => c.domain), ['.bing.com']);
+});
+
+test('uninstall opens the feedback page with only the version in the address', () => {
+  assert.equal(calls.uninstallUrl, 'https://sentimenta1ist.github.io/crumbclear/uninstall.html?v=9.9.9');
+});
+
+test('"Clean this site" also clears its site data, even when kept or not visited yet', async () => {
+  store.settings = { ...store.settings, enabled: true, cleanSiteData: true };
+  store.lists = [{ expression: 'bank.com', list: 'keep' }];
+  store.visited = ['other.com'];
+  tabs = [{ id: 1, url: 'https://app.bank.com/' }, { id: 2, url: 'https://other.com/' }];
+  cookies = [ck('.bank.com', 's')];
+  removedOrigins.length = 0;
+  const r = await send({ type: 'clean-site', host: 'app.bank.com' });
+  assert.equal(r.cookies, 1);
+  for (const o of ['https://bank.com', 'https://app.bank.com']) assert.ok(removedOrigins.includes(o), o);
+  assert.ok(!removedOrigins.some((o) => o.includes('other.com')));
+  assert.deepEqual(store.visited, ['other.com']);
 });
 
 test('site info counts the tabs a site is open in', async () => {

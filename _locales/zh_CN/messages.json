@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "CrumbClear：自动删除 Cookie",
+    "message": "CrumbClear：关闭标签页时自动删除 Cookie",
     "description": "Extension name in the Chrome Web Store and chrome://extensions (max 75 chars)"
   },
   "extDescription": {
-    "message": "关闭标签页时自动删除 Cookie。支持保留列表、分区 Cookie 和列表导入。无跟踪。",
+    "message": "关闭标签页时自动删除 Cookie 和网站数据。支持保留列表、撤销和列表导入。免费开源，无跟踪。",
     "description": "Store summary (max 132 chars)"
   },
   "actionTitle": {
@@ -164,6 +164,9 @@
   },
   "settings": {
     "message": "设置"
+  },
+  "reportProblem": {
+    "message": "报告问题"
   },
   "undo": {
     "message": "撤销"
